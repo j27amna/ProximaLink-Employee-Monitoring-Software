@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logs and Clipboard</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Logs and Clipboard</h1>
+
+      <!-- Display logs -->
+      {% if logs %}
+      <section>
+        <h2>Keystroke Logs</h2>
+        <div class="row row-data">
+          {% for log in logs %}
+          <div class="col-md-8 log-entry my-2 p-2 border rounded">
+            <p>{{ log.text }}</p>
+            <p class="timestamp text-left">{{ log.timestamp }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      <!-- Display clipboard logs -->
+      {% if clipboard_logs %}
+      <section>
+        <h2>Clipboard Logs</h2>
+        <div class="row row-data">
+          {% for log in clipboard_logs %}
+          <div class="col-md-8 log-entry my-2 p-2 border rounded">
+            <p>{{ log.text }}</p>
+            <p class="timestamp text-left">{{ log.timestamp }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      <!-- Alert if no logs found -->
+      {% if not logs and not clipboard_logs %}
+      <div class="alert alert-info text-center" role="alert">
+        No logs found yet. Monitor activity for data to appear.
+      </div>
+      {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
