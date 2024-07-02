@@ -34,6 +34,13 @@
           <section class="user-section">
             <h2>{{ user[0] }}</h2>
             <p>{{ user[1] }}</p>
+
+            <div class="tags-container">
+            <span class="tag" onclick="filterLogs('all')">All</span>
+            <span class="tag" onclick="filterLogs('key-stroke')">KeyStroke</span>
+            <span class="tag" onclick="filterLogs('clipboard')">Clipboard</span>
+            <!-- Add more tags as needed for additional categories -->
+          </div>
             <div class="row row-data">
               {% for log in logs %}
               <div class="col-md-8 log-entry my-2 p-2 border rounded">

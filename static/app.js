@@ -1,18 +1,21 @@
-// app.js
-function filterLogs(user, category) {
-  var logEntries = document.querySelectorAll(".log-entry");
+function filterLogs(category) {
+  var logs = document.querySelectorAll(".log-entry");
 
-  logEntries.forEach(function (entry) {
-    var isKeystroke = entry.classList.contains("key-stroke");
-    var isClipboard = entry.classList.contains("clipboard");
-
-    if (
-      (category === "KeyStroke" && isKeystroke) ||
-      (category === "Clipboard" && isClipboard && user === "Clipboard")
-    ) {
-      entry.style.display = "block";
+  logs.forEach(function (log) {
+    if (category === "all") {
+      log.style.display = "block"; // Show all logs if 'All' is selected
     } else {
-      entry.style.display = "none";
+      // Check if log entry has the specified category class
+      var hasCategory = log.classList.contains(category);
+
+      // Toggle display based on category match
+      log.style.display = hasCategory ? "block" : "none";
     }
   });
 }
+
+$(document).ready(function () {
+  $("#sidebarCollapse").on("click", function () {
+    $(".sidebar").toggleClass("active");
+  });
+});
