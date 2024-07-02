@@ -50,7 +50,7 @@
             <h2>{{ user[0] }}</h2>
             <p>{{ user[1] }}</p>
             <div class="row row-data">
-              {% for log in logs %}
+              {% for log in clipboard_logs %}
               <div class="col-md-8 log-entry my-2 p-2 border rounded">
                 <p>{{ log.text }}</p>
                 <p class="timestamp text-right">{{ log.timestamp }}</p>
