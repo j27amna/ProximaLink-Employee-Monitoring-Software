@@ -76,5 +76,14 @@ def dashboard():
     )
 
 
+@app.route("/clip")
+def clipboard():
+    clipboard_logs = get_clipboard_logs()
+    return render_template(
+        "clipboard.html",
+        clipboard_logs=clipboard_logs,
+    )
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True)
