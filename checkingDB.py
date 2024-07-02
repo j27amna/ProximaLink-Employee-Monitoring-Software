@@ -1,6 +1,6 @@
 import sqlite3
 
-DB_FILE = "./keylogs.db"  # Replace with your actual database file path
+DB_FILE = "./db/keylogs.db"  # Replace with your actual database file path
 
 
 def check_table_existence(table_name):

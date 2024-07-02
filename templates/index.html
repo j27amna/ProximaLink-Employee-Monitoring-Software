@@ -39,30 +39,31 @@
               {% for log in logs %}
               <div class="col-md-8 log-entry my-2 p-2 border rounded">
                 <p>{{ log.text }}</p>
-                <p class="timestamp text-right">{{ log.timestamp }}</p>
+                <p class="timestamp text-left">{{ log.timestamp }}</p>
               </div>
               {% endfor %}
             </div>
           </section>
-          {% endfor %} {% endif %} {% if clipboard_logs %} {% for user, logs in
-          clipboard_logs.items() %}
-          <section class="user-section">
-            <h2>{{ user[0] }}</h2>
-            <p>{{ user[1] }}</p>
+          {% endfor %}
+        <section>
             <div class="row row-data">
               {% for log in clipboard_logs %}
               <div class="col-md-8 log-entry my-2 p-2 border rounded">
-                <p>{{ log.text }}</p>
-                <p class="timestamp text-right">{{ log.timestamp }}</p>
-              </div>
-              {% endfor %}
+                  <p>{{ log.text }}</p>
+                  <p class="timestamp text-left">{{ log.timestamp }}</p>
+                </div>
+                {% endfor %}
             </div>
-          </section>
-          {% endfor %} {% else %}
-          <div class="alert alert-info text-center" role="alert">
+        </section>
+        {% endif %}
+
+        <!-- Alert if no logs found -->
+        {% if not logs and not clipboard_logs %}
+        <div class="alert alert-info text-center" role="alert">
             No logs found yet. Monitor activity for data to appear.
           </div>
-          {% endif %}
+        {% endif %}
+        </div>
         </main>
       </div>
     </div>

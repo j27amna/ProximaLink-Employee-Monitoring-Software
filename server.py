@@ -2,7 +2,7 @@ from flask import Flask, render_template, g
 import sqlite3
 
 app = Flask(__name__)
-DB_FILE = "keylogs.db"
+DB_FILE = "./db/keylogs.db"
 
 
 def get_db():

