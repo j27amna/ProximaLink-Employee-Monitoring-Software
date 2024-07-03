@@ -1,9 +1,8 @@
 # directory.py
 import os
 
-BASE_DIR = "LoggedData"
 # define the path for the app to store data of users in the BASE_DIR
-BASE_DIR = r"C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test"
+BASE_DIR = r"C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\loggedData"
 
 
 def setup_user_directories(username):

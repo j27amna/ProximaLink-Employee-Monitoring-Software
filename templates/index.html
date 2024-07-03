@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -30,46 +31,25 @@
           </ul>
         </aside>
         <main class="col-md-10 py-3">
-          {% if user_logs %} {% for user, logs in user_logs.items() %}
-          <section class="user-section">
-            <h2>{{ user[0] }}</h2>
-            <p>{{ user[1] }}</p>
-
-            <div class="tags-container">
-            <span class="tag" onclick="filterLogs('all')">All</span>
-            <span class="tag" onclick="filterLogs('key-stroke')">KeyStroke</span>
-            <span class="tag" onclick="filterLogs('clipboard')">Clipboard</span>
-            <!-- Add more tags as needed for additional categories -->
-          </div>
-            <div class="row row-data">
-              {% for log in logs %}
-              <div class="col-md-8 log-entry my-2 p-2 border rounded">
-                <p>{{ log.text }}</p>
-                <p class="timestamp text-left">{{ log.timestamp }}</p>
-              </div>
-              {% endfor %}
+          {% if all_logs %}
+          <div class="row row-data">
+            {% for log in all_logs %}
+            <div class="col-md-8 log-entry my-2 p-2 border rounded">
+              <p>{{ log.text }}</p>
+              <p class="timestamp text-left">{{ log.timestamp }}</p>
             </div>
-          </section>
-          {% endfor %} {% endif %} 
-          {% if clipboard_logs %}
-      <section>
-        <div class="row row-data">
-          {% for log in clipboard_logs %}
-          <div class="col-md-8 log-entry my-2 p-2 border rounded">
-            <p>{{ log.text }}</p>
-            <p class="timestamp text-left">{{ log.timestamp }}</p>
+            {% endfor %}
           </div>
-          {% endfor %}
-        </div>
-      </section>
-      {% endif %}
-        <!-- Alert if no logs found -->
-        {% if not logs and not clipboard_logs %}
-        <div class="alert alert-info text-center" role="alert">
+          {% else %}
+          <!-- Display a message if no logs are found -->
+          <div class="alert alert-info text-center" role="alert">
             No logs found yet. Monitor activity for data to appear.
           </div>
-        {% endif %}
-        </div>
+          {% endif %}
+          <hr />
+          <div class="text-center">
+            <a href="/screenshots" class="btn btn-primary">View Screenshots</a>
+          </div>
         </main>
       </div>
     </div>

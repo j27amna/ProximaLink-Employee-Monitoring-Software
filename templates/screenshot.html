@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Screenshots</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='screenshot.css') }}"
+    />
+  </head>
+  <body>
+    <h1>Screenshots</h1>
+    <div class="container">
+      <div class="row">
+        {% for screenshot in screenshots %}
+        <div class="col-md-4 col-sm-6">
+          <img
+            src="http://localhost:8000/{{ screenshot.filename }}"
+            alt="Screenshot"
+            class="img-thumbnail"
+            data-image="http://localhost:8000/{{ screenshot.filename }}"
+            data-toggle="modal"
+            data-target="#overlayModal"
+            data-caption="Username: {{ screenshot.username }}"
+          />
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Modal for overlay view -->
+    <div
+      class="modal fade"
+      id="overlayModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="overlayModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <button class="nav-btn nav-btn-left" id="prevImage">&lt;</button>
+          <button class="nav-btn nav-btn-right" id="nextImage">&gt;</button>
+          <div class="modal-body">
+            <img src="" class="img-fluid" id="overlayImage" />
+            <p id="imageCaption"></p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='screenshot.js') }}"></script>
+  </body>
+</html>
