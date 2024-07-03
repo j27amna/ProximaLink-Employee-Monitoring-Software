@@ -1,20 +1,24 @@
-LoggedData/Toshiba/Clipboard/clipboard_logs.csv
-LoggedData/Toshiba/Clipboard/clipboard_logs.csv
+# Ignore the LoggedData directory
+LoggedData/
+
+# Ignore specific files
 checkingDB.py
 db/keylogs.db
 keylogs.db
-logData/__pycache__/logger.cpython-311.pyc
-keylog.db;
+
+# Ignore all Python bytecode files
+__pycache__/
+*.pyc
+
+# Ignore specific cached files (optional, already covered by the above rules)
 __pycache__/directory.cpython-311.pyc
 __pycache__/__init__.cpython-311.pyc
 logData/__pycache__/logger.cpython-311.pyc
 views/__pycache__/__init__.cpython-311.pyc
-__pycache__/directory.cpython-311.pyc
-logData/__pycache__/logger.cpython-311.pyc
-Toshiba/Clipboard/clipboard_logs.csv
-LoggedData/Toshiba/Files/Attendance Details.csv
-__pycache__/directory.cpython-311.pyc
-logData/__pycache__/logger.cpython-311.pyc
+
+# Ignore specific logs and temporary files
 LoggedData/Toshiba/Clipboard/clipboard_logs.csv
+
+# Ignore specific templates and test files (optional, if not needed in repo)
 templates/clipboard.html
 testingFeature.py
