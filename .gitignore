@@ -22,3 +22,5 @@ LoggedData/Toshiba/Clipboard/clipboard_logs.csv
 # Ignore specific templates and test files (optional, if not needed in repo)
 templates/clipboard.html
 testingFeature.py
+__pycache__/directory.cpython-311.pyc
+logData/__pycache__/logger.cpython-311.pyc

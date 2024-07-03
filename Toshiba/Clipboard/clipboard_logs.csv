@@ -1,0 +1,3288 @@
+Timestamp,Username,IP,Data
+2024-07-03 09:57:08,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>ProximaLink Dashboard</title>
+    <!-- Include Bootstrap CSS and other dependencies -->
+    <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"">
+    <link rel=""stylesheet"" href=""{{ url_for('static', filename='styles.css') }}"">
+</head>
+<body>
+    <!-- Header and main content -->
+    <div class=""container-fluid"">
+        <!-- Sidebar and main content layout -->
+        <div class=""row"">
+            <aside class=""col-md-2 bg-light py-3"">
+                <!-- Sidebar content -->
+                <!-- List of users or other navigation elements -->
+            </aside>
+            <main class=""col-md-10 py-3"">
+                <!-- Main content area -->
+                <!-- Display logs and other relevant information -->
+                <section class=""user-section"">
+                    <h2>User Name</h2>
+                    <p>User information or summary</p>
+                    <!-- Logs and other content -->
+                    <div class=""row"">
+                        <!-- Display screenshots as thumbnails -->
+                        {% for screenshot in screenshots %}
+                        <div class=""col-md-3"">
+                            <a href=""#"" class=""screenshot-link"" data-image=""{{ screenshot.image_path }}"">
+                                <img src=""{{ screenshot.thumbnail_path }}"" alt=""Screenshot Thumbnail"" class=""img-thumbnail"">
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <!-- Modal for displaying full-size screenshots -->
+    <div class=""modal fade"" id=""screenshotModal"" tabindex=""-1"" role=""dialog"" aria-labelledby=""screenshotModalLabel"" aria-hidden=""true"">
+        <div class=""modal-dialog modal-lg"" role=""document"">
+            <div class=""modal-content"">
+                <div class=""modal-header"">
+                    <h5 class=""modal-title"" id=""screenshotModalLabel"">Screenshot</h5>
+                    <button type=""button"" class=""close"" data-dismiss=""modal"" aria-label=""Close"">
+                        <span aria-hidden=""true"">&times;</span>
+                    </button>
+                </div>
+                <div class=""modal-body"">
+                    <!-- Placeholder for screenshot image -->
+                    <img src="""" alt=""Screenshot Image"" class=""img-fluid"" id=""screenshotImage"">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- JavaScript dependencies -->
+    <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+    <!-- Custom JavaScript for handling screenshot modals -->
+    <script>
+        $(document).ready(function() {
+            // Handle click on screenshot link
+            $('.screenshot-link').click(function(e) {
+                e.preventDefault();
+                var imagePath = $(this).data('image');
+                $('#screenshotImage').attr('src', imagePath);
+                $('#screenshotModal').modal('show');
+            });
+        });
+    </script>
+</body>
+</html>
+"
+2024-07-03 09:58:04,Toshiba,192.168.100.200,"User Name
+User information or summary"
+2024-07-03 09:59:34,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Test Screenshot Modal</title>
+    <!-- Bootstrap CSS -->
+    <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"">
+</head>
+<body>
+    <!-- Button trigger modal -->
+    <button type=""button"" class=""btn btn-primary"" data-toggle=""modal"" data-target=""#screenshotModal"">
+        Open Screenshot Modal
+    </button>
+
+    <!-- Modal -->
+    <div class=""modal fade"" id=""screenshotModal"" tabindex=""-1"" role=""dialog"" aria-labelledby=""screenshotModalLabel"" aria-hidden=""true"">
+        <div class=""modal-dialog modal-lg"" role=""document"">
+            <div class=""modal-content"">
+                <div class=""modal-header"">
+                    <h5 class=""modal-title"" id=""screenshotModalLabel"">Screenshot</h5>
+                    <button type=""button"" class=""close"" data-dismiss=""modal"" aria-label=""Close"">
+                        <span aria-hidden=""true"">&times;</span>
+                    </button>
+                </div>
+                <div class=""modal-body"">
+                    <!-- Placeholder for screenshot image -->
+                    <img src=""https://via.placeholder.com/800x600"" alt=""Screenshot Image"" class=""img-fluid"" id=""screenshotImage"">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+</body>
+</html>
+"
+2024-07-03 10:01:23,Toshiba,192.168.100.200,"def get_screenshot_logs():
+    screenshots = []
+    for root, dirs, files in os.walk(SCREENSHOT_DIR):
+        for file in files:
+            if file.endswith("".png"") or file.endswith("".jpg""):
+                screenshot_path = os.path.join(root, file)
+                username = os.path.basename(os.path.dirname(screenshot_path))
+                screenshots.append({
+                    ""username"": username,
+                    ""image_path"": screenshot_path,
+                    ""filename"": file,
+                    # Add more details as needed
+                })
+    return screenshots"
+2024-07-03 10:02:17,Toshiba,192.168.100.200,"def get_screenshot_logs():
+    screenshots = []
+    for root, dirs, files in os.walk(SCREENSHOT_DIR):
+        for file in files:
+            if file.endswith("".png"") or file.endswith("".jpg""):
+                screenshot_path = os.path.join(root, file)
+                username = os.path.basename(os.path.dirname(screenshot_path))
+                screenshots.append({
+                    ""username"": username,
+                    ""image_path"": screenshot_path,
+                    ""filename"": file,
+                    # Add more details as needed
+                })
+    return screenshots
+
+@app.route(""/screenshots"")
+def screenshots():
+    screenshots = get_screenshot_logs()
+    return render_template(""screenshots.html"", screenshots=screenshots)"
+2024-07-03 10:03:25,Toshiba,192.168.100.200,clipboard
+2024-07-03 10:03:40,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Screenshots</title>
+    <!-- Bootstrap CSS -->
+    <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"">
+    <!-- Custom CSS -->
+    <link rel=""stylesheet"" href=""{{ url_for('static', filename='styles.css') }}"">
+</head>
+<body>
+    <div class=""container"">
+        <h1>Screenshots</h1>
+        <div class=""row"">
+            {% for screenshot in screenshots %}
+            <div class=""col-md-4 mb-4"">
+                <div class=""card"">
+                    <img src=""{{ url_for('static', filename=screenshot.image_path) }}"" class=""card-img-top img-thumbnail"" alt=""{{ screenshot.filename }}"">
+                    <div class=""card-body"">
+                        <h5 class=""card-title"">{{ screenshot.username }}</h5>
+                        <!-- Add more details as needed -->
+                        <a href=""#"" class=""btn btn-primary"" data-toggle=""modal"" data-target=""#screenshotModal{{ loop.index }}"">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class=""modal fade"" id=""screenshotModal{{ loop.index }}"" tabindex=""-1"" role=""dialog"" aria-labelledby=""screenshotModalLabel{{ loop.index }}"" aria-hidden=""true"">
+                <div class=""modal-dialog modal-lg"" role=""document"">
+                    <div class=""modal-content"">
+                        <div class=""modal-header"">
+                            <h5 class=""modal-title"" id=""screenshotModalLabel{{ loop.index }}"">Screenshot Details</h5>
+                            <button type=""button"" class=""close"" data-dismiss=""modal"" aria-label=""Close"">
+                                <span aria-hidden=""true"">&times;</span>
+                            </button>
+                        </div>
+                        <div class=""modal-body"">
+                            <img src=""{{ url_for('static', filename=screenshot.image_path) }}"" class=""img-fluid"" alt=""{{ screenshot.filename }}"">
+                            <h6>Username: {{ screenshot.username }}</h6>
+                            <!-- Add more details here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+</body>
+</html>
+"
+2024-07-03 10:05:31,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Screenshots</title>
+    <!-- Bootstrap CSS -->
+    <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"">
+    <!-- Custom CSS -->
+    <link rel=""stylesheet"" href=""{{ url_for('static', filename='styles.css') }}"">
+</head>
+<body>
+    <div class=""container"">
+        <h1>Screenshots</h1>
+        <div class=""row"">
+            {% for screenshot in screenshots %}
+            <div class=""col-md-4 mb-4"">
+                <div class=""card"">
+                    <img src=""{{ url_for('static', filename=screenshot.image_path) }}"" class=""card-img-top img-thumbnail"" alt=""{{ screenshot.filename }}"">
+                    <div class=""card-body"">
+                        <h5 class=""card-title"">{{ screenshot.username }}</h5>
+                        <!-- Add more details as needed -->
+                        <button type=""button"" class=""btn btn-primary"" data-toggle=""modal"" data-target=""#screenshotModal{{ loop.index }}"">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class=""modal fade"" id=""screenshotModal{{ loop.index }}"" tabindex=""-1"" role=""dialog"" aria-labelledby=""screenshotModalLabel{{ loop.index }}"" aria-hidden=""true"">
+                <div class=""modal-dialog modal-lg"" role=""document"">
+                    <div class=""modal-content"">
+                        <div class=""modal-header"">
+                            <h5 class=""modal-title"" id=""screenshotModalLabel{{ loop.index }}"">Screenshot Details</h5>
+                            <button type=""button"" class=""close"" data-dismiss=""modal"" aria-label=""Close"">
+                                <span aria-hidden=""true"">&times;</span>
+                            </button>
+                        </div>
+                        <div class=""modal-body"">
+                            <img src=""{{ url_for('static', filename=screenshot.image_path) }}"" class=""img-fluid"" alt=""{{ screenshot.filename }}"">
+                            <h6>Username: {{ screenshot.username }}</h6>
+                            <!-- Add more details here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+</body>
+</html>
+"
+2024-07-03 10:08:08,Toshiba,192.168.100.200,"SCREENSHOT_DIR = ""./LoggedData""
+"
+2024-07-03 10:10:51,Toshiba,192.168.100.200,"
+def get_screenshot_logs():
+    screenshots = []
+    for root, dirs, files in os.walk(SCREENSHOT_DIR):
+        for file in files:
+            if file.endswith("".png"") or file.endswith("".jpg""):
+                screenshot_path = os.path.join(root, file)
+                username = os.path.basename(os.path.dirname(screenshot_path))
+                screenshots.append(
+                    {
+                        ""username"": username,
+                        ""image_path"": screenshot_path,
+                        ""filename"": file,
+                        # Add more details as needed
+                    }
+                )
+    return screenshots"
+2024-07-03 10:15:37,Toshiba,192.168.100.200,"def get_screenshot_logs():
+    screenshots = []
+    for user_dir in os.listdir(SCREENSHOT_DIR):
+        user_dir_path = os.path.join(SCREENSHOT_DIR, user_dir)
+        screenshot_dir = os.path.join(user_dir_path, ""Screenshot"")
+        
+        if os.path.isdir(screenshot_dir):
+            for file in os.listdir(screenshot_dir):
+                if file.endswith("".png"") or file.endswith("".jpg""):
+                    screenshot_path = os.path.join(screenshot_dir, file)
+                    screenshots.append(
+                        {
+                            ""username"": user_dir,
+                            ""image_path"": screenshot_path,
+                            ""filename"": file,
+                            # Add more details as needed
+                        }
+                    )
+    
+    return screenshots"
+2024-07-03 10:16:01,Toshiba,192.168.100.200,"{% extends 'base.html' %}
+{% block content %}
+<div class=""container"">
+    <h2>Screenshots</h2>
+    <div class=""row"">
+        {% for screenshot in screenshots %}
+        <div class=""col-md-3 mb-3"">
+            <a href=""#"" data-toggle=""modal"" data-target=""#screenshotModal{{ loop.index }}"">
+                <img src=""{{ url_for('static', filename=screenshot.path) }}"" class=""img-thumbnail"" alt=""Screenshot"">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Screenshot Modals -->
+{% for screenshot in screenshots %}
+<div class=""modal fade"" id=""screenshotModal{{ loop.index }}"" tabindex=""-1"" role=""dialog"" aria-labelledby=""screenshotModalLabel"" aria-hidden=""true"">
+    <div class=""modal-dialog modal-dialog-centered"" role=""document"">
+        <div class=""modal-content"">
+            <div class=""modal-header"">
+                <h5 class=""modal-title"" id=""screenshotModalLabel"">Screenshot Details</h5>
+                <button type=""button"" class=""close"" data-dismiss=""modal"" aria-label=""Close"">
+                    <span aria-hidden=""true"">&times;</span>
+                </button>
+            </div>
+            <div class=""modal-body"">
+                <img src=""{{ url_for('static', filename=screenshot.path) }}"" class=""img-fluid"" alt=""Screenshot"">
+                <p>Filename: {{ screenshot.filename }}</p>
+                <p>Timestamp: {{ screenshot.timestamp }}</p>
+                <!-- Additional details as needed -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
+"
+2024-07-03 10:16:41,Toshiba,192.168.100.200,"<img
+          src=""{{ url_for('static', filename=screenshot.path) }}""
+          class=""img-thumbnail""
+          alt=""Screenshot""
+        />"
+2024-07-03 10:16:53,Toshiba,192.168.100.200,"TemplateNotFound
+jinja2.exceptions.TemplateNotFound: base.html"
+2024-07-03 10:17:24,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Screenshots</title>
+    <!-- Bootstrap CSS -->
+    <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"">
+    <!-- Custom CSS -->
+    <link rel=""stylesheet"" href=""{{ url_for('static', filename='styles.css') }}"">
+</head>
+<body>
+    <div class=""container"">
+        <h1>Screenshots</h1>
+        <div class=""row"">
+            {% for screenshot in screenshots %}
+            <div class=""col-md-4 mb-4"">
+                <div class=""card"">
+                    <img src=""{{ url_for('static', filename=screenshot.image_path) }}"" class=""card-img-top img-thumbnail"" alt=""{{ screenshot.filename }}"">
+                    <div class=""card-body"">
+                        <h5 class=""card-title"">{{ screenshot.username }}</h5>
+                        <!-- Add more details as needed -->
+                        <button type=""button"" class=""btn btn-primary"" data-toggle=""modal"" data-target=""#screenshotModal{{ loop.index }}"">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class=""modal fade"" id=""screenshotModal{{ loop.index }}"" tabindex=""-1"" role=""dialog"" aria-labelledby=""screenshotModalLabel{{ loop.index }}"" aria-hidden=""true"">
+                <div class=""modal-dialog modal-lg"" role=""document"">
+                    <div class=""modal-content"">
+                        <div class=""modal-header"">
+                            <h5 class=""modal-title"" id=""screenshotModalLabel{{ loop.index }}"">Screenshot Details</h5>
+                            <button type=""button"" class=""close"" data-dismiss=""modal"" aria-label=""Close"">
+                                <span aria-hidden=""true"">&times;</span>
+                            </button>
+                        </div>
+                        <div class=""modal-body"">
+                            <img src=""{{ url_for('static', filename=screenshot.image_path) }}"" class=""img-fluid"" alt=""{{ screenshot.filename }}"">
+                            <h6>Username: {{ screenshot.username }}</h6>
+                            <!-- Add more details here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+</body>
+</html>
+"
+2024-07-03 10:17:59,Toshiba,192.168.100.200,"{% extends 'base.html' %}
+{% block content %}
+<div class=""container"">
+    <h2>Screenshots</h2>
+    <div class=""row"">
+        {% for screenshot in screenshots %}
+        <div class=""col-md-3 mb-3"">
+            <a href=""#"" data-toggle=""modal"" data-target=""#screenshotModal{{ loop.index }}"">
+                <img src=""{{ url_for('static', filename=screenshot.path) }}"" class=""img-thumbnail"" alt=""Screenshot"">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Screenshot Modals -->
+{% for screenshot in screenshots %}
+<div class=""modal fade"" id=""screenshotModal{{ loop.index }}"" tabindex=""-1"" role=""dialog"" aria-labelledby=""screenshotModalLabel"" aria-hidden=""true"">
+    <div class=""modal-dialog modal-dialog-centered"" role=""document"">
+        <div class=""modal-content"">
+            <div class=""modal-header"">
+                <h5 class=""modal-title"" id=""screenshotModalLabel"">Screenshot Details</h5>
+                <button type=""button"" class=""close"" data-dismiss=""modal"" aria-label=""Close"">
+                    <span aria-hidden=""true"">&times;</span>
+                </button>
+            </div>
+            <div class=""modal-body"">
+                <img src=""{{ url_for('static', filename=screenshot.path) }}"" class=""img-fluid"" alt=""Screenshot"">
+                <p>Filename: {{ screenshot.filename }}</p>
+                <p>Timestamp: {{ screenshot.timestamp }}</p>
+                <!-- Additional details as needed -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
+"
+2024-07-03 10:19:52,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Screenshots</title>
+    <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"">
+    <style>
+        /* Additional CSS styles as needed */
+        .thumbnail {
+            cursor: pointer;
+        }
+        .modal-body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class=""container"">
+        <h1>Screenshots</h1>
+        <div class=""row"">
+            {% for screenshot in screenshots %}
+            <div class=""col-md-3 mb-4"">
+                <div class=""card"">
+                    <img class=""card-img-top thumbnail"" src=""{{ screenshot.image_path }}"" alt=""{{ screenshot.filename }}"" data-toggle=""modal"" data-target=""#modal{{ loop.index }}"">
+                    <div class=""card-body"">
+                        <h5 class=""card-title"">{{ screenshot.filename }}</h5>
+                        <p class=""card-text"">Username: {{ screenshot.username }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Modal -->
+    {% for screenshot in screenshots %}
+    <div class=""modal fade"" id=""modal{{ loop.index }}"" tabindex=""-1"" role=""dialog"" aria-labelledby=""modal{{ loop.index }}Label"" aria-hidden=""true"">
+        <div class=""modal-dialog modal-lg"" role=""document"">
+            <div class=""modal-content"">
+                <div class=""modal-header"">
+                    <h5 class=""modal-title"" id=""modal{{ loop.index }}Label"">{{ screenshot.filename }}</h5>
+                    <button type=""button"" class=""close"" data-dismiss=""modal"" aria-label=""Close"">
+                        <span aria-hidden=""true"">&times;</span>
+                    </button>
+                </div>
+                <div class=""modal-body"">
+                    <img src=""{{ screenshot.image_path }}"" class=""img-fluid"" alt=""{{ screenshot.filename }}"">
+                    <p>Username: {{ screenshot.username }}</p>
+                    <p>Filename: {{ screenshot.filename }}</p>
+                    <!-- Add more details as needed -->
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Bootstrap and jQuery JS -->
+    <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+</body>
+</html>
+"
+2024-07-03 10:20:51,Toshiba,192.168.100.200,"192.168.100.200 - - [03/Jul/2024 10:19:58] ""GET /screenshots HTTP/1.1"" 200 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095316.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095318.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095321.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095328.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095331.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095329.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095332.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095333.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095404.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095434.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095504.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095534.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095604.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095634.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095658.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095659.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095702.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095722.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095745.png HTTP/1.1"" 404 -"
+2024-07-03 10:22:23,Toshiba,192.168.100.200,C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData
+2024-07-03 10:24:10,Toshiba,192.168.100.200,"SCREENSHOT_DIR = r"".C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData""
+"
+2024-07-03 10:24:17,Toshiba,192.168.100.200,"192.168.100.200 - - [03/Jul/2024 10:19:58] ""GET /screenshots HTTP/1.1"" 200 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095316.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095318.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095321.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095328.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095331.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095329.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095332.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095333.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095404.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095434.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095504.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095534.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095604.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095634.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095658.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095659.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095702.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095722.png HTTP/1.1"" 404 -
+192.168.100.200 - - [03/Jul/2024 10:19:59] ""GET /LoggedData/Toshiba/Screenshot/screenshot_20240703_095745.png HTTP/1.1"" 404 -"
+2024-07-03 10:25:04,Toshiba,192.168.100.200,"SCREENSHOT_DIR = r"".C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData""
+"
+2024-07-03 10:25:21,Toshiba,192.168.100.200,"OSError: [WinError 123] The filename, directory name, or volume label syntax is incorrect: '.C:\\Users\\Toshiba\\Desktop\\D\\Designing\\Python\\Django\\ProximaLinkMonitoringApp\\keylogger_project\\test\\LoggedData'"
+2024-07-03 10:26:28,Toshiba,192.168.100.200,"<img class=""card-img-top thumbnail"" src=""{{ screenshot.image_path }}"" alt=""{{ screenshot.filename }}"" data-toggle=""modal"" data-target=""#modal{{ loop.index }}"">
+"
+2024-07-03 10:29:50,Toshiba,192.168.100.200,"<!-- index.html or screenshots.html -->
+
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Screenshots Grid</title>
+    <style>
+        /* CSS for grid layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            padding: 20px;
+        }
+        .grid-item {
+            position: relative;
+            cursor: pointer;
+        }
+        .grid-item img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class=""grid-container"">
+        {% for screenshot in screenshots %}
+        <div class=""grid-item"">
+            <a href=""{{ screenshot.image_path }}"" target=""_blank"">
+                <img src=""{{ screenshot.image_path }}"" alt=""{{ screenshot.filename }}"">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+"
+2024-07-03 10:32:30,Toshiba,192.168.100.200,"<!-- screenshots.html -->
+
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Screenshots Grid</title>
+    <style>
+        /* CSS for grid layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            padding: 20px;
+        }
+        .grid-item {
+            position: relative;
+            cursor: pointer;
+        }
+        .grid-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class=""grid-container"">
+        {% for screenshot in screenshots %}
+        <div class=""grid-item"">
+            <a href=""{{ screenshot.image_path }}"" target=""_blank"">
+                <img src=""{{ screenshot.image_path }}"" alt=""{{ screenshot.filename }}"">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+"
+2024-07-03 10:33:08,Toshiba,192.168.100.200,about:blank#blocked
+2024-07-03 10:34:42,Toshiba,192.168.100.200,"{% for screenshot in screenshots %}
+{{ screenshot.filename }}
+{% endfor %}"
+2024-07-03 10:35:38,Toshiba,192.168.100.200,"<!-- screenshot.html -->
+
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Screenshots</title>
+    <style>
+        /* CSS for styling thumbnails */
+        .thumbnail {
+            display: inline-block;
+            margin: 10px;
+        }
+        .thumbnail img {
+            width: 200px; /* Adjust size as needed */
+            height: auto; /* Maintain aspect ratio */
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class=""thumbnails"">
+        {% for screenshot in screenshots %}
+        <div class=""thumbnail"">
+            <img src=""{{ screenshot.image_path }}"" alt=""{{ screenshot.filename }}"">
+            <p>{{ screenshot.filename }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+"
+2024-07-03 10:38:05,Toshiba,192.168.100.200,screenshots
+2024-07-03 10:38:40,Toshiba,192.168.100.200,{% for screenshot in screenshots %}
+2024-07-03 10:41:47,Toshiba,192.168.100.200,"def get_screenshot_logs():
+    conn = get_db()
+    c = conn.cursor()
+    c.execute(
+        ""SELECT timestamp, username, ip, text, type, image_path FROM screenshot_logs ORDER BY timestamp DESC""
+    )
+    logs = c.fetchall()
+    return logs
+
+
+def get_screenshot_logs():
+    screenshots = []
+    for user_dir in os.listdir(SCREENSHOT_DIR):
+        print(user_dir)
+        user_dir_path = os.path.join(SCREENSHOT_DIR, user_dir)
+        print(user_dir_path)
+        screenshot_dir = os.path.join(user_dir_path, ""Screenshot"")
+        print(screenshot_dir)
+
+        if os.path.isdir(screenshot_dir):
+            for file in os.listdir(screenshot_dir):
+                if file.endswith("".png"") or file.endswith("".jpg""):
+                    screenshot_path = os.path.join(screenshot_dir, file)
+                    print(screenshot_path)
+                    screenshots.append(
+                        {
+                            ""username"": user_dir,
+                            ""image_path"": screenshot_path,
+                            ""filename"": file,
+                            # Add more details as needed
+                        }
+                    )
+
+    return screenshots"
+2024-07-03 10:43:43,Toshiba,192.168.100.200,"# server.py
+
+from flask import Flask, render_template, g
+import sqlite3
+import os
+
+app = Flask(__name__)
+DB_FILE = ""./db/keylogs.db""
+SCREENSHOT_DIR = r""C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData""
+
+
+def get_db():
+    db = getattr(g, ""_database"", None)
+    if db is None:
+        db = g._database = sqlite3.connect(DB_FILE)
+    return db
+
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, ""_database"", None)
+    if db is not None:
+        db.close()
+
+
+def get_unique_users():
+    with sqlite3.connect(DB_FILE) as conn:
+        c = conn.cursor()
+        c.execute(""SELECT DISTINCT username FROM logs"")
+        rows = c.fetchall()
+    return [row[0] for row in rows]
+
+
+def get_user_logs():
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute(
+        ""SELECT timestamp, username, ip, text, 'keystroke' as type FROM logs ORDER BY timestamp DESC""
+    )
+    logs = c.fetchall()
+    conn.close()
+    return [
+        {
+            ""timestamp"": row[0],
+            ""username"": row[1],
+            ""ip"": row[2],
+            ""text"": row[3],
+            ""type"": row[4],
+        }
+        for row in logs
+    ]
+
+
+def get_clipboard_logs():
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute(
+        ""SELECT timestamp, username, ip, text, 'clipboard' as type FROM clipboard_logs ORDER BY timestamp DESC""
+    )
+    logs = c.fetchall()
+    conn.close()
+    return [
+        {
+            ""timestamp"": row[0],
+            ""username"": row[1],
+            ""ip"": row[2],
+            ""text"": row[3],
+            ""type"": row[4],
+        }
+        for row in logs
+    ]
+
+
+def get_screenshot_logs_from_db():
+    conn = get_db()
+    c = conn.cursor()
+    c.execute(
+        ""SELECT timestamp, username, ip, text, type, image_path FROM screenshot_logs ORDER BY timestamp DESC""
+    )
+    logs = c.fetchall()
+    return logs
+
+
+def get_screenshot_logs():
+    screenshots = []
+    for user_dir in os.listdir(SCREENSHOT_DIR):
+        print(user_dir)
+        user_dir_path = os.path.join(SCREENSHOT_DIR, user_dir)
+        print(user_dir_path)
+        screenshot_dir = os.path.join(user_dir_path, ""Screenshot"")
+        print(screenshot_dir)
+
+        if os.path.isdir(screenshot_dir):
+            for file in os.listdir(screenshot_dir):
+                if file.endswith("".png"") or file.endswith("".jpg""):
+                    screenshot_path = os.path.join(screenshot_dir, file)
+                    print(screenshot_path)
+                    screenshots.append(
+                        {
+                            ""username"": user_dir,
+                            ""image_path"": screenshot_path,
+                            ""filename"": file,
+                            # Add more details as needed
+                        }
+                    )
+
+    return screenshots
+
+
+@app.route(""/screenshots"")
+def screenshots():
+    screenshots = get_screenshot_logs_from_db()
+    return render_template(""clipboard.html"", screenshots=screenshots)
+
+
+@app.route(""/"")
+def dashboard():
+    unique_users = get_unique_users()
+    user_logs = get_user_logs()
+    clipboard_logs = get_clipboard_logs()
+    all_logs = user_logs + clipboard_logs
+    all_logs = sorted(
+        all_logs, key=lambda k: k[""timestamp""], reverse=True
+    )  # Sort logs by timestamp
+    return render_template(""index.html"", unique_users=unique_users, all_logs=all_logs)
+
+
+@app.route(""/clip"")
+def clipboard():
+    clipboard_logs = get_clipboard_logs()
+    return render_template(
+        ""clipboard.html"",
+        clipboard_logs=clipboard_logs,
+    )
+
+
+if __name__ == ""__main__"":
+    app.run(host=""0.0.0.0"", port=8080, debug=True)
+"
+2024-07-03 10:45:39,Toshiba,192.168.100.200,"@app.route(""/screenshots"")
+def screenshots():
+    screenshots = get_screenshot_logs_from_db()
+    return render_template(""clipboard.html"", screenshots=screenshots)"
+2024-07-03 10:46:01,Toshiba,192.168.100.200,"updated the server.py
+# server.py
+
+from flask import Flask, render_template, g
+import sqlite3
+import os
+
+app = Flask(__name__)
+DB_FILE = ""./db/keylogs.db""
+SCREENSHOT_DIR = r""C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData""
+
+
+def get_db():
+    db = getattr(g, ""_database"", None)
+    if db is None:
+        db = g._database = sqlite3.connect(DB_FILE)
+    return db
+
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, ""_database"", None)
+    if db is not None:
+        db.close()
+
+
+def get_unique_users():
+    with sqlite3.connect(DB_FILE) as conn:
+        c = conn.cursor()
+        c.execute(""SELECT DISTINCT username FROM logs"")
+        rows = c.fetchall()
+    return [row[0] for row in rows]
+
+
+def get_user_logs():
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute(
+        ""SELECT timestamp, username, ip, text, 'keystroke' as type FROM logs ORDER BY timestamp DESC""
+    )
+    logs = c.fetchall()
+    conn.close()
+    return [
+        {
+            ""timestamp"": row[0],
+            ""username"": row[1],
+            ""ip"": row[2],
+            ""text"": row[3],
+            ""type"": row[4],
+        }
+        for row in logs
+    ]
+
+
+def get_clipboard_logs():
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute(
+        ""SELECT timestamp, username, ip, text, 'clipboard' as type FROM clipboard_logs ORDER BY timestamp DESC""
+    )
+    logs = c.fetchall()
+    conn.close()
+    return [
+        {
+            ""timestamp"": row[0],
+            ""username"": row[1],
+            ""ip"": row[2],
+            ""text"": row[3],
+            ""type"": row[4],
+        }
+        for row in logs
+    ]
+
+
+def get_screenshot_logs_from_db():
+    conn = get_db()
+    c = conn.cursor()
+    c.execute(
+        ""SELECT timestamp, username, ip, text, type, image_path FROM screenshot_logs ORDER BY timestamp DESC""
+    )
+    logs = c.fetchall()
+    return logs
+
+
+def get_screenshot_logs():
+    screenshots = []
+    for user_dir in os.listdir(SCREENSHOT_DIR):
+        print(user_dir)
+        user_dir_path = os.path.join(SCREENSHOT_DIR, user_dir)
+        print(user_dir_path)
+        screenshot_dir = os.path.join(user_dir_path, ""Screenshot"")
+        print(screenshot_dir)
+
+        if os.path.isdir(screenshot_dir):
+            for file in os.listdir(screenshot_dir):
+                if file.endswith("".png"") or file.endswith("".jpg""):
+                    screenshot_path = os.path.join(screenshot_dir, file)
+                    print(screenshot_path)
+                    screenshots.append(
+                        {
+                            ""username"": user_dir,
+                            ""image_path"": screenshot_path,
+                            ""filename"": file,
+                            # Add more details as needed
+                        }
+                    )
+
+    return screenshots
+
+
+@app.route(""/screenshots"")
+def screenshots():
+    screenshots = get_screenshot_logs_from_db()
+    return render_template(""clipboard.html"", screenshots=screenshots)
+
+
+@app.route(""/"")
+def dashboard():
+    unique_users = get_unique_users()
+    user_logs = get_user_logs()
+    clipboard_logs = get_clipboard_logs()
+    all_logs = user_logs + clipboard_logs
+    all_logs = sorted(
+        all_logs, key=lambda k: k[""timestamp""], reverse=True
+    )  # Sort logs by timestamp
+    return render_template(""index.html"", unique_users=unique_users, all_logs=all_logs)
+
+
+@app.route(""/clip"")
+def clipboard():
+    clipboard_logs = get_clipboard_logs()
+    return render_template(
+        ""clipboard.html"",
+        clipboard_logs=clipboard_logs,
+    )
+
+
+if __name__ == ""__main__"":
+    app.run(host=""0.0.0.0"", port=8080, debug=True)
+
+
+and now /screenshot page is blank"
+2024-07-03 10:48:50,Toshiba,192.168.100.200,"{% for screenshot in screenshots %} {{ screenshot.filename }}
+{{ screenshot.filename }}
+
+ {% endfor %}"
+2024-07-03 10:50:05,Toshiba,192.168.100.200,"<!-- clipboard.html -->
+
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Screenshots</title>
+</head>
+<body>
+    <h1>Screenshots</h1>
+    <div class=""container"">
+        <div class=""row"">
+            {% for screenshot in screenshots %}
+            <div class=""col-md-3"">
+                <a href=""{{ screenshot.image_path }}"" target=""_blank"">
+                    <img src=""{{ screenshot.image_path }}"" alt=""{{ screenshot.filename }}"" class=""img-thumbnail"">
+                </a>
+                <p>{{ screenshot.filename }}</p>
+                <p>Username: {{ screenshot.username }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
+"
+2024-07-03 10:50:05,Toshiba,192.168.100.200,"<!-- screenshot.html -->
+
+<!DOCTYPE html>
+<html lang=""en"">
+  <head>
+    <meta charset=""UTF-8"" />
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
+    <title>Screenshots</title>
+    <style>
+      /* CSS for styling thumbnails */
+      .thumbnail {
+        display: inline-block;
+        margin: 10px;
+      }
+      .thumbnail img {
+        width: 200px; /* Adjust size as needed */
+        height: auto; /* Maintain aspect ratio */
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class=""thumbnails"">
+      {% for screenshot in screenshots %}
+      <div class=""thumbnail"">
+        <img
+          src=""{{ screenshot.image_path }}""
+          alt=""{{ screenshot.filename }}""
+        />
+        <p>{{ screenshot.filename }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
+"
+2024-07-03 10:50:11,Toshiba,192.168.100.200,"<!-- clipboard.html -->
+
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Screenshots</title>
+</head>
+<body>
+    <h1>Screenshots</h1>
+    <div class=""container"">
+        <div class=""row"">
+            {% for screenshot in screenshots %}
+            <div class=""col-md-3"">
+                <a href=""{{ screenshot.image_path }}"" target=""_blank"">
+                    <img src=""{{ screenshot.image_path }}"" alt=""{{ screenshot.filename }}"" class=""img-thumbnail"">
+                </a>
+                <p>{{ screenshot.filename }}</p>
+                <p>Username: {{ screenshot.username }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
+"
+2024-07-03 10:50:24,Toshiba,192.168.100.200,"Screenshots
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:
+
+
+Username:"
+2024-07-03 10:50:44,Toshiba,192.168.100.200,"Screenshots
+{% for screenshot in screenshots %}
+{{ screenshot.filename }}
+{{ screenshot.filename }}
+
+Username: {{ screenshot.username }}
+
+{% endfor %}"
+2024-07-03 10:52:09,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Screenshots</title>
+</head>
+<body>
+    <h1>Screenshots</h1>
+    <div class=""container"">
+        <div class=""row"">
+            {% for screenshot in screenshots %}
+            <div class=""col-md-3"">
+                <a href=""{{ screenshot.image_path }}"" target=""_blank"">
+                    <img src=""{{ screenshot.image_path }}"" alt=""{{ screenshot.filename }}"" class=""img-thumbnail"">
+                </a>
+                <p>{{ screenshot.filename }}</p>
+                <p>Username: {{ screenshot.username }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
+"
+2024-07-03 10:52:25,Toshiba,192.168.100.200,"def get_clipboard_logs():
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute(
+        ""SELECT timestamp, username, ip, text, 'clipboard' as type FROM clipboard_logs ORDER BY timestamp DESC""
+    )
+    logs = c.fetchall()
+    conn.close()
+    return [
+        {
+            ""timestamp"": row[0],
+            ""username"": row[1],
+            ""ip"": row[2],
+            ""text"": row[3],
+            ""type"": row[4],
+        }
+        for row in logs
+    ]
+
+
+def get_screenshot_logs():
+    conn = get_db()
+    c = conn.cursor()
+    c.execute(
+        ""SELECT timestamp, username, ip, text, type, image_path FROM screenshot_logs ORDER BY timestamp DESC""
+    )
+    logs = c.fetchall()
+    return logs"
+2024-07-03 10:53:14,Toshiba,192.168.100.200,get_screenshot_logs_from_db
+2024-07-03 10:54:40,Toshiba,192.168.100.200,"def get_screenshot_logs():
+    screenshots = []
+    for user_dir in os.listdir(SCREENSHOT_DIR):
+        user_dir_path = os.path.join(SCREENSHOT_DIR, user_dir)
+        screenshot_dir = os.path.join(user_dir_path, ""Screenshot"")
+
+        if os.path.isdir(screenshot_dir):
+            for file in os.listdir(screenshot_dir):
+                if file.endswith("".png"") or file.endswith("".jpg""):
+                    screenshot_path = os.path.join(screenshot_dir, file)
+                    screenshots.append(
+                        {
+                            ""username"": user_dir,
+                            ""image_path"": screenshot_path,
+                            ""filename"": file,
+                        }
+                    )
+    return screenshots"
+2024-07-03 10:54:53,Toshiba,192.168.100.200,"Screenshots
+screenshot_20240703_095316.png
+screenshot_20240703_095316.png
+
+Username: Toshiba
+
+screenshot_20240703_095318.png
+screenshot_20240703_095318.png
+
+Username: Toshiba
+
+screenshot_20240703_095321.png
+screenshot_20240703_095321.png
+
+Username: Toshiba
+
+screenshot_20240703_095328.png
+screenshot_20240703_095328.png
+
+Username: Toshiba
+
+screenshot_20240703_095329.png
+screenshot_20240703_095329.png
+
+Username: Toshiba
+
+screenshot_20240703_095331.png
+screenshot_20240703_095331.png
+
+Username: Toshiba"
+2024-07-03 10:55:06,Toshiba,192.168.100.200,"<!-- screenshots.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Screenshots</title>
+</head>
+<body>
+    <h1>Screenshots</h1>
+    {% for screenshot in screenshots %}
+        <div>
+            <h3>{{ screenshot.filename }}</h3>
+            <p>Username: {{ screenshot.username }}</p>
+            <img src=""{{ screenshot.image_path }}"" alt=""Screenshot"">
+        </div>
+    {% endfor %}
+</body>
+</html>
+"
+2024-07-03 10:55:16,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+  <head>
+    <meta charset=""UTF-8"" />
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
+    <title>Screenshots</title>
+  </head>
+  <body>
+    <h1>Screenshots</h1>
+    <div class=""container"">
+      <div class=""row"">
+        {% for screenshot in screenshots %}
+        <div class=""col-md-3"">
+          <a href=""{{ screenshot.image_path }}"" target=""_blank"">
+            <img
+              src=""{{ screenshot.image_path }}""
+              alt=""{{ screenshot.filename }}""
+              class=""img-thumbnail""
+            />
+          </a>
+          <p>{{ screenshot.filename }}</p>
+          <p>Username: {{ screenshot.username }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
+"
+2024-07-03 10:55:59,Toshiba,192.168.100.200,"Screenshots
+screenshot_20240703_095316.png
+screenshot_20240703_095316.png
+
+Username: Toshiba
+
+screenshot_20240703_095318.png
+screenshot_20240703_095318.png
+
+Username: Toshiba
+
+screenshot_20240703_095321.png
+screenshot_20240703_095321.png
+
+Username: Toshiba
+
+screenshot_20240703_095328.png
+screenshot_20240703_095328.png
+
+Username: Toshiba
+
+screenshot_20240703_095329.png
+screenshot_20240703_095329.png
+
+Username: Toshiba
+
+screenshot_20240703_095331.png
+screenshot_20240703_095331.png
+
+Username: Toshiba"
+2024-07-03 10:57:15,Toshiba,192.168.100.200,"C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba
+C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot
+C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot\screenshot_20240703_095316.png
+C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot\screenshot_20240703_095318.png
+C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot\screenshot_20240703_095321.png
+C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot\screenshot_20240703_095328.png
+C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot\screenshot_20240703_095329.png
+C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot\screenshot_20240703_095331.png
+C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot\screenshot_20240703_095332.png
+C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot\screenshot_20240703_095333.png
+C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot\screenshot_20240703_095404.png
+C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot\screenshot_20240703_095434.png
+C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot\screenshot_20240703_095504.png"
+2024-07-03 10:58:40,Toshiba,192.168.100.200,C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot\screenshot_20240703_095316.png
+2024-07-03 11:00:06,Toshiba,192.168.100.200,"<main class=""col-md-10 py-3"">
+          {% if all_logs %}
+          <div class=""row row-data"">
+            {% for log in all_logs %}
+            <div class=""col-md-8 log-entry my-2 p-2 border rounded"">
+              <p>{{ log.text }}</p>
+              <p class=""timestamp text-left"">{{ log.timestamp }}</p>
+            </div>
+            {% endfor %}"
+2024-07-03 11:01:10,Toshiba,192.168.100.200,"<div class=""col-md-3"">
+          <a href=""{{ screenshot.image_path }}"" target=""_blank"">
+            <img src=""{{ screenshot.image_path }}"" alt=""{{ screenshot.filename }}"" class=""img-thumbnail"">
+          </a>
+          <p>{{ screenshot.filename }}</p>
+          <p>Username: {{ screenshot.username }}</p>
+        </div>"
+2024-07-03 11:02:11,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Screenshots</title>
+  <style>
+    .thumbnail {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Screenshots</h1>
+  <div class=""container"">
+    <div class=""row"">
+      <div class=""col-md-3"">
+        <a href=""file:///C:/Users/Toshiba/Desktop/D/Designing/Python/Django/ProximaLinkMonitoringApp/keylogger_project/test/LoggedData/Toshiba/Screenshot/screenshot_20240703_095316.png"" target=""_blank"">
+          <img src=""file:///C:/Users/Toshiba/Desktop/D/Designing/Python/Django/ProximaLinkMonitoringApp/keylogger_project/test/LoggedData/Toshiba/Screenshot/screenshot_20240703_095316.png"" alt=""screenshot_20240703_095316.png"" class=""thumbnail"">
+        </a>
+        <p>Username: Toshiba</p>
+      </div>
+      <div class=""col-md-3"">
+        <a href=""file:///C:/Users/Toshiba/Desktop/D/Designing/Python/Django/ProximaLinkMonitoringApp/keylogger_project/test/LoggedData/Toshiba/Screenshot/screenshot_20240703_095318.png"" target=""_blank"">
+          <img src=""file:///C:/Users/Toshiba/Desktop/D/Designing/Python/Django/ProximaLinkMonitoringApp/keylogger_project/test/LoggedData/Toshiba/Screenshot/screenshot_20240703_095318.png"" alt=""screenshot_20240703_095318.png"" class=""thumbnail"">
+        </a>
+        <p>Username: Toshiba</p>
+      </div>
+      <!-- Add more similar blocks for each screenshot -->
+    </div>
+  </div>
+</body>
+</html>
+"
+2024-07-03 11:02:32,Toshiba,192.168.100.200,"<a href=""file:///C:/Users/Toshiba/Desktop/D/Designing/Python/Django/ProximaLinkMonitoringApp/keylogger_project/test/LoggedData/Toshiba/Screenshot/screenshot_20240703_095316.png"" target=""_blank"">
+            <img src=""file:///C:/Users/Toshiba/Desktop/D/Designing/Python/Django/ProximaLinkMonitoringApp/keylogger_project/test/LoggedData/Toshiba/Screenshot/screenshot_20240703_095316.png"" alt=""screenshot_20240703_095316.png"" class=""thumbnail"">
+          </a>"
+2024-07-03 11:03:46,Toshiba,192.168.100.200,/Users/Toshiba/Desktop/D/Designing/Python/Django/ProximaLinkMonitoringApp/keylogger_project/test/LoggedData/Toshiba
+2024-07-03 11:12:09,Toshiba,192.168.100.200,"Not allowed to load local resource: file:///C:/Screenshot/screenshot_20240703_095316.png
+screenshots:1  Not allowed to load local resource: file:///C:/Screenshot/screenshot_20240703_095318.png
+screenshots:1  Not allowed to load local resource: file:///C:/Screenshot/screenshot_20240703_095316.png"
+2024-07-03 11:13:56,Toshiba,192.168.100.200,"@app.route(""/screenshots"")
+def screenshots():
+    screenshots = get_screenshot_logs()
+    return render_template(""clipboard.html"", screenshots=screenshots)"
+2024-07-03 11:15:39,Toshiba,192.168.100.200,screenshot
+2024-07-03 13:00:17,Toshiba,192.168.100.200,"Not allowed to load local resource: file:///C:/Screenshot/screenshot_20240703_095318.png
+"
+2024-07-03 13:00:57,Toshiba,192.168.100.200,"python -m http.server 8000 --directory C:/Users/Toshiba/Desktop/D/Designing/Python/Django/ProximaLinkMonitoringApp/keylogger_project/test/LoggedData/Toshiba/Screenshot
+"
+2024-07-03 13:01:20,Toshiba,192.168.100.200,http://localhost:8000
+2024-07-03 13:02:33,Toshiba,192.168.100.200,Screenshot
+2024-07-03 13:03:29,Toshiba,192.168.100.200,http://localhost:8000/screenshot_20240703_095316.png
+2024-07-03 13:07:46,Toshiba,192.168.100.200,"<!-- screenshots.html -->
+
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Screenshots</title>
+    <style>
+        .thumbnail {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Screenshots</h1>
+    <div class=""container"">
+        <div class=""row"">
+            {% for screenshot in screenshots %}
+            <div class=""col-md-4"">
+                <img src=""{{ url_for('serve_screenshot', filename=screenshot.filename) }}""
+                     alt=""{{ screenshot.filename }}""
+                     class=""thumbnail""
+                     onclick=""openOverlay('{{ url_for('serve_screenshot', filename=screenshot.filename) }}')""
+                />
+                <p>{{ screenshot.filename }}</p>
+                <p>Username: {{ screenshot.username }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div id=""overlay"" class=""overlay"" onclick=""closeOverlay()"">
+        <span class=""close"">&times;</span>
+        <div class=""overlay-content"">
+            <img id=""overlay-img"" src="""" alt=""Screenshot"">
+        </div>
+    </div>
+
+    <script>
+        function openOverlay(imageUrl) {
+            document.getElementById(""overlay-img"").src = imageUrl;
+            document.getElementById(""overlay"").style.display = ""block"";
+        }
+
+        function closeOverlay() {
+            document.getElementById(""overlay"").style.display = ""none"";
+        }
+    </script>
+</body>
+</html>
+"
+2024-07-03 13:08:07,Toshiba,192.168.100.200,"<div class=""container"">
+        <div class=""row"">
+            {% include 'screenshots.html' %}
+        </div>
+    </div>"
+2024-07-03 13:08:34,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+  <head>
+    <meta charset=""UTF-8"" />
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
+    <title>ProximaLink Dashboard</title>
+    <link
+      rel=""stylesheet""
+      href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css""
+    />
+    <link
+      rel=""stylesheet""
+      href=""{{ url_for('static', filename='styles.css') }}""
+    />
+  </head>
+  <body>
+    <header class=""bg-primary text-white text-center py-3"">
+      <h1>ProximaLink Dashboard</h1>
+      <p>Welcome to the monitoring dashboard.</p>
+    </header>
+    <div class=""container-fluid"">
+      <div class=""row"">
+        <aside class=""col-md-2 bg-light py-3"">
+          <h2>Users</h2>
+          <ul class=""list-unstyled"">
+            {% if unique_users %} {% for user in unique_users %}
+            <li class=""user-item"">{{ user }}</li>
+            {% endfor %} {% else %}
+            <p>No users found yet.</p>
+            {% endif %}
+          </ul>
+        </aside>
+        <main class=""col-md-10 py-3"">
+          {% if all_logs %}
+          <div class=""row row-data"">
+            {% for log in all_logs %}
+            <div class=""col-md-8 log-entry my-2 p-2 border rounded"">
+              <p>{{ log.text }}</p>
+              <p class=""timestamp text-left"">{{ log.timestamp }}</p>
+            </div>
+            {% endfor %}
+          </div>
+          {% else %}
+          <!-- Display a message if no logs are found -->
+          <div class=""alert alert-info text-center"" role=""alert"">
+            No logs found yet. Monitor activity for data to appear.
+          </div>
+          {% endif %}
+        </main>
+      </div>
+    </div>
+    <footer class=""bg-primary text-white text-center py-3 mt-3"">
+      <p>ProximaLink Monitoring &copy; 2024</p>
+    </footer>
+    <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+  </body>
+</html>
+"
+2024-07-03 13:11:04,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>ProximaLink Dashboard</title>
+    <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"">
+    <link rel=""stylesheet"" href=""{{ url_for('static', filename='styles.css') }}"">
+</head>
+<body>
+<header class=""bg-primary text-white text-center py-3"">
+    <h1>ProximaLink Dashboard</h1>
+    <p>Welcome to the monitoring dashboard.</p>
+</header>
+<div class=""container-fluid"">
+    <div class=""row"">
+        <aside class=""col-md-2 bg-light py-3"">
+            <h2>Users</h2>
+            <ul class=""list-unstyled"">
+                {% if unique_users %}
+                    {% for user in unique_users %}
+                        <li class=""user-item"">{{ user }}</li>
+                    {% endfor %}
+                {% else %}
+                    <p>No users found yet.</p>
+                {% endif %}
+            </ul>
+        </aside>
+        <main class=""col-md-10 py-3"">
+            {% if all_logs %}
+                <div class=""row row-data"">
+                    {% for log in all_logs %}
+                        <div class=""col-md-8 log-entry my-2 p-2 border rounded"">
+                            <p>{{ log.text }}</p>
+                            <p class=""timestamp text-left"">{{ log.timestamp }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <!-- Display a message if no logs are found -->
+                <div class=""alert alert-info text-center"" role=""alert"">
+                    No logs found yet. Monitor activity for data to appear.
+                </div>
+            {% endif %}
+            <hr>
+            <div class=""text-center"">
+                <a href=""/screenshots"" class=""btn btn-primary"">View Screenshots</a>
+            </div>
+        </main>
+    </div>
+</div>
+<footer class=""bg-primary text-white text-center py-3 mt-3"">
+    <p>ProximaLink Monitoring &copy; 2024</p>
+</footer>
+<script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+<script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+<script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+</body>
+</html>
+"
+2024-07-03 13:13:33,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Screenshots</title>
+    <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"">
+    <link rel=""stylesheet"" href=""{{ url_for('static', filename='styles.css') }}"">
+    <style>
+        .thumbnail {
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+        }
+        .overlay img {
+            display: block;
+            margin: auto;
+            max-width: 90%;
+            max-height: 90%;
+            margin-top: 5%;
+        }
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<header class=""bg-primary text-white text-center py-3"">
+    <h1>Screenshots</h1>
+    <p>View screenshots captured</p>
+</header>
+<div class=""container-fluid"">
+    <div class=""row"" id=""thumbnails"">
+        {% for screenshot in screenshots %}
+        <div class=""col-md-4 mb-3"">
+            <div class=""thumbnail text-center"">
+                <img src=""{{ url_for('serve_screenshot', filename=screenshot.filename) }}""
+                     alt=""{{ screenshot.filename }}""
+                     class=""img-thumbnail""
+                     data-image=""{{ screenshot.image_path }}""
+                     data-toggle=""modal""
+                     data-target=""#overlayModal""
+                     data-caption=""Username: {{ screenshot.username }}""
+                />
+                <p>{{ screenshot.filename }}</p>
+                <p>Username: {{ screenshot.username }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Modal for overlay view -->
+<div class=""overlay"" id=""overlayModal"">
+   
+"
+2024-07-03 13:13:43,Toshiba,192.168.100.200,"@app.route(""/screenshots"")
+def screenshots():
+    screenshots = get_screenshot_logs()
+    return render_template(""screenshots.html"", screenshots=screenshots)
+
+
+@app.route(""/screenshots/<path:filename>"")
+def serve_screenshot(filename):
+    return send_from_directory(SCREENSHOT_DIR, filename)"
+2024-07-03 13:14:18,Toshiba,192.168.100.200,send_from_directory
+2024-07-03 13:17:11,Toshiba,192.168.100.200,"<hr>
+            <div class=""text-center"">
+                <a href=""/screenshots"" class=""btn btn-primary"">View Screenshots</a>
+            </div>"
+2024-07-03 13:19:56,Toshiba,192.168.100.200,"SCREENSHOT_DIR = r""C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData""
+"
+2024-07-03 13:21:41,Toshiba,192.168.100.200,http://192.168.100.200:8080/screenshots/screenshot_20240703_095634.png
+2024-07-03 13:22:03,Toshiba,192.168.100.200,"Failed to load resource: the server responded with a status of 404 (NOT FOUND)
+screenshot_20240703_095332.png:1 
+        
+        
+        Failed to load resource: the server responded with a status of 404 (NOT FOUND)
+screenshot_20240703_095504.png:1 
+        
+        
+        Failed to load resource: the server responded with a status of 404 (NOT FOUND)
+screenshot_20240703_095722.png:1 
+        
+        
+        Failed to load resource: the server responded with a status of 404 (NOT FOUND)
+screenshot_20240703_095534.png:1 
+        
+        
+        Failed to load resource: the server responded with a status of 404 (NOT FOUND)
+screenshot_20240703_095745.png:1 
+        
+        
+        Failed to load resource: the server responded with a status of 404 (NOT FOUND)"
+2024-07-03 13:23:18,Toshiba,192.168.100.200,"src=""{{ url_for('static', filename='screenshots/screenshot_20240703_095634.png') }}"" alt=""Screenshot"""
+2024-07-03 13:23:57,Toshiba,192.168.100.200,http://192.168.100.200:8080/static/screenshots/screenshot_20240703_095634.png
+2024-07-03 13:24:29,Toshiba,192.168.100.200,python -m http.server 8000 --directory C:/Users/Toshiba/Desktop/D/Designing/Python/Django/ProximaLinkMonitoringApp/keylogger_project/test/LoggedData/Toshiba/Screenshot
+2024-07-03 13:27:20,Toshiba,192.168.100.200,http://localhost:8000/screenshot_20240703_095634.png
+2024-07-03 13:27:54,Toshiba,192.168.100.200,"<img
+              src=""{{ url_for('localhost:8000', filename='./*') }}""
+              alt=""Screenshot""
+              class=""img-thumbnail""
+              data-image=""{{ screenshot.image_path }}""
+              data-toggle=""modal""
+              data-target=""#overlayModal""
+              data-caption=""Username: {{ screenshot.username }}""
+            />"
+2024-07-03 13:28:23,Toshiba,192.168.100.200,"src=""http://localhost:8000/{{ screenshot.filename }}""
+          alt=""{{ screenshot.filename }}"""
+2024-07-03 14:01:36,Toshiba,192.168.100.200,"<div class=""modal-footer"">
+          <button type=""button"" class=""btn btn-secondary"" data-dismiss=""modal"">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+  <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+  <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+  <script>
+    $(document).ready(function() {
+      // Open image in overlay modal on click
+      $('.img-thumbnail').click(function() {
+        var imgPath = $(this).attr('data-image');
+        $('#overlayImage').attr('src', imgPath);
+        $('#overlayModal').modal('show');
+      });
+    });
+  </script>
+</body>
+</html>"
+2024-07-03 14:04:04,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Screenshots</title>
+  <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"">
+  <link rel=""stylesheet"" href=""{{ url_for('static', filename='styles.css') }}"">
+</head>
+<body>
+  <h1>Screenshots</h1>
+  <div class=""container"">
+    <div class=""row"">
+      {% for screenshot in screenshots %}
+      <div class=""col-md-3"">
+        <img
+          src=""http://localhost:8000/{{ screenshot.filename }}""
+          alt=""{{ screenshot.filename }}""
+          class=""img-thumbnail""
+          data-image=""http://localhost:8000/{{ screenshot.filename }}""
+          data-toggle=""modal""
+          data-target=""#overlayModal""
+          data-caption=""Username: {{ screenshot.username }}""
+        />
+        <p>{{ screenshot.filename }}</p>
+        <p>Username: {{ screenshot.username }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Modal for overlay view -->
+  <div class=""modal fade"" id=""overlayModal"" tabindex=""-1"" role=""dialog"" aria-labelledby=""overlayModalLabel"" aria-hidden=""true"">
+    <div class=""modal-dialog modal-dialog-centered modal-lg"" role=""document"">
+      <div class=""modal-content"">
+        <div class=""modal-body"">
+          <img src="""" class=""img-fluid"" id=""overlayImage"">
+          <p id=""imageCaption""></p>
+        </div>
+        <div class=""modal-footer"">
+          <button type=""button"" class=""btn btn-secondary"" data-dismiss=""modal"">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+  <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+  <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+  <script>
+    $(document).ready(function() {
+      // Open image in overlay modal on click
+      $('.img-thumbnail').click(function() {
+        var imgPath = $(this).attr('data-image');
+        var caption = $(this).attr('data-caption');
+        $('#overlayImage').attr('src', imgPath);
+        $('#imageCaption').text(caption);
+        $('#overlayModal').modal('show');
+      });
+    });
+  </script>
+</body>
+</html>
+"
+2024-07-03 14:06:37,Toshiba,192.168.100.200,"<p>{{ screenshot.filename }}</p>
+        <p>Username: {{ screenshot.username }}</p>"
+2024-07-03 14:07:30,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Screenshots</title>
+  <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"">
+  <link rel=""stylesheet"" href=""{{ url_for('static', filename='styles.css') }}"">
+  <style>
+    .modal-dialog {
+      max-width: 90%;
+    }
+    .modal-content {
+      position: relative;
+    }
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    .nav-btn-left {
+      left: 0;
+    }
+    .nav-btn-right {
+      right: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Screenshots</h1>
+  <div class=""container"">
+    <div class=""row"">
+      {% for screenshot in screenshots %}
+      <div class=""col-md-3"">
+        <img
+          src=""http://localhost:8000/{{ screenshot.filename }}""
+          alt=""{{ screenshot.filename }}""
+          class=""img-thumbnail""
+          data-image=""http://localhost:8000/{{ screenshot.filename }}""
+          data-toggle=""modal""
+          data-target=""#overlayModal""
+          data-caption=""Username: {{ screenshot.username }}""
+        />
+        <p>{{ screenshot.filename }}</p>
+        <p>Username: {{ screenshot.username }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Modal for overlay view -->
+  <div class=""modal fade"" id=""overlayModal"" tabindex=""-1"" role=""dialog"" aria-labelledby=""overlayModalLabel"" aria-hidden=""true"">
+    <div class=""modal-dialog modal-dialog-centered modal-lg"" role=""document"">
+      <div class=""modal-content"">
+        <button class=""nav-btn nav-btn-left"" id=""prevImage"">&lt;</button>
+        <button class=""nav-btn nav-btn-right"" id=""nextImage"">&gt;</button>
+        <div class=""modal-body"">
+          <img src="""" class=""img-fluid"" id=""overlayImage"">
+          <p id=""imageCaption""></p>
+        </div>
+        <div class=""modal-footer"">
+          <button type=""button"" class=""btn btn-secondary"" data-dismiss=""modal"">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+  <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+  <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+  <script>
+    $(document).ready(function() {
+      let currentImageIndex = 0;
+      let images = [];
+
+      // Collect image elements and initialize modal
+      $('.img-thumbnail').each(function(index) {
+        images.push({
+          src: $(this).attr('data-image'),
+          caption: $(this).attr('data-caption')
+        });
+
+        $(this).click(function() {
+          currentImageIndex = index;
+          updateModal();
+          $('#overlayModal').modal('show');
+        });
+      });
+
+      function updateModal() {
+        $('#overlayImage').attr('src', images[currentImageIndex].src);
+        $('#imageCaption').text(images[currentImageIndex].caption);
+      }
+
+      // Navigation buttons
+      $('#prevImage').click(function() {
+        if (currentImageIndex > 0) {
+          currentImageIndex--;
+          updateModal();
+        }
+      });
+
+      $('#nextImage').click(function() {
+        if (currentImageIndex < images.length - 1) {
+          currentImageIndex++;
+          updateModal();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+"
+2024-07-03 14:09:15,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Screenshots</title>
+  <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"">
+  <link rel=""stylesheet"" href=""{{ url_for('static', filename='styles.css') }}"">
+  <style>
+    .modal-dialog {
+      max-width: 90%;
+    }
+    .modal-content {
+      position: relative;
+    }
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    .nav-btn-left {
+      left: 0;
+    }
+    .nav-btn-right {
+      right: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Screenshots</h1>
+  <div class=""container"">
+    <div class=""row"">
+      {% for screenshot in screenshots %}
+      <div class=""col-md-3"">
+        <img
+          src=""http://localhost:8000/{{ screenshot.filename }}""
+          alt=""Screenshot""
+          class=""img-thumbnail""
+          data-image=""http://localhost:8000/{{ screenshot.filename }}""
+          data-toggle=""modal""
+          data-target=""#overlayModal""
+          data-caption=""Username: {{ screenshot.username }}""
+        />
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Modal for overlay view -->
+  <div class=""modal fade"" id=""overlayModal"" tabindex=""-1"" role=""dialog"" aria-labelledby=""overlayModalLabel"" aria-hidden=""true"">
+    <div class=""modal-dialog modal-dialog-centered modal-lg"" role=""document"">
+      <div class=""modal-content"">
+        <button class=""nav-btn nav-btn-left"" id=""prevImage"">&lt;</button>
+        <button class=""nav-btn nav-btn-right"" id=""nextImage"">&gt;</button>
+        <div class=""modal-body"">
+          <img src="""" class=""img-fluid"" id=""overlayImage"">
+          <p id=""imageCaption""></p>
+        </div>
+        <div class=""modal-footer"">
+          <button type=""button"" class=""btn btn-secondary"" data-dismiss=""modal"">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+  <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+  <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+  <script>
+    $(document).ready(function() {
+      let currentImageIndex = 0;
+      let images = [];
+
+      // Collect image elements and initialize modal
+      $('.img-thumbnail').each(function(index) {
+        images.push({
+          src: $(this).attr('data-image'),
+          caption: $(this).attr('data-caption')
+        });
+
+        $(this).click(function() {
+          currentImageIndex = index;
+          updateModal();
+          $('#overlayModal').modal('show');
+        });
+      });
+
+      function updateModal() {
+        $('#overlayImage').attr('src', images[currentImageIndex].src);
+        $('#imageCaption').text(images[currentImageIndex].caption);
+      }
+
+      // Navigation buttons
+      $('#prevImage').click(function() {
+        if (currentImageIndex > 0) {
+          currentImageIndex--;
+          updateModal();
+        }
+      });
+
+      $('#nextImage').click(function() {
+        if (currentImageIndex < images.length - 1) {
+          currentImageIndex++;
+          updateModal();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+"
+2024-07-03 14:12:29,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Screenshots</title>
+  <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"">
+  <link rel=""stylesheet"" href=""{{ url_for('static', filename='styles.css') }}"">
+  <style>
+    .img-thumbnail {
+      width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 5px;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
+    }
+    .modal-dialog {
+      max-width: 90%;
+    }
+    .modal-content {
+      position: relative;
+    }
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    .nav-btn-left {
+      left: 0;
+    }
+    .nav-btn-right {
+      right: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Screenshots</h1>
+  <div class=""container"">
+    <div class=""row"">
+      {% for screenshot in screenshots %}
+      <div class=""col-md-4 col-sm-6"">
+        <img
+          src=""http://localhost:8000/{{ screenshot.filename }}""
+          alt=""Screenshot""
+          class=""img-thumbnail""
+          data-image=""http://localhost:8000/{{ screenshot.filename }}""
+          data-toggle=""modal""
+          data-target=""#overlayModal""
+          data-caption=""Username: {{ screenshot.username }}""
+        />
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Modal for overlay view -->
+  <div class=""modal fade"" id=""overlayModal"" tabindex=""-1"" role=""dialog"" aria-labelledby=""overlayModalLabel"" aria-hidden=""true"">
+    <div class=""modal-dialog modal-dialog-centered modal-lg"" role=""document"">
+      <div class=""modal-content"">
+        <button class=""nav-btn nav-btn-left"" id=""prevImage"">&lt;</button>
+        <button class=""nav-btn nav-btn-right"" id=""nextImage"">&gt;</button>
+        <div class=""modal-body"">
+          <img src="""" class=""img-fluid"" id=""overlayImage"">
+          <p id=""imageCaption""></p>
+        </div>
+        <div class=""modal-footer"">
+          <button type=""button"" class=""btn btn-secondary"" data-dismiss=""modal"">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+  <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+  <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+  <script>
+    $(document).ready(function() {
+      let currentImageIndex = 0;
+      let images = [];
+
+      // Collect image elements and initialize modal
+      $('.img-thumbnail').each(function(index) {
+        images.push
+"
+2024-07-03 14:20:38,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Screenshots</title>
+  <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"">
+  <link rel=""stylesheet"" href=""{{ url_for('static', filename='styles.css') }}"">
+  <style>
+    .img-thumbnail {
+      width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 5px;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
+    }
+    .modal-dialog {
+      max-width: 90%;
+    }
+    .modal-content {
+      position: relative;
+    }
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    .nav-btn-left {
+      left: 0;
+    }
+    .nav-btn-right {
+      right: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Screenshots</h1>
+  <div class=""container"">
+    <div class=""row"">
+      {% for screenshot in screenshots %}
+      <div class=""col-md-4 col-sm-6"">
+        <img
+          src=""http://localhost:8000/{{ screenshot.filename }}""
+          alt=""Screenshot""
+          class=""img-thumbnail""
+          data-image=""http://localhost:8000/{{ screenshot.filename }}""
+          data-toggle=""modal""
+          data-target=""#overlayModal""
+          data-caption=""Username: {{ screenshot.username }}""
+        />
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Modal for overlay view -->
+  <div class=""modal fade"" id=""overlayModal"" tabindex=""-1"" role=""dialog"" aria-labelledby=""overlayModalLabel"" aria-hidden=""true"">
+    <div class=""modal-dialog modal-dialog-centered modal-lg"" role=""document"">
+      <div class=""modal-content"">
+        <button class=""nav-btn nav-btn-left"" id=""prevImage"">&lt;</button>
+        <button class=""nav-btn nav-btn-right"" id=""nextImage"">&gt;</button>
+        <div class=""modal-body"">
+          <img src="""" class=""img-fluid"" id=""overlayImage"">
+          <p id=""imageCaption""></p>
+        </div>
+        <div class=""modal-footer"">
+          <button type=""button"" class=""btn btn-secondary"" data-dismiss=""modal"">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+  <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+  <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+  <script>
+    $(document).ready(function() {
+      let currentImageIndex = 0;
+      let images = [];
+
+      // Collect image elements and initialize modal
+      $('.img-thumbnail').each(function(index) {
+        images.push({
+          src: $(this).attr('data-image'),
+          caption: $(this).attr('data-caption')
+        });
+
+        $(this).click(function() {
+          currentImageIndex = index;
+          updateModal();
+          $('#overlayModal').modal('show');
+        });
+      });
+
+      function updateModal() {
+        $('#overlayImage').attr('src', images[currentImageIndex].src);
+        $('#imageCaption').text(images[currentImageIndex].caption);
+      }
+
+      // Navigation buttons
+      $('#prevImage').click(function() {
+        if (currentImageIndex > 0) {
+          currentImageIndex--;
+          updateModal();
+        }
+      });
+
+      $('#nextImage').click(function() {
+        if (currentImageIndex < images.length - 1) {
+          currentImageIndex++;
+          updateModal();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+"
+2024-07-03 14:22:55,Toshiba,192.168.100.200,screenshot.css
+2024-07-03 14:23:11,Toshiba,192.168.100.200,"/* static/screenshot.css */
+
+.img-thumbnail {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.modal-dialog {
+  max-width: 90%;
+}
+
+.modal-content {
+  position: relative;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  font-size: 2em;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.nav-btn-left {
+  left: 0;
+}
+
+.nav-btn-right {
+  right: 0;
+}
+"
+2024-07-03 14:23:34,Toshiba,192.168.100.200,screenshot.js
+2024-07-03 14:23:38,Toshiba,192.168.100.200,"// static/screenshot.js
+
+$(document).ready(function() {
+  let currentImageIndex = 0;
+  let images = [];
+
+  // Collect image elements and initialize modal
+  $('.img-thumbnail').each(function(index) {
+    images.push($(this).attr('data-image'));
+
+    $(this).click(function() {
+      currentImageIndex = index;
+      updateModal();
+      $('#overlayModal').modal('show');
+    });
+  });
+
+  function updateModal() {
+    $('#overlayImage').attr('src', images[currentImageIndex]);
+  }
+
+  // Navigation buttons
+  $('#prevImage').click(function() {
+    if (currentImageIndex > 0) {
+      currentImageIndex--;
+      updateModal();
+    }
+  });
+
+  $('#nextImage').click(function() {
+    if (currentImageIndex < images.length - 1) {
+      currentImageIndex++;
+      updateModal();
+    }
+  });
+});
+"
+2024-07-03 14:23:48,Toshiba,192.168.100.200,"<link rel=""stylesheet"" href=""{{ url_for('static', filename='screenshot.css') }}"">"
+2024-07-03 14:24:29,Toshiba,192.168.100.200,"  <script src=""{{ url_for('static', filename='screenshot.js') }}""></script>
+"
+2024-07-03 14:26:48,Toshiba,192.168.100.200,"LoggedData/
+"
+2024-07-03 14:26:52,Toshiba,192.168.100.200,Toshiba/Clipboard/clipboard_logs.csv
+2024-07-03 14:27:33,Toshiba,192.168.100.200,"LoggedData
+checkingDB.py
+db/keylogs.db
+keylogs.db
+__pycache__/directory.cpython-311.pyc
+__pycache__/__init__.cpython-311.pyc
+logData/__pycache__/logger.cpython-311.pyc
+views/__pycache__/__init__.cpython-311.pyc
+__pycache__/directory.cpython-311.pyc
+logData/__pycache__/logger.cpython-311.pyc
+__pycache__/directory.cpython-311.pyc
+logData/__pycache__/logger.cpython-311.pyc
+LoggedData/Toshiba/Clipboard/clipboard_logs.csv
+templates/clipboard.html
+testingFeature.py
+LoggedData/
+
+"
+2024-07-03 14:28:16,Toshiba,192.168.100.200,"# Ignore the LoggedData directory
+LoggedData/
+
+# Ignore specific files
+checkingDB.py
+db/keylogs.db
+keylogs.db
+
+# Ignore all Python bytecode files
+__pycache__/
+*.pyc
+
+# Ignore specific cached files (optional, already covered by the above rules)
+__pycache__/directory.cpython-311.pyc
+__pycache__/__init__.cpython-311.pyc
+logData/__pycache__/logger.cpython-311.pyc
+views/__pycache__/__init__.cpython-311.pyc
+
+# Ignore specific logs and temporary files
+LoggedData/Toshiba/Clipboard/clipboard_logs.csv
+
+# Ignore specific templates and test files (optional, if not needed in repo)
+templates/clipboard.html
+testingFeature.py
+"
+2024-07-03 14:28:25,Toshiba,192.168.100.200,"git rm -r --cached LoggedData checkingDB.py db/keylogs.db keylogs.db __pycache__ logData/__pycache__ views/__pycache__ LoggedData/Toshiba/Clipboard/clipboard_logs.csv templates/clipboard.html testingFeature.py
+"
+2024-07-03 14:28:47,Toshiba,192.168.100.200,fatal: pathspec 'db/keylogs.db' did not match any files
+2024-07-03 14:30:41,Toshiba,192.168.100.200,"git add .gitignore
+git commit -m ""Update .gitignore and remove specific files and directories from tracking""
+"
+2024-07-03 14:36:42,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>ProximaLink Dashboard</title>
+    <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"">
+    <link rel=""stylesheet"" href=""{{ url_for('static', filename='styles.css') }}"">
+</head>
+<body class=""bg-dark text-white"">
+    <header class=""bg-primary text-white text-center py-3"">
+        <h1>ProximaLink Dashboard</h1>
+        <p>Welcome to the monitoring dashboard.</p>
+    </header>
+    <div class=""container-fluid"">
+        <div class=""row"">
+            <aside class=""col-md-2 bg-light text-dark py-3"">
+                <h2>Users</h2>
+                <ul class=""list-unstyled"">
+                    {% if unique_users %}
+                        {% for user in unique_users %}
+                            <li class=""user-item"">{{ user }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <p>No users found yet.</p>
+                    {% endif %}
+                </ul>
+            </aside>
+            <main class=""col-md-10 py-3"">
+                <div class=""d-flex justify-content-between mb-3"">
+                    <button id=""toggleKeylogs"" class=""btn btn-primary"">Keylogs</button>
+                    <button id=""toggleScreenshots"" class=""btn btn-secondary"">Screenshots</button>
+                </div>
+                <div id=""keylogsSection"">
+                    {% if all_logs %}
+                        <div class=""row row-data"">
+                            {% for log in all_logs %}
+                                <div class=""col-md-8 log-entry my-2 p-2 border rounded"">
+                                    <p>{{ log.text }}</p>
+                                    <p class=""timestamp text-left"">{{ log.timestamp }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class=""alert alert-info text-center"" role=""alert"">
+                            No logs found yet. Monitor activity for data to appear.
+                        </div>
+                    {% endif %}
+                </div>
+                <div id=""screenshotsSection"" style=""display: none;"">
+                    <div class=""row"">
+                        {% for screenshot in screenshots %}
+                            <div class=""col-md-4 mb-4"">
+                                <img
+                                    src=""http://localhost:8000/{{ screenshot.image_path }}""
+                                    alt=""Screenshot""
+                                    class=""img-thumbnail""
+                                    data-image=""http://localhost:8000/{{ screenshot.image_path }}""
+                                    data-toggle=""modal""
+                                    data-target=""#overlayModal""
+                                />
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <footer class=""bg-primary text-white text-center py-3 mt-3"">
+        <p>ProximaLink Monitoring &copy; 2024</p>
+    </footer>
+    <div class=""modal fade"" id=""overlayModal"" tabindex=""-1"" role=""dialog"" aria-labelledby=""overlayModalLabel"" aria-hidden=""true"">
+        <div class=""modal-dialog modal-dialog-centered modal-lg"" role=""document"">
+            <div class=""modal-content bg-dark"">
+                <div class=""modal-header"">
+                    <h5 class=""modal-title"" id=""overlayModalLabel"">Screenshot</h5>
+                    <button type=""button"" class=""close"" data-dismiss=""modal"" aria-label=""Close"">
+                        <span aria-hidden=""true"">&times;</span>
+                    </button>
+                </div>
+                <div class=""modal-body"">
+                    <img id=""overlayImage"" src="""" alt=""Screenshot"" class=""img-fluid"">
+                </div>
+                <div class=""modal-footer"">
+                    <button type=""button"" class=""btn btn-secondary"" data-dismiss=""modal"">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+    <script src=""{{ url_for('static', filename='scripts.js') }}""></script>
+</body>
+</html>
+"
+2024-07-03 14:36:54,Toshiba,192.168.100.200,scripts.js
+2024-07-03 14:37:02,Toshiba,192.168.100.200,"document.addEventListener('DOMContentLoaded', function () {
+    const toggleKeylogsButton = document.getElementById('toggleKeylogs');
+    const toggleScreenshotsButton = document.getElementById('toggleScreenshots');
+    const keylogsSection = document.getElementById('keylogsSection');
+    const screenshotsSection = document.getElementById('screenshotsSection');
+    const overlayModal = document.getElementById('overlayModal');
+    const overlayImage = document.getElementById('overlayImage');
+
+    toggleKeylogsButton.addEventListener('click', function () {
+        keylogsSection.style.display = 'block';
+        screenshotsSection.style.display = 'none';
+    });
+
+    toggleScreenshotsButton.addEventListener('click', function () {
+        keylogsSection.style.display = 'none';
+        screenshotsSection.style.display = 'block';
+    });
+
+    $('#overlayModal').on('show.bs.modal', function (event) {
+        const button = $(event.relatedTarget);
+        const imageSrc = button.data('image');
+        overlayImage.src = imageSrc;
+    });
+});
+"
+2024-07-03 14:37:21,Toshiba,192.168.100.200,"body {
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #0071c5;
+}
+
+footer {
+  background-color: #0071c5;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
+
+.tags-container {
+  margin-top: 10px;
+}
+
+.tag {
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.tag:hover {
+  background-color: #0056b3;
+}
+
+.row-data {
+  padding-left: 15px;
+}
+
+.user-item {
+  background-color: #00c5fd;
+  color: #fff;
+  font-weight: 400;
+  font-size: small;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.user-item:hover {
+  background-color: #0071c5;
+}
+
+.user-section {
+  margin-bottom: 20px;
+  border-radius: 2px;
+}
+
+.user-section h2 {
+  color: #0071c5;
+  font-weight: 600;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.log-entry {
+  background-color: #f9f9f9;
+  word-wrap: break-word;
+}
+
+.timestamp {
+  font-size: 0.9em;
+  color: #888;
+  text-align: left;
+}
+
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  /* Sidebar initially hidden */
+  height: 100%;
+  width: 250px;
+  background: #333;
+  color: #fff;
+  transition: all 0.3s ease;
+  z-index: 999;
+  overflow-y: auto;
+}
+
+.sidebar.active {
+  left: 0;
+  /* Show sidebar */
+}
+
+.sidebar-header {
+  padding: 20px;
+  background: #5d5d5d;
+}
+
+.sidebar ul.components {
+  padding: 20px 0;
+}
+
+.sidebar ul li {
+  position: relative;
+  /* Ensure icons stay in place */
+}
+
+.sidebar ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+  color: #fff;
+}
+
+.sidebar ul li a i {
+  margin-right: 10px;
+}
+
+.sidebar ul li a:hover {
+  background-color: #555;
+}
+
+/* Main content area */
+.main-content {
+  margin-left: 0;
+  /* Adjust to leave space for sidebar */
+  padding: 20px;
+}
+
+.navbar {
+  background: #f8f9fa;
+  padding: 15px 10px;
+}
+
+/* Sidebar toggle button */
+#sidebarCollapse {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #fff;
+  background: none;
+  border: none;
+  font-size: 1.5em;
+}
+
+#sidebarCollapse:hover {
+  color: #ccc;
+}
+"
+2024-07-03 14:39:38,Toshiba,192.168.100.200,Helvetica
+2024-07-03 14:41:07,Toshiba,192.168.100.200,"body {
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #ffffff;
+}
+
+header {
+  background-color: #0071c5;
+}
+
+footer {
+  background-color: #0071c5;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
+
+.tags-container {
+  margin-top: 10px;
+}
+
+.tag {
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.tag:hover {
+  background-color: #0056b3;
+}
+
+.row-data {
+  padding-left: 15px;
+}
+
+.user-item {
+  background-color: #00c5fd;
+  color: #fff;
+  font-weight: 400;
+  font-size: small;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.user-item:hover {
+  background-color: #0071c5;
+}
+
+.user-section {
+  margin-bottom: 20px;
+  border-radius: 2px;
+}
+
+.user-section h2 {
+  color: #0071c5;
+  font-weight: 600;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.log-entry {
+  background-color: #1e1e1e;
+  word-wrap: break-word;
+  border-color: #333333;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.timestamp {
+  font-size: 0.9em;
+  color: #888;
+  text-align: left;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Sidebar initially hidden */
+  height: 100%;
+  width: 250px;
+  background: #333;
+  color: #fff;
+  transition: all 0.3s ease;
+  z-index: 999;
+  overflow-y: auto;
+}
+
+.sidebar.active {
+  left: 0; /* Show sidebar */
+}
+
+.sidebar-header {
+  padding: 20px;
+  background: #5d5d5d;
+}
+
+.sidebar ul.components {
+  padding: 20px 0;
+}
+
+.sidebar ul li {
+  position: relative; /* Ensure icons stay in place */
+}
+
+.sidebar ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+  color: #fff;
+}
+
+.sidebar ul li a i {
+  margin-right: 10px;
+}
+
+.sidebar ul li a:hover {
+  background-color: #555;
+}
+
+/* Main content area */
+.main-content {
+  margin-left: 0; /* Adjust to leave space for sidebar */
+  padding: 20px;
+}
+
+.navbar {
+  background: #f8f9fa;
+  padding: 15px 10px;
+}
+
+/* Sidebar toggle button */
+#sidebarCollapse {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #fff;
+  background: none;
+  border: none;
+  font-size: 1.5em;
+}
+
+#sidebarCollapse:hover {
+  color: #ccc;
+}
+"
+2024-07-03 14:45:29,Toshiba,192.168.100.200,Here is the design and color scheme i wanted to use just keep our blue instead of these two in images as primary and this is a good layout and dark theme can you integrate these changes to our overall design 
+2024-07-03 14:47:08,Toshiba,192.168.100.200,"Roboto, Open Sans and Lato"
+2024-07-03 14:50:54,Toshiba,192.168.100.200,"/* Body */
+body {
+  font-family: 'Roboto', sans-serif; /* Primary font */
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans', sans-serif; /* Heading font */
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+/* Paragraphs */
+p {
+  font-family: 'Lato', sans-serif; /* Secondary font */
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+/* Navbar */
+.navbar {
+  font-family: 'Roboto', sans-serif; /* Navbar font */
+}
+
+/* Sidebar */
+.sidebar {
+  font-family: 'Roboto', sans-serif; /* Sidebar font */
+}
+
+/* Buttons */
+.btn {
+  font-family: 'Roboto', sans-serif; /* Button font */
+  font-weight: bold;
+}
+
+/* Tags */
+.tag {
+  font-family: 'Roboto', sans-serif; /* Tag font */
+}
+"
+2024-07-03 14:51:19,Toshiba,192.168.100.200,"<link href=""https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"" rel=""stylesheet"">
+<link href=""https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"" rel=""stylesheet"">
+<link href=""https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"" rel=""stylesheet"">
+"
+2024-07-03 14:55:28,Toshiba,192.168.100.200,"/* Body */
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: #333; /* Dark background */
+  color: #fff; /* Light text */
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #fff; /* Light text */
+}
+
+/* Paragraphs */
+p {
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #ccc; /* Light text */
+}
+
+/* Navbar */
+.navbar {
+  background: #555; /* Darker navbar */
+  color: #fff; /* Light text */
+}
+
+/* Sidebar */
+.sidebar {
+  background: #222; /* Darker sidebar */
+  color: #ccc; /* Light text */
+}
+
+/* Buttons */
+.btn {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  background-color: #007bff; /* Primary button color */
+  color: #fff; /* Light text */
+}
+
+.btn:hover {
+  background-color: #0056b3; /* Darker hover state */
+}
+
+/* Tags */
+.tag {
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #007bff; /* Tag background color */
+  color: #fff; /* Light text */
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.tag:hover {
+  background-color: #0056b3; /* Darker hover state */
+}
+"
+2024-07-03 14:57:31,Toshiba,192.168.100.200,for dashboard 
+2024-07-03 14:59:29,Toshiba,192.168.100.200,4B70F5
+2024-07-03 15:01:11,Toshiba,192.168.100.200,"Primary Colors
+191c24
+00C7FD
+0071c5
+
+Secondary colors
+FFFFFF
+198754
+0dcaf0
+ab2e3c
+ffc107"
+2024-07-03 15:03:06,Toshiba,192.168.100.200,"/* Primary Colors */
+:root {
+  --primary-dark: #191c24;
+  --primary-blue: #00c7fd;
+  --primary-darker-blue: #0071c5;
+}
+
+/* Secondary Colors */
+:root {
+  --secondary-white: #ffffff;
+  --secondary-green: #198754;
+  --secondary-light-blue: #0dcaf0;
+  --secondary-red: #ab2e3c;
+  --secondary-yellow: #ffc107;
+}
+
+/* Body */
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: var(--primary-dark); /* Dark primary color */
+  color: var(--secondary-white); /* Secondary color for text */
+}
+
+/* Header */
+header {
+  background-color: var(--primary-darker-blue); /* Darker blue */
+  color: var(--secondary-white); /* White text */
+  padding: 15px;
+  text-align: center;
+}
+
+/* Footer */
+footer {
+  background-color: var(--primary-darker-blue); /* Darker blue */
+  color: var(--secondary-white); /* White text */
+  text-align: center;
+  padding: 15px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* User Section */
+.user-section {
+  background-color: var(--primary-blue); /* Blue */
+  color: var(--secondary-white); /* White text */
+  margin-bottom: 20px;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.user-section h2 {
+  color: var(--primary-darker-blue); /* Darker blue for headings */
+  font-weight: bold;
+  border-bottom: 2px solid var(--secondary-green); /* Green */
+  padding-bottom: 10px;
+}
+
+/* Buttons */
+.btn {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  background-color: var(--primary-blue); /* Blue */
+  color: var(--secondary-white); /* White text */
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: var(--primary-darker-blue); /* Darker blue on hover */
+}
+
+/* Tags */
+.tag {
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: var(--primary-darker-blue); /* Darker blue */
+  color: var(--secondary-white); /* White text */
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.tag:hover {
+  background-color: var(--primary-blue); /* Blue on hover */
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: var(--primary-dark); /* Dark primary color */
+  color: var(--secondary-white); /* White text */
+  transition: all 0.3s ease;
+  z-index: 999;
+  overflow-y: auto;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--primary-darker-blue); /* Darker blue */
+  color: var(--secondary-white); /* White text */
+  padding: 15px 10px;
+}
+
+/* Adjustments for specific elements can be made as needed */
+
+"
+2024-07-03 15:03:43,Toshiba,192.168.100.200,var(--primary-dark);
+2024-07-03 15:05:37,Toshiba,192.168.100.200,"<aside class=""col-md-2 bg-light py-3"" style=""
+    background-color: var(--primary-dark);
+"">
+          <h2>Users</h2>
+          <ul class=""list-unstyled"">
+             
+            <li class=""user-item"">Toshiba</li>
+             
+          </ul>
+        </aside>"
+2024-07-03 15:08:31,Toshiba,192.168.100.200,"/* Updated styles for aside element */
+aside {
+  background-color: var(--primary-dark); /* Dark primary color */
+  color: var(--secondary-white); /* White text */
+  border-right: 2px solid var(--secondary-green); /* Green border on the right */
+}
+
+aside h2 {
+  color: var(--primary-darker-blue); /* Darker blue for headings */
+  font-weight: bold;
+  border-bottom: 2px solid var(--secondary-green); /* Green border at bottom of heading */
+  padding-bottom: 10px;
+}
+
+aside .user-item {
+  background-color: var(--primary-blue); /* Blue */
+  color: var(--secondary-white); /* White text */
+  font-weight: 400;
+  font-size: small;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+aside .user-item:hover {
+  background-color: var(--primary-darker-blue); /* Darker blue on hover */
+}
+"
+2024-07-03 15:12:33,Toshiba,192.168.100.200,"body {
+  font-family: 'Roboto', 'Open Sans', 'Lato', Arial, sans-serif;
+}
+
+header, footer {
+  background-color: #0071c5;
+  color: #fff;
+  padding: 15px 0;
+  text-align: center;
+}
+
+/* User section */
+.user-item {
+  background-color: #00c7fd; /* Primary color */
+  color: #fff;
+  font-weight: 400;
+  font-size: small;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.user-item:hover {
+  background-color: #0071c5; /* Darker shade on hover */
+}
+
+/* Log entry */
+.log-entry {
+  background-color: #f9f9f9;
+  word-wrap: break-word;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.timestamp {
+  font-size: 0.9em;
+  color: #888;
+  text-align: left;
+}
+
+/* Tags */
+.tags-container {
+  margin-top: 10px;
+}
+
+.tag {
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #007bff; /* Primary color */
+  color: #fff;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.tag:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Users section */
+.user-section {
+  margin-bottom: 20px;
+  border-radius: 2px;
+}
+
+.user-section h2 {
+  color: #0071c5; /* Primary color */
+  font-weight: 600;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+
+/* Main content */
+.main-content {
+  padding: 20px;
+}
+
+/* Footer */
+footer {
+  background-color: #0071c5;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+}
+
+/* Button styles */
+.btn {
+  background-color: #00c7fd; /* Primary color */
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0071c5; /* Darker shade on hover */
+}
+"
+2024-07-03 15:15:36,Toshiba,192.168.100.200,".user-section {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.user-section h2 {
+  color: #0071c5; /* Primary color */
+  font-weight: 600;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+"
+2024-07-03 15:18:13,Toshiba,192.168.100.200,var(--primary-dark);
+2024-07-03 15:18:37,Toshiba,192.168.100.200,var(--secondary-white);
