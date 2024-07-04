@@ -876,3 +876,1948 @@ footer p {
   margin-top: 15px;
 }
 "
+2024-07-04 21:14:28,Toshiba,192.168.100.200,btn-outline-primary
+2024-07-04 21:15:31,Toshiba,192.168.100.200,btn-block
+2024-07-04 21:18:43,Toshiba,192.168.100.200,"<div id=""screenshotsContent"" style=""display: none"">
+            <!-- Placeholder for Screenshots content loaded via AJAX -->
+          </div>"
+2024-07-04 21:20:07,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+  <head>
+    <meta charset=""UTF-8"" />
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
+    <title>Screenshots</title>
+    <link
+      rel=""stylesheet""
+      href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css""
+    />
+    <link
+      rel=""stylesheet""
+      href=""{{ url_for('static', filename='styles.css') }}""
+    />
+    <style>
+      .thumbnail {
+        max-width: 100px;
+        max-height: 100px;
+        margin: 5px;
+        cursor: pointer;
+      }
+      .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+      }
+      .overlay img {
+        max-width: 90%;
+        max-height: 90%;
+        margin: 50px auto;
+        display: block;
+      }
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 30px;
+        color: #fff;
+        cursor: pointer;
+      }
+      .navigation-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 30px;
+        color: #fff;
+        cursor: pointer;
+        z-index: 1001;
+      }
+      .prev-btn {
+        left: 20px;
+      }
+      .next-btn {
+        right: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class=""container mt-4"">
+      <div class=""row"">
+        <div class=""col-md-12"">
+          <div class=""row"">
+            {% for screenshot in screenshots %}
+            <div class=""col-md-4 col-sm-6 col-xs-12"">
+              <img
+                src=""{{ url_for('static', filename=screenshot) }}""
+                class=""thumbnail""
+                alt=""screenshot""
+                data-index=""{{ loop.index }}""
+              />
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class=""overlay"" id=""overlay"">
+      <span class=""close-btn"" id=""closeOverlay"">&times;</span>
+      <span class=""navigation-btn prev-btn"" id=""prevImage"">&#10094;</span>
+      <span class=""navigation-btn next-btn"" id=""nextImage"">&#10095;</span>
+      <img src="""" alt=""screenshot"" id=""overlayImage"" />
+    </div>
+
+    <script>
+      document.addEventListener(""DOMContentLoaded"", function () {
+        const thumbnails = document.querySelectorAll("".thumbnail"");
+        const overlay = document.getElementById(""overlay"");
+        const overlayImage = document.getElementById(""overlayImage"");
+        const closeOverlay = document.getElementById(""closeOverlay"");
+        const prevImage = document.getElementById(""prevImage"");
+        const nextImage = document.getElementById(""nextImage"");
+
+        let currentIndex = 0;
+
+        thumbnails.forEach((thumbnail, index) => {
+          thumbnail.addEventListener(""click"", () => {
+            currentIndex = index;
+            overlayImage.src = thumbnail.src;
+            overlay.style.display = ""block"";
+          });
+        });
+
+        closeOverlay.addEventListener(""click"", () => {
+          overlay.style.display = ""none"";
+        });
+
+        prevImage.addEventListener(""click"", () => {
+          currentIndex =
+            (currentIndex - 1 + thumbnails.length) % thumbnails.length;
+          overlayImage.src = thumbnails[currentIndex].src;
+        });
+
+        nextImage.addEventListener(""click"", () => {
+          currentIndex = (currentIndex + 1) % thumbnails.length;
+          overlayImage.src = thumbnails[currentIndex].src;
+        });
+      });
+    </script>
+  </body>
+</html>
+"
+2024-07-04 21:20:53,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Screenshots</title>
+  <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"">
+  <link rel=""stylesheet"" href=""{{ url_for('static', filename='screenshot.css') }}"">
+</head>
+<body>
+  <header>
+    <h1>ProximaLink Dashboard</h1>
+    <p>Welcome to the monitoring dashboard.</p>
+  </header>
+  <h1>Screenshots</h1>
+  <div class=""container"">
+    <div class=""row"">
+      {% for screenshot in screenshots %}
+      <div class=""col-md-4 col-sm-6"">
+        <img
+          src=""http://localhost:8000/{{ screenshot.filename }}""
+          alt=""Screenshot""
+          class=""img-thumbnail""
+          data-image=""http://localhost:8000/{{ screenshot.filename }}""
+          data-toggle=""modal""
+          data-target=""#overlayModal""
+          data-caption=""Username: {{ screenshot.username }}""
+        />
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Modal for overlay view -->
+  <div class=""modal fade"" id=""overlayModal"" tabindex=""-1"" role=""dialog"" aria-labelledby=""overlayModalLabel"" aria-hidden=""true"">
+    <div class=""modal-dialog modal-dialog-centered modal-lg"" role=""document"">
+      <div class=""modal-content"">
+        <button class=""nav-btn nav-btn-left"" id=""prevImage"">&lt;</button>
+        <button class=""nav-btn nav-btn-right"" id=""nextImage"">&gt;</button>
+        <div class=""modal-body"">
+          <img src="""" class=""img-fluid"" id=""overlayImage"" />
+          <p id=""imageCaption""></p>
+        </div>
+        <div class=""modal-footer"">
+          <button type=""button"" class=""btn btn-secondary"" data-dismiss=""modal"">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    <p>ProximaLink Monitoring &copy; 2024</p>
+  </footer>
+
+  <script src=""https://code.jquery.com/jquery-3.5.1.slim.min.js""></script>
+  <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+  <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+  <script src=""{{ url_for('static', filename='screenshot.js') }}""></script>
+
+  <!-- Custom JavaScript for Toggle Button Integration -->
+  <script>
+    $(document).ready(function() {
+      // Function to close the overlay modal
+      function closeModal() {
+        $('#overlayModal').modal('hide');
+      }
+
+      // Listen for click on Keystrokes button (if needed)
+      $('#btnKeystrokes').click(function() {
+        // Implement behavior for Keystrokes button click (if needed)
+      });
+
+      // Listen for click on Screenshots button (if needed)
+      $('#btnScreenshots').click(function() {
+        // Load content from screenshots.html using AJAX
+        $.ajax({
+          url: 'screenshots.html',
+          type: 'GET',
+          success: function(data) {
+            $('#screenshotsContent').html(data);  // Load HTML content into screenshotsContent div
+            $('#screenshotsContent').show();      // Show Screenshots content
+            $('#keystrokesContent').hide();       // Hide Keystrokes content
+          },
+          error: function(xhr, status, error) {
+            console.error('Error loading screenshots:', error);
+            // Handle error loading screenshots.html
+          }
+        });
+      });
+
+      // Listen for click on Videos button (if needed)
+      $('#btnVideos').click(function() {
+        // Implement behavior for Videos button click (if needed)
+      });
+    });
+  </script>
+</body>
+</html>
+"
+2024-07-04 21:23:54,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+  <head>
+    <meta charset=""UTF-8"" />
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
+    <title>ProximaLink Dashboard</title>
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      rel=""stylesheet""
+      href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css""
+    />
+    <link
+      rel=""stylesheet""
+      href=""{{ url_for('static', filename='styles.css') }}""
+    />
+    <link
+      rel=""stylesheet""
+      href=""{{ url_for('static', filename='screenshot.css') }}""
+    />
+  </head>
+  <body>
+    <header class=""flex-fill align-self-center"">
+      <div class=""container-fluid flex-fill align-items-center"">
+        <div class=""flex-grow-1 logo"">
+          <img
+            src=""/static/icons/PureWhite.png""
+            class=""img-fluid""
+            alt=""logo-white""
+          />
+        </div>
+        <div class=""header-content flex-fill"">
+          <h1>ProximaLink Dashboard</h1>
+          <p>Welcome to the monitoring dashboard.</p>
+        </div>
+        <div></div>
+      </div>
+    </header>
+
+    <div class=""container-fluid"">
+      <div class=""row"">
+        <aside class=""col-md-2 py-3"">
+          <h2>Users</h2>
+          <ul class=""list-unstyled"">
+            {% if unique_users %} {% for user in unique_users %}
+            <li class=""user-item"">{{ user }}</li>
+            {% endfor %} {% else %}
+            <p>No users found yet.</p>
+            {% endif %}
+          </ul>
+        </aside>
+
+        <main class=""col-md-10"">
+          <div class=""d-flex justify-content-between align-self-center"">
+            <div class=""col-btn"">
+              <!-- Buttons Section -->
+              <div
+                class=""btn-group d-flex align-items-start""
+                role=""group""
+                aria-label=""Toggle Buttons""
+              >
+                <button
+                  type=""button""
+                  class=""btn rounded-pill btn-primary mx-2""
+                  id=""btnKeystrokes""
+                >
+                  Keystrokes
+                </button>
+                <button
+                  type=""button""
+                  class=""btn rounded-pill btn-primary mx-2""
+                  id=""btnScreenshots""
+                >
+                  Screenshots
+                </button>
+                <button
+                  type=""button""
+                  class=""btn rounded-pill btn-primary mx-2""
+                  id=""btnVideos""
+                >
+                  Videos
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vertical Separator -->
+          <div class=""col-1 separator"">
+            <hr class=""my-3"" />
+          </div>
+
+          <!-- Content Sections -->
+          <div id=""keystrokesContent"">
+            <!-- Initial content for Keystrokes -->
+            <div class=""row"">
+              <div class=""col"">
+                {% if all_logs %} {% for log in all_logs %}
+                <div class=""log-entry border rounded mb-3"">
+                  <p>{{ log.text }}</p>
+                  <p class=""timestamp text-left"">{{ log.timestamp }}</p>
+                </div>
+                {% endfor %} {% else %}
+                <!-- Display a message if no logs are found -->
+                <div class=""alert alert-info text-center"" role=""alert"">
+                  No logs found yet. Monitor activity for data to appear.
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <div id=""screenshotsContent"" style=""display: none"">
+            <!-- Placeholder for Screenshots content loaded via AJAX -->
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <footer style=""margin-top: 15px"">
+      <p>ProximaLink Monitoring &copy; 2024</p>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src=""https://code.jquery.com/jquery-3.6.0.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+    <script src=""{{ url_for('static', filename='screenshot.js') }}""></script>
+
+    <!-- Custom JavaScript for Toggling Content -->
+    <script>
+      $(document).ready(function () {
+        // Handle click on Keystrokes button
+        $(""#btnKeystrokes"").click(function () {
+          $(""#keystrokesContent"").show(); // Show Keystrokes content
+          $(""#screenshotsContent"").hide(); // Hide Screenshots content
+        });
+
+        // Handle click on Screenshots button
+        $(""#btnScreenshots"").click(function () {
+          // Load content from screenshots.html using AJAX
+          $.ajax({
+            url: ""{{ url_for('static', filename='screenshots.html') }}"",
+            type: ""GET"",
+            success: function (data) {
+              $(""#screenshotsContent"").html(data); // Load HTML content into screenshotsContent div
+              $(""#screenshotsContent"").show(); // Show Screenshots content
+              $(""#keystrokesContent"").hide(); // Hide Keystrokes content
+            },
+            error: function (xhr, status, error) {
+              console.error(""Error loading screenshots:"", error);
+              // Handle error loading screenshots.html
+            },
+          });
+        });
+
+        // Handle click on Videos button (if needed)
+        $(""#btnVideos"").click(function () {
+          // Handle click on Videos button if required
+        });
+      });
+    </script>
+  </body>
+</html>
+"
+2024-07-04 21:26:04,Toshiba,192.168.100.200,"<a href=""#"""
+2024-07-04 21:27:05,Toshiba,192.168.100.200,"role=""button"" aria-pressed=""true"""
+2024-07-04 21:27:18,Toshiba,192.168.100.200,</a>
+2024-07-04 21:28:51,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+  <head>
+    <meta charset=""UTF-8"" />
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
+    <title>ProximaLink Dashboard</title>
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      rel=""stylesheet""
+      href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css""
+    />
+    <link
+      rel=""stylesheet""
+      href=""{{ url_for('static', filename='styles.css') }}""
+    />
+  </head>
+  <body>
+    <header class=""flex-fill align-self-center"">
+      <div class=""container-fluid flex-fill align-items-center"">
+        <div class=""flex-grow-1 logo"">
+          <img
+            src=""/static/icons/PureWhite.png""
+            class=""img-fluid""
+            alt=""logo-white""
+          />
+        </div>
+        <div class=""header-content flex-fill"">
+          <h1>ProximaLink Dashboard</h1>
+          <p>Welcome to the monitoring dashboard.</p>
+        </div>
+      </div>
+    </header>
+
+    <div class=""container-fluid"">
+      <div class=""row"">
+        <aside class=""col-md-2 py-3"">
+          <h2>Users</h2>
+          <ul class=""list-unstyled"">
+            {% if unique_users %} {% for user in unique_users %}
+            <li class=""user-item"">{{ user }}</li>
+            {% endfor %} {% else %}
+            <p>No users found yet.</p>
+            {% endif %}
+          </ul>
+        </aside>
+
+        <main class=""col-md-10"">
+          <div class=""d-flex justify-content-between align-self-center"">
+            <div class=""col-btn"">
+              <!-- Buttons Section -->
+              <div
+                class=""btn-group d-flex align-items-start""
+                role=""group""
+                aria-label=""Toggle Buttons""
+              >
+                <button
+                  type=""button""
+                  class=""btn rounded-pill btn-primary active mx-2""
+                  id=""btnKeystrokes""
+                >
+                  Keystrokes
+                </button>
+                <a
+                  href=""screenshot.html""
+                  class=""btn rounded-pill btn-outline-primary mx-2""
+                  id=""btnScreenshots""
+                  role=""button""
+                  aria-pressed=""true""
+                >
+                  Screenshots
+                </a>
+
+                <button
+                  type=""button""
+                  class=""btn rounded-pill btn-outline-primary mx-2""
+                  id=""btnVideos""
+                >
+                  Videos
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vertical Separator -->
+          <div class=""col-1 separator"">
+            <hr class=""my-3"" />
+          </div>
+
+          <!-- Content Sections -->
+          <div id=""keystrokesContent"">
+            <!-- Initial content for Keystrokes -->
+            <div class=""row"">
+              <div class=""col"">
+                {% if all_logs %} {% for log in all_logs %}
+                <div class=""log-entry border rounded mb-3"">
+                  <p>{{ log.text }}</p>
+                  <p class=""timestamp text-left"">{{ log.timestamp }}</p>
+                </div>
+                {% endfor %} {% else %}
+                <!-- Display a message if no logs are found -->
+                <div class=""alert alert-info text-center"" role=""alert"">
+                  No logs found yet. Monitor activity for data to appear.
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <div id=""screenshotsContent"" style=""display: none"">
+            <!-- Placeholder for Screenshots content loaded via AJAX -->
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <footer style=""margin-top: 15px"">
+      <p>ProximaLink Monitoring &copy; 2024</p>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src=""https://code.jquery.com/jquery-3.6.0.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+
+    <!-- Custom JavaScript for Toggling Content -->
+    <script>
+      $(document).ready(function () {
+        // Handle click on Keystrokes button
+        $(""#btnKeystrokes"").click(function () {
+          $(""#keystrokesContent"").show(); // Show Keystrokes content
+          $(""#screenshotsContent"").hide(); // Hide Screenshots content
+        });
+
+        // Handle click on Screenshots button
+        $(""#btnScreenshots"").click(function () {
+          // Load content from screenshots.html using AJAX
+          $.ajax({
+            url: ""screenshots.html"",
+            type: ""GET"",
+            success: function (data) {
+              $(""#screenshotsContent"").html(data); // Load HTML content into screenshotsContent div
+              $(""#screenshotsContent"").show(); // Show Screenshots content
+              $(""#keystrokesContent"").hide(); // Hide Keystrokes content
+            },
+            error: function (xhr, status, error) {
+              console.error(""Error loading screenshots:"", error);
+              // Handle error loading screenshots.html
+            },
+          });
+        });
+
+        // Handle click on Videos button (if needed)
+        $(""#btnVideos"").click(function () {
+          // Handle click on Videos button if required
+        });
+      });
+    </script>
+  </body>
+</html>
+"
+2024-07-04 21:29:30,Toshiba,192.168.100.200,"<div class=""container"">
+      <div class=""row"">
+        {% for screenshot in screenshots %}
+        <div class=""col-md-4 col-sm-6"">
+          <img
+            src=""http://localhost:8000/{{ screenshot.filename }}""
+            alt=""Screenshot""
+            class=""img-thumbnail""
+            data-image=""http://localhost:8000/{{ screenshot.filename }}""
+            data-toggle=""modal""
+            data-target=""#overlayModal""
+            data-caption=""Username: {{ screenshot.username }}""
+          />
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Modal for overlay view -->
+    <div
+      class=""modal fade""
+      id=""overlayModal""
+      tabindex=""-1""
+      role=""dialog""
+      aria-labelledby=""overlayModalLabel""
+      aria-hidden=""true""
+    >
+      <div class=""modal-dialog modal-dialog-centered modal-lg"" role=""document"">
+        <div class=""modal-content"">
+          <button class=""nav-btn nav-btn-left"" id=""prevImage"">&lt;</button>
+          <button class=""nav-btn nav-btn-right"" id=""nextImage"">&gt;</button>
+          <div class=""modal-body"">
+            <img src="""" class=""img-fluid"" id=""overlayImage"" />
+            <p id=""imageCaption""></p>
+          </div>
+          <div class=""modal-footer"">
+            <button
+              type=""button""
+              class=""btn btn-secondary""
+              data-dismiss=""modal""
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>"
+2024-07-04 21:34:23,Toshiba,192.168.100.200,"""html.suggest.html5"""
+2024-07-04 21:39:01,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+  <head>
+    <meta charset=""UTF-8"" />
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
+    <title>ProximaLink Dashboard</title>
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      rel=""stylesheet""
+      href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css""
+    />
+    <link
+      rel=""stylesheet""
+      href=""{{ url_for('static', filename='styles.css') }}""
+    />
+  </head>
+  <body>
+    <header class=""flex-fill align-self-center"">
+      <div class=""container-fluid flex-fill align-items-center"">
+        <div class=""flex-grow-1 logo"">
+          <img
+            src=""/static/icons/PureWhite.png""
+            class=""img-fluid""
+            alt=""logo-white""
+          />
+        </div>
+        <div class=""header-content flex-fill"">
+          <h1>ProximaLink Dashboard</h1>
+          <p>Welcome to the monitoring dashboard.</p>
+        </div>
+      </div>
+    </header>
+
+    <div class=""container-fluid"">
+      <div class=""row"">
+        <aside class=""col-md-2 py-3"">
+          <h2>Users</h2>
+          <ul class=""list-unstyled"">
+            {% if unique_users %} {% for user in unique_users %}
+            <li class=""user-item"">{{ user }}</li>
+            {% endfor %} {% else %}
+            <p>No users found yet.</p>
+            {% endif %}
+          </ul>
+        </aside>
+
+        <main class=""col-md-10"">
+          <div class=""d-flex justify-content-between align-self-center"">
+            <div class=""col-btn"">
+              <!-- Buttons Section -->
+              <div
+                class=""btn-group d-flex align-items-start""
+                role=""group""
+                aria-label=""Toggle Buttons""
+              >
+                <button
+                  type=""button""
+                  class=""btn rounded-pill btn-primary active mx-2""
+                  id=""btnKeystrokes""
+                >
+                  Keystrokes
+                </button>
+                <a
+                  href=""screenshot.html""
+                  class=""btn rounded-pill btn-outline-primary mx-2""
+                  id=""btnScreenshots""
+                  role=""button""
+                  aria-pressed=""true""
+                >
+                  Screenshots
+                </a>
+
+                <button
+                  type=""button""
+                  class=""btn rounded-pill btn-outline-primary mx-2""
+                  id=""btnVideos""
+                >
+                  Videos
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vertical Separator -->
+          <div class=""col-1 separator"">
+            <hr class=""my-3"" />
+          </div>
+
+          <div class=""container"">
+            <div class=""row"">
+              {% for screenshot in screenshots %}
+              <div class=""col-md-4 col-sm-6"">
+                <img
+                  src=""http://localhost:8000/{{ screenshot.filename }}""
+                  alt=""Screenshot""
+                  class=""img-thumbnail""
+                  data-image=""http://localhost:8000/{{ screenshot.filename }}""
+                  data-toggle=""modal""
+                  data-target=""#overlayModal""
+                  data-caption=""Username: {{ screenshot.username }}""
+                />
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+
+    <!-- Modal for overlay view -->
+    <div
+      class=""modal fade""
+      id=""overlayModal""
+      tabindex=""-1""
+      role=""dialog""
+      aria-labelledby=""overlayModalLabel""
+      aria-hidden=""true""
+    >
+      <div class=""modal-dialog modal-dialog-centered modal-lg"" role=""document"">
+        <div class=""modal-content"">
+          <button class=""nav-btn nav-btn-left"" id=""prevImage"">&lt;</button>
+          <button class=""nav-btn nav-btn-right"" id=""nextImage"">&gt;</button>
+          <div class=""modal-body"">
+            <img src="""" class=""img-fluid"" id=""overlayImage"" />
+            <p id=""imageCaption""></p>
+          </div>
+          <div class=""modal-footer"">
+            <button
+              type=""button""
+              class=""btn btn-secondary""
+              data-dismiss=""modal""
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer style=""margin-top: 15px"">
+      <p>ProximaLink Monitoring &copy; 2024</p>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src=""https://code.jquery.com/jquery-3.6.0.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+  </body>
+</html>
+"
+2024-07-04 21:39:31,Toshiba,192.168.100.200,No users found yet.
+2024-07-04 21:40:00,Toshiba,192.168.100.200,"   screenshots = get_screenshot_logs()
+    return render_template(""screenshot.html"", screenshots=screenshots)"
+2024-07-04 21:40:16,Toshiba,192.168.100.200,"return render_template(""testing.html"""
+2024-07-04 21:40:19,Toshiba,192.168.100.200,"return render_template(""screenshot.html"""
+2024-07-04 21:40:26,Toshiba,192.168.100.200,"return render_template(""testing.html"""
+2024-07-04 21:40:39,Toshiba,192.168.100.200,"unique_users = get_unique_users()
+    user_logs = get_user_logs()
+    clipboard_logs = get_clipboard_logs()
+    all_logs = user_logs + clipboard_logs
+    all_logs = sorted(
+        all_logs, key=lambda k: k[""timestamp""], reverse=True
+    )  # Sort logs by timestamp"
+2024-07-04 21:43:12,Toshiba,192.168.100.200,"data-toggle=""button"" aria-pressed=""false"""
+2024-07-04 21:43:27,Toshiba,192.168.100.200,"data-toggle=""button"" 
+                  aria-pressed=""false"""
+2024-07-04 21:46:05,Toshiba,192.168.100.200,"unique_users=unique_users, all_logs=all_logs"
+2024-07-04 21:54:22,Toshiba,192.168.100.200,"<div class=""screenshots-container"">
+  {% for screenshot in screenshots %}
+  <div class=""screenshot-item"">
+    <img
+      src=""http://localhost:8000/{{ screenshot.filename }}""
+      alt=""Screenshot""
+      class=""screenshot-thumbnail""
+      data-image=""http://localhost:8000/{{ screenshot.filename }}""
+      data-toggle=""modal""
+      data-target=""#overlayModal""
+      data-caption=""Username: {{ screenshot.username }}""
+    />
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Modal for overlay view -->
+<div class=""modal fade"" id=""overlayModal"" tabindex=""-1"" role=""dialog"" aria-labelledby=""overlayModalLabel"" aria-hidden=""true"">
+  <div class=""modal-dialog modal-dialog-centered modal-lg"" role=""document"">
+    <div class=""modal-content"">
+      <button class=""nav-btn nav-btn-left"" id=""prevImage"">&lt;</button>
+      <button class=""nav-btn nav-btn-right"" id=""nextImage"">&gt;</button>
+      <div class=""modal-body"">
+        <img src="""" class=""img-fluid"" id=""overlayImage"" />
+        <p id=""imageCaption""></p>
+      </div>
+      <div class=""modal-footer"">
+        <button type=""button"" class=""btn btn-secondary"" data-dismiss=""modal"">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+"
+2024-07-04 21:54:40,Toshiba,192.168.100.200,"<div class=""screenshots-container"">
+  {% for screenshot in screenshots %}
+  <div class=""screenshot-item"">
+    <img
+      src=""http://localhost:8000/{{ screenshot.filename }}""
+      alt=""Screenshot""
+      class=""screenshot-thumbnail""
+      data-image=""http://localhost:8000/{{ screenshot.filename }}""
+      data-toggle=""modal""
+      data-target=""#overlayModal""
+      data-caption=""Username: {{ screenshot.username }}""
+    />
+  </div>
+  {% endfor %}
+</div>"
+2024-07-04 21:55:03,Toshiba,192.168.100.200,"<div class=""screenshots-container"">
+  {% for screenshot in screenshots %}
+  <div class=""screenshot-item"">
+    <img
+      src=""http://localhost:8000/{{ screenshot.filename }}""
+      alt=""Screenshot""
+      class=""screenshot-thumbnail""
+      data-image=""http://localhost:8000/{{ screenshot.filename }}""
+      data-toggle=""modal""
+      data-target=""#overlayModal""
+      data-caption=""Username: {{ screenshot.username }}""
+    />
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Modal for overlay view -->
+<div class=""modal fade"" id=""overlayModal"" tabindex=""-1"" role=""dialog"" aria-labelledby=""overlayModalLabel"" aria-hidden=""true"">
+  <div class=""modal-dialog modal-dialog-centered modal-lg"" role=""document"">
+    <div class=""modal-content"">
+      <button class=""nav-btn nav-btn-left"" id=""prevImage"">&lt;</button>
+      <button class=""nav-btn nav-btn-right"" id=""nextImage"">&gt;</button>
+      <div class=""modal-body"">
+        <img src="""" class=""img-fluid"" id=""overlayImage"" />
+        <p id=""imageCaption""></p>
+      </div>
+      <div class=""modal-footer"">
+        <button type=""button"" class=""btn btn-secondary"" data-dismiss=""modal"">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+"
+2024-07-04 21:55:36,Toshiba,192.168.100.200,".screenshots-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Adjust the gap value as needed */
+  justify-content: space-around;
+}
+
+.screenshot-item {
+  width: calc(33.33% - 10px); /* Adjust percentage for the number of columns */
+  margin-bottom: 15px; /* Space between rows */
+}
+
+.screenshot-thumbnail {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}"
+2024-07-04 21:57:33,Toshiba,192.168.100.200,"div class=""col-btn"">
+              <!-- Buttons Section -->
+              <div
+                class=""btn-group d-flex align-items-start""
+                role=""group""
+                aria-label=""Toggle Buttons""
+              >
+                <button
+                  type=""button""
+                  class=""btn rounded-pill btn-primary mx-2""
+                  id=""btnKeystrokes""
+                  data-toggle=""button"" 
+                  aria-pressed=""false""
+                >
+                  Keystrokes
+
+            </button>
+                <button
+                  class=""btn rounded-pill btn-outline-primary active mx-2""
+                  id=""btnScreenshots""
+                  data-toggle=""button"" 
+                  aria-pressed=""false""
+                  >
+
+                  Screenshots
+
+                <button
+                  type=""button""
+                  class=""btn rounded-pill btn-outline-primary mx-2""
+                  id=""btnVideos""
+                  data-toggle=""button"" 
+                  aria-pressed=""false""
+                >
+                  Videos
+                </button>
+              </div>
+            </div>
+          </div>"
+2024-07-04 22:03:24,Toshiba,192.168.100.200,"$(document).ready(function() {
+  let currentIndex;
+  const images = $('.screenshot-thumbnail');
+
+  // Image click event to show overlay modal
+  $(document).on('click', '.screenshot-thumbnail', function() {
+    currentIndex = images.index(this);
+    const imageUrl = $(this).data('image');
+    const caption = $(this).data('caption');
+    $('#overlayImage').attr('src', imageUrl);
+    $('#imageCaption').text(caption);
+    $('#overlayModal').modal('show');
+  });
+
+  // Navigation buttons for overlay modal
+  $('#prevImage').click(function() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    const prevImage = images[currentIndex];
+    const imageUrl = $(prevImage).data('image');
+    const caption = $(prevImage).data('caption');
+    $('#overlayImage').attr('src', imageUrl);
+    $('#imageCaption').text(caption);
+  });
+
+  $('#nextImage').click(function() {
+    currentIndex = (currentIndex + 1) % images.length;
+    const nextImage = images[currentIndex];
+    const imageUrl = $(nextImage).data('image');
+    const caption = $(nextImage).data('caption');
+    $('#overlayImage').attr('src', imageUrl);
+    $('#imageCaption').text(caption);
+  });
+});
+"
+2024-07-04 22:04:15,Toshiba,192.168.100.200,".screenshots-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Adjust the gap value as needed */
+  justify-content: space-around;
+}
+
+.screenshot-item {
+  width: calc(33.33% - 10px); /* Adjust percentage for the number of columns */
+  margin-bottom: 15px; /* Space between rows */
+}
+
+.screenshot-thumbnail {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.modal-body {
+  position: relative;
+  text-align: center;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.nav-btn-left {
+  left: 10px;
+}
+
+.nav-btn-right {
+  right: 10px;
+}
+
+#overlayImage {
+  max-width: 100%;
+  height: auto;
+}
+
+#imageCaption {
+  margin-top: 10px;
+}
+"
+2024-07-04 22:05:12,Toshiba,192.168.100.200,"<div class=""screenshots-container"">
+  {% for screenshot in screenshots %}
+  <div class=""screenshot-item"">
+    <img
+      src=""http://localhost:8000/{{ screenshot.filename }}""
+      alt=""Screenshot""
+      class=""screenshot-thumbnail""
+      data-image=""http://localhost:8000/{{ screenshot.filename }}""
+      data-toggle=""modal""
+      data-target=""#overlayModal""
+      data-caption=""Username: {{ screenshot.username }}""
+    />
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Modal for overlay view -->
+<div class=""modal fade"" id=""overlayModal"" tabindex=""-1"" role=""dialog"" aria-labelledby=""overlayModalLabel"" aria-hidden=""true"">
+  <div class=""modal-dialog modal-dialog-centered modal-lg"" role=""document"">
+    <div class=""modal-content"">
+      <div class=""modal-body"">
+        <button class=""nav-btn nav-btn-left"" id=""prevImage"">&lt;</button>
+        <button class=""nav-btn nav-btn-right"" id=""nextImage"">&gt;</button>
+        <img src="""" class=""img-fluid"" id=""overlayImage"" />
+        <p id=""imageCaption""></p>
+      </div>
+      <div class=""modal-footer"">
+        <button type=""button"" class=""btn btn-secondary"" data-dismiss=""modal"">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+"
+2024-07-04 22:06:53,Toshiba,192.168.100.200,"padding: 0;
+  overflow: hidden;"
+2024-07-04 22:08:50,Toshiba,192.168.100.200,modal-content
+2024-07-04 22:15:40,Toshiba,192.168.100.200,"<!-- Modal for overlay view -->
+<div class=""modal fade"" id=""overlayModal"" tabindex=""-1"" role=""dialog"" aria-labelledby=""overlayModalLabel"" aria-hidden=""true"">
+  <div class=""modal-dialog modal-dialog-centered modal-lg"" role=""document"">
+    <div class=""modal-content"">
+      <div class=""modal-body"">
+        <button type=""button"" class=""close nav-btn-top-right"" data-dismiss=""modal"" aria-label=""Close"">
+          <span aria-hidden=""true"">&times;</span>
+        </button>
+        <button class=""nav-btn nav-btn-left"" id=""prevImage"">&lt;</button>
+        <button class=""nav-btn nav-btn-right"" id=""nextImage"">&gt;</button>
+        <img src="""" class=""img-fluid"" id=""overlayImage"" />
+      </div>
+      <div class=""modal-footer justify-content-center"">
+        <div class=""nav-dots"" id=""navDots""></div>
+      </div>
+    </div>
+  </div>
+</div>
+"
+2024-07-04 22:15:53,Toshiba,192.168.100.200,"/* General styling for screenshots */
+.screenshots-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Adjust the gap value as needed */
+  justify-content: space-around;
+}
+
+.screenshot-item {
+  width: calc(33.33% - 10px); /* Adjust percentage for the number of columns */
+  margin-bottom: 15px; /* Space between rows */
+}
+
+.screenshot-thumbnail {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* Modal styling */
+.modal-body {
+  position: relative;
+  text-align: center;
+  padding: 0;
+  overflow: hidden;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.nav-btn-left {
+  left: 10px;
+}
+
+.nav-btn-right {
+  right: 10px;
+}
+
+.nav-btn-top-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  z-index: 1100;
+}
+
+#overlayImage {
+  max-width: 90%;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  margin: auto;
+}
+
+/* Navigation dots styling */
+.nav-dots {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-dots .dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.nav-dots .dot.active {
+  background-color: #007bff;
+}"
+2024-07-04 22:16:28,Toshiba,192.168.100.200,"$(document).ready(function() {
+  var currentIndex = 0;
+  var screenshots = [];
+
+  // Function to close the overlay modal
+  function closeModal() {
+    $('#overlayModal').modal('hide');
+  }
+
+  // Function to show the image at the specified index
+  function showImage(index) {
+    $('#overlayImage').attr('src', screenshots[index].src);
+    updateDots(index);
+  }
+
+  // Function to update the navigation dots
+  function updateDots(index) {
+    $('#navDots .dot').removeClass('active');
+    $('#navDots .dot').eq(index).addClass('active');
+  }
+
+  // Listen for click on Keystrokes button (if needed)
+  $('#btnKeystrokes').click(function() {
+    // Implement behavior for Keystrokes button click (if needed)
+  });
+
+  // Listen for click on Screenshots button (if needed)
+  $('#btnScreenshots').click(function() {
+    // Load content from screenshots.html using AJAX
+    $.ajax({
+      url: 'screenshots.html',
+      type: 'GET',
+      success: function(data) {
+        $('#screenshotsContent').html(data);  // Load HTML content into screenshotsContent div
+        $('#screenshotsContent').show();      // Show Screenshots content
+        $('#keystrokesContent').hide();       // Hide Keystrokes content
+      },
+      error: function(xhr, status, error) {
+        console.error('Error loading screenshots:', error);
+        // Handle error loading screenshots.html
+      }
+    });
+  });
+
+  // Listen for click on Videos button (if needed)
+  $('#btnVideos').click(function() {
+    // Implement behavior for Videos button click (if needed)
+  });
+
+  // Initialize the screenshots array and dots
+  $('.screenshot-thumbnail').each(function(index) {
+    screenshots.push({
+      src: $(this).attr('src'),
+      caption: $(this).data('caption')
+    });
+
+    $('#navDots').append('<div class=""dot"" data-index=""' + index + '""></div>');
+  });
+
+  // Show the first image initially
+  if (screenshots.length > 0) {
+    showImage(0);
+  }
+
+  // Event listener for navigation dots
+  $('#navDots').on('click', '.dot', function() {
+    var index = $(this).data('index');
+    currentIndex = index;
+    showImage(index);
+  });
+
+  // Event listeners for navigation buttons
+  $('#prevImage').click(function() {
+    currentIndex = (currentIndex > 0) ? currentIndex - 1 : screenshots.length - 1;
+    showImage(currentIndex);
+  });
+
+  $('#nextImage').click(function() {
+    currentIndex = (currentIndex < screenshots.length - 1) ? currentIndex + 1 : 0;
+    showImage(currentIndex);
+  });
+
+  // Initialize modal with the first image
+  if (screenshots.length > 0) {
+    showImage(0);
+  }
+});
+"
+2024-07-04 22:20:58,Toshiba,192.168.100.200,"('static', filename="
+2024-07-04 22:21:44,Toshiba,192.168.100.200,"/* General styling for screenshots */
+.screenshots-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Adjust the gap value as needed */
+  justify-content: space-around;
+}
+
+.screenshot-item {
+  width: calc(33.33% - 10px); /* Adjust percentage for the number of columns */
+  margin-bottom: 15px; /* Space between rows */
+}
+
+.screenshot-thumbnail {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* Modal styling */
+.modal-dialog {
+  max-width: 80%;
+}
+
+.modal-content.no-border {
+  border: none;
+  background: transparent;
+}
+
+.modal-body {
+  position: relative;
+  text-align: center;
+  padding: 0;
+  overflow: hidden;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.nav-btn-left {
+  left: 10px;
+}
+
+.nav-btn-right {
+  right: 10px;
+}
+
+.nav-btn-top-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  z-index: 1100;
+}
+
+#overlayImage {
+  max-width: 100%;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  margin: auto;
+}
+
+/* Navigation dots styling */
+.nav-dots {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-dots .dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.nav-dots .dot.active {
+  background-color: #007bff;
+}
+"
+2024-07-04 22:21:55,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+  <head>
+    <meta charset=""UTF-8"" />
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
+    <title>ProximaLink Dashboard</title>
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      rel=""stylesheet""
+      href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css""
+    />
+    <link
+      rel=""stylesheet""
+      href=""{{ url_for('static', filename='styles.css') }}""
+    />
+  </head>
+  <body>
+    <header class=""flex-fill align-self-center"">
+      <div class=""container-fluid flex-fill align-items-center"">
+        <div class=""flex-grow-1 logo"">
+          <img
+            src=""/static/icons/PureWhite.png""
+            class=""img-fluid""
+            alt=""logo-white""
+          />
+        </div>
+        <div class=""header-content flex-fill"">
+          <h1>ProximaLink Dashboard</h1>
+          <p>Welcome to the monitoring dashboard.</p>
+        </div>
+      </div>
+    </header>
+
+    <div class=""container-fluid"">
+      <div class=""row"">
+        <aside class=""col-md-2 py-3"">
+          <h2>Users</h2>
+          <ul class=""list-unstyled"">
+            {% if unique_users %} {% for user in unique_users %}
+            <li class=""user-item"">{{ user }}</li>
+            {% endfor %} {% else %}
+            <p>No users found yet.</p>
+            {% endif %}
+          </ul>
+        </aside>
+
+        <main class=""col-md-10"">
+          <div class=""d-flex justify-content-between align-self-center"">
+            <div class=""col-btn"">
+              <!-- Buttons Section -->
+              <div
+                class=""btn-group d-flex align-items-start""
+                role=""group""
+                aria-label=""Toggle Buttons""
+              >
+                <button
+                  type=""button""
+                  class=""btn rounded-pill btn-primary mx-2""
+                  id=""btnKeystrokes""
+                  data-toggle=""button"" 
+                  aria-pressed=""false""
+                >
+                  Keystrokes
+
+            </button>
+                <button
+                  class=""btn rounded-pill btn-outline-primary active mx-2""
+                  id=""btnScreenshots""
+                  data-toggle=""button"" 
+                  aria-pressed=""false""
+                  >
+
+                  Screenshots
+
+                <button
+                  type=""button""
+                  class=""btn rounded-pill btn-outline-primary mx-2""
+                  id=""btnVideos""
+                  data-toggle=""button"" 
+                  aria-pressed=""false""
+                >
+                  Videos
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vertical Separator -->
+          <div class=""col-1 separator"">
+            <hr class=""my-3"" />
+          </div>
+
+          <!-- Content Sections -->
+          <div id=""keystrokesContent"">
+            <!-- Initial content for Keystrokes -->
+            <div class=""row"">
+              <div class=""col"">
+                {% if all_logs %} {% for log in all_logs %}
+                <div class=""log-entry border rounded mb-3"">
+                  <p>{{ log.text }}</p>
+                  <p class=""timestamp text-left"">{{ log.timestamp }}</p>
+                </div>
+                {% endfor %} {% else %}
+                <!-- Display a message if no logs are found -->
+                <div class=""alert alert-info text-center"" role=""alert"">
+                  No logs found yet. Monitor activity for data to appear.
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <div id=""screenshotsContent"" style=""display: none"">
+            <!-- Placeholder for Screenshots content loaded via AJAX -->
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <footer style=""margin-top: 15px"">
+      <p>ProximaLink Monitoring &copy; 2024</p>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src=""https://code.jquery.com/jquery-3.6.0.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+
+    <!-- Custom JavaScript for Toggling Content -->
+    <script>
+      $(document).ready(function () {
+        // Handle click on Keystrokes button
+        $(""#btnKeystrokes"").click(function () {
+          $(""#keystrokesContent"").show(); // Show Keystrokes content
+          $(""#screenshotsContent"").hide(); // Hide Screenshots content
+        });
+
+        // Handle click on Screenshots button
+        $(""#btnScreenshots"").click(function () {
+          // Load content from screenshots.html using AJAX
+          $.ajax({
+            url: ""screenshots.html"",
+            type: ""GET"",
+            success: function (data) {
+              $(""#screenshotsContent"").html(data); // Load HTML content into screenshotsContent div
+              $(""#screenshotsContent"").show(); // Show Screenshots content
+              $(""#keystrokesContent"").hide(); // Hide Keystrokes content
+            },
+            error: function (xhr, status, error) {
+              console.error(""Error loading screenshots:"", error);
+              // Handle error loading screenshots.html
+            },
+          });
+        });
+
+        // Handle click on Videos button (if needed)
+        $(""#btnVideos"").click(function () {
+          // Handle click on Videos button if required
+        });
+      });
+    </script>
+  </body>
+</html>
+"
+2024-07-04 22:22:42,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+  <head>
+    <meta charset=""UTF-8"" />
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
+    <title>ProximaLink Dashboard</title>
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      rel=""stylesheet""
+      href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css""
+    />
+    <link
+      rel=""stylesheet""
+      href=""{{ url_for('static', filename='styles.css') }}""
+    />
+   
+  </head>
+  <body>
+    <header class=""flex-fill align-self-center"">
+      <div class=""container-fluid flex-fill align-items-center"">
+        <div class=""flex-grow-1 logo"">
+          <img
+            src=""/static/icons/PureWhite.png""
+            class=""img-fluid""
+            alt=""logo-white""
+          />
+        </div>
+        <div class=""header-content flex-fill"">
+          <h1>ProximaLink Dashboard</h1>
+          <p>Welcome to the monitoring dashboard.</p>
+        </div>
+      </div>
+    </header>
+
+    <div class=""container-fluid"">
+      <div class=""row"">
+        <aside class=""col-md-2 py-3"">
+          <h2>Users</h2>
+          <ul class=""list-unstyled"">
+            {% if unique_users %} {% for user in unique_users %}
+            <li class=""user-item"">{{ user }}</li>
+            {% endfor %} {% else %}
+            <p>No users found yet.</p>
+            {% endif %}
+          </ul>
+        </aside>
+
+        <main class=""col-md-10"">
+          <div class=""d-flex justify-content-between align-self-center"">
+            <div class=""col-btn"">
+              <!-- Buttons Section -->
+              <div
+                class=""btn-group d-flex align-items-start""
+                role=""group""
+                aria-label=""Toggle Buttons""
+              >
+                <button
+                  type=""button""
+                  class=""btn rounded-pill btn-primary mx-2""
+                  id=""btnKeystrokes""
+                  data-toggle=""button"" 
+                  aria-pressed=""false""
+                >
+                  Keystrokes
+
+            </button>
+                <button
+                  class=""btn rounded-pill btn-outline-primary active mx-2""
+                  id=""btnScreenshots""
+                  data-toggle=""button"" 
+                  aria-pressed=""false""
+                  >
+
+                  Screenshots
+
+                <button
+                  type=""button""
+                  class=""btn rounded-pill btn-outline-primary mx-2""
+                  id=""btnVideos""
+                  data-toggle=""button"" 
+                  aria-pressed=""false""
+                >
+                  Videos
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vertical Separator -->
+          <div class=""col-1 separator"">
+            <hr class=""my-3"" />
+          </div>
+
+          <div class=""screenshots-container"">
+  {% for screenshot in screenshots %}
+  <div class=""screenshot-item"">
+    <img
+      src=""http://localhost:8000/{{ screenshot.filename }}""
+      alt=""Screenshot""
+      class=""screenshot-thumbnail""
+      data-image=""http://localhost:8000/{{ screenshot.filename }}""
+      data-toggle=""modal""
+      data-target=""#overlayModal""
+      data-caption=""Username: {{ screenshot.username }}""
+    />
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Modal for overlay view -->
+<div class=""modal fade"" id=""overlayModal"" tabindex=""-1"" role=""dialog"" aria-labelledby=""overlayModalLabel"" aria-hidden=""true"">
+  <div class=""modal-dialog modal-dialog-centered modal-lg"" role=""document"">
+    <div class=""modal-content"">
+      <div class=""modal-body"">
+        <button type=""button"" class=""close nav-btn-top-right"" data-dismiss=""modal"" aria-label=""Close"">
+          <span aria-hidden=""true"">&times;</span>
+        </button>
+        <button class=""nav-btn nav-btn-left"" id=""prevImage"">&lt;</button>
+        <button class=""nav-btn nav-btn-right"" id=""nextImage"">&gt;</button>
+        <img src="""" class=""img-fluid"" id=""overlayImage"" />
+      </div>
+      <div class=""modal-footer justify-content-center"">
+        <div class=""nav-dots"" id=""navDots""></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</main>
+
+
+    <footer style=""margin-top: 15px"">
+      <p>ProximaLink Monitoring &copy; 2024</p>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src=""https://code.jquery.com/jquery-3.6.0.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+    <script src=""{{url_for('static', filename=""screenshot.js"")}}"">
+</script>
+  </body>
+</html>
+"
+2024-07-04 22:25:17,Toshiba,192.168.100.200,"/* Primary Colors */
+:root {
+  --primary-blue: #00c7fd;
+  --primary-darker-blue: #0071c5;
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --primary: #007bff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --black: #000;
+  --primary-dark: #191c24;
+  --gray-dark: #343a40;
+  --gray: #6c757d;
+}
+
+/* Secondary Colors */
+:root {
+  --secondary-white: #ffffff;
+  --secondary-green: #198754;
+  --secondary-light-blue: #0dcaf0;
+  --secondary-red: #ab2e3c;
+  --secondary-yellow: #ffc107;
+}
+
+body {
+  font-family: 'Roboto', 'Open Sans', 'Lato', Arial, sans-serif;
+  background-color: var(--black);
+  color: var(--secondary-white);
+  overflow-x: hidden;
+  /* Prevent horizontal overflow */
+}
+
+header {
+  background-color: var(--gray-dark);
+  color: #fff;
+  padding: 15px 0;
+  text-align: center;
+  width: 100%;
+}
+
+header .logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container-fluid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  max-width: 150px;
+  /* Adjust this value based on your preference */
+}
+
+/* User section */
+.user-item {
+  background-color: #00c7fd;
+  /* Primary color */
+  color: #fff;
+  font-weight: 400;
+  font-size: small;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.user-item:hover {
+  background-color: #0071c5;
+  /* Darker shade on hover */
+}
+
+/* Log entry */
+.log-entry {
+  background-color: var(--primary-dark);
+  word-wrap: break-word;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+aside {
+  background-color: var(--gray-dark);
+  color: #fff;
+  padding-left: 0;
+  /* Remove left padding */
+  padding-right: 0;
+}
+
+.timestamp {
+  font-size: 0.9em;
+  color: #999;
+  text-align: left;
+}
+
+/* Tags */
+.tags-container {
+  margin-top: 10px;
+}
+
+.tag {
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #007bff;
+  /* Primary color */
+  color: #fff;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.tag:hover {
+  background-color: #0056b3;
+  /* Darker shade on hover */
+}
+
+/* Users section */
+.user-section {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.col-md-10 {
+  padding: 30px;
+}
+
+/* Main content */
+.main-content {
+  padding: 20px 0;
+  /* Fix comma here */
+}
+
+.user-section h2 {
+  color: #0071c5;
+  /* Primary color */
+  font-weight: 600;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+
+
+
+.row div div p.timestamp {
+  color: var(--light);
+}
+
+.btn {
+  padding-right: 15px;
+}
+
+footer {
+  background-color: #191c24;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
+
+footer p {
+  margin-top: 15px;
+}
+
+
+/* should be removed after testing*/
+/* General styling for screenshots */
+.screenshots-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  /* Adjust the gap value as needed */
+  justify-content: space-around;
+}
+
+.screenshot-item {
+  width: calc(33.33% - 10px);
+  /* Adjust percentage for the number of columns */
+  margin-bottom: 15px;
+  /* Space between rows */
+}
+
+.screenshot-thumbnail {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* Modal styling */
+.modal-body {
+  position: relative;
+  text-align: center;
+  padding: 0;
+  overflow: hidden;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.nav-btn-left {
+  left: 10px;
+}
+
+.nav-btn-right {
+  right: 10px;
+}
+
+.nav-btn-top-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  z-index: 1100;
+}
+
+#overlayImage {
+  max-width: 90%;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  margin: auto;
+}
+
+/* Navigation dots styling */
+.nav-dots {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-dots .dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.nav-dots .dot.active {
+  background-color: #007bff;
+}
+"

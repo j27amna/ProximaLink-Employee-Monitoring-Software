@@ -119,7 +119,20 @@ def serve_screenshot(filename):
 
 @app.route("/testing")
 def testing():
-    return render_template("testing.html")
+    unique_users = get_unique_users()
+    user_logs = get_user_logs()
+    clipboard_logs = get_clipboard_logs()
+    all_logs = user_logs + clipboard_logs
+    all_logs = sorted(
+        all_logs, key=lambda k: k["timestamp"], reverse=True
+    )  # Sort logs by timestamp
+    screenshots = get_screenshot_logs()
+    return render_template(
+        "testing.html",
+        screenshots=screenshots,
+        unique_users=unique_users,
+        all_logs=all_logs,
+    )
 
 
 if __name__ == "__main__":

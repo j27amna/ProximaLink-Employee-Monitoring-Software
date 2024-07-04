@@ -1,61 +1,95 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
+/* General styling for screenshots */
+.screenshots-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  /* Adjust the gap value as needed */
+  justify-content: space-around;
 }
 
-header {
-  background-color: #191c24;
-  color: #fff;
-  padding: 15px 0;
+.screenshot-item {
+  width: calc(33.33% - 10px);
+  /* Adjust percentage for the number of columns */
+  margin-bottom: 15px;
+  /* Space between rows */
+}
+
+.screenshot-thumbnail {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* Modal styling */
+.modal-dialog {
+  max-width: 80%;
+}
+
+.modal-content.no-border {
+  border: none;
+  background: transparent;
+}
+
+.modal-body {
+  position: relative;
   text-align: center;
-}
-
-.container {
-  width: 80%;
-  margin: auto;
+  padding: 0;
   overflow: hidden;
 }
 
-header h1 {
-  margin: 0;
-}
-
-section {
-  padding: 20px;
-  background: #fff;
-  margin-top: 10px;
-}
-
-h1,
-h2 {
-  color: #fff;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-ul li {
-  background: #f4f4f4;
-  margin: 5px 0;
-  padding: 10px;
-  border: #ccc 1px solid;
-}
-
-ul li a {
-  text-decoration: none;
-  color: #333;
-}
-
-footer {
-  background-color: #191c24;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
-  text-align: center;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.nav-btn-left {
+  left: 10px;
+}
+
+.nav-btn-right {
+  right: 10px;
+}
+
+.nav-btn-top-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  z-index: 1100;
+}
+
+#overlayImage {
+  max-width: 100%;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  margin: auto;
+}
+
+/* Navigation dots styling */
+.nav-dots {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-dots .dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.nav-dots .dot.active {
+  background-color: #007bff;
 }
