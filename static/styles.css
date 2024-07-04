@@ -1,10 +1,26 @@
+/* Primary Colors */
+:root {
+  --primary-dark: #191c24;
+  --primary-blue: #00c7fd;
+  --primary-darker-blue: #0071c5;
+}
+
+/* Secondary Colors */
+:root {
+  --secondary-white: #ffffff;
+  --secondary-green: #198754;
+  --secondary-light-blue: #0dcaf0;
+  --secondary-red: #ab2e3c;
+  --secondary-yellow: #ffc107;
+}
+
 body {
   font-family: 'Roboto', 'Open Sans', 'Lato', Arial, sans-serif;
 }
 
 header,
 footer {
-  background-color: #0071c5;
+  background-color: var(--primary-dark);
   color: #fff;
   padding: 15px 0;
   text-align: center;
@@ -31,7 +47,7 @@ footer {
 
 /* Log entry */
 .log-entry {
-  background-color: var(--primary-dark);
+  background-color: #f9f9f9;
   word-wrap: break-word;
   padding: 10px;
   margin-bottom: 10px;
