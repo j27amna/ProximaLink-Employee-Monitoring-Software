@@ -4,6 +4,7 @@ from flask import Flask, render_template, g, send_from_directory, request, jsoni
 import sqlite3
 import os
 import subprocess
+import requests
 
 
 app = Flask(__name__)
@@ -93,21 +94,6 @@ def get_screenshot_logs():
     return screenshots
 
 
-def start_http_server():
-    # Specify the directory containing your screenshots
-    screenshot_dir = os.path.abspath("LoggedData/Toshiba/Screenshot")
-
-    # Command to start http.server on port 8000
-    command = ["python", "-m", "http.server", "8000", "--directory", screenshot_dir]
-
-    # Start subprocess
-    try:
-        subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        print("HTTP server started on port 8000")
-    except Exception as e:
-        print(f"Error starting HTTP server: {e}")
-
-
 @app.route("/")
 def dashboard():
     unique_users = get_unique_users()
@@ -123,7 +109,7 @@ def dashboard():
 @app.route("/screenshots")
 def screenshots():
     screenshots = get_screenshot_logs()
-    return render_template("testing.html", screenshots=screenshots)
+    return render_template("screenshot.html", screenshots=screenshots)
 
 
 @app.route("/screenshots/<path:filename>")
@@ -131,8 +117,11 @@ def serve_screenshot(filename):
     return send_from_directory(SCREENSHOT_DIR, filename)
 
 
-if __name__ == "__main__":
+@app.route("/testing")
+def testing():
+    return render_template("testing.html")
 
-    start_http_server()
+
+if __name__ == "__main__":
 
     app.run(host="0.0.0.0", port=8080, debug=True)

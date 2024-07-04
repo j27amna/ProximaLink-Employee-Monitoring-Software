@@ -71,3 +71,808 @@ Timestamp,Username,IP,Data
 log_clipboard(""Test clipboard text"")"
 2024-07-02 12:16:26,Toshiba,192.168.100.200,the function does not seems to be working as i copied the file and nothing is logged nor the error in the console as it's logging the clipboard text conten
 2024-07-02 12:23:59,Toshiba,192.168.100.200,Test clipboard text
+2024-07-04 19:55:44,Toshiba,192.168.100.200,"jquery-3.6.0.min.js:2 
+ 
+ GET http://localhost:8080/screenshots.html 404 (NOT FOUND)
+(index):19652 
+ Error loading screenshots: NOT FOUND
+error	@	(index):19652
+c	@	jquery-3.6.0.min.js:2
+fireWith	@	jquery-3.6.0.min.js:2
+l	@	jquery-3.6.0.min.js:2
+(anonymous)	@	jquery-3.6.0.min.js:2
+load (async)		
+send	@	jquery-3.6.0.min.js:2
+ajax	@	jquery-3.6.0.min.js:2
+(anonymous)	@	(index):19643
+dispatch	@	jquery-3.6.0.min.js:2
+v.handle	@	jquery-3.6.0.min.js:2"
+2024-07-04 19:57:32,Toshiba,192.168.100.200," <main class=""col-md-10"">"
+2024-07-04 19:58:31,Toshiba,192.168.100.200,"          <div id=""keystrokesContent"">
+"
+2024-07-04 20:05:32,Toshiba,192.168.100.200,"def start_http_server():
+    # Specify the directory containing your screenshots
+    screenshot_dir = os.path.abspath(""LoggedData/Toshiba/Screenshot"")
+
+    # Command to start http.server on port 8000
+    command = [""python"", ""-m"", ""http.server"", ""8000"", ""--directory"", screenshot_dir]
+    print(command)
+
+    # Start subprocess
+    try:
+        subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        print(f""HTTP server started at {command}"")
+    except Exception as e:
+        print(f""Error starting HTTP server: {e}"")"
+2024-07-04 20:07:35,Toshiba,192.168.100.200,"def start_http_server():
+    # Specify the directory containing your screenshots
+    screenshot_dir = os.path.abspath(""LoggedData/Toshiba/Screenshot"")
+
+    # Command to start http.server on port 8000
+    command = [""python"", ""-m"", ""http.server"", ""8000"", ""--directory"", screenshot_dir]
+    print(f""Starting HTTP server with command: {' '.join(command)}"")
+
+    try:
+        # Start subprocess
+        subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        print(f""HTTP server started. Serving files from {screenshot_dir} on port 8000."")
+    except Exception as e:
+        print(f""Error starting HTTP server: {e}"")"
+2024-07-04 20:10:48,Toshiba,192.168.100.200,"This page isn’t working right nowlocalhost didn’t send any data.
+ERR_EMPTY_RESPONSE"
+2024-07-04 20:11:38,Toshiba,192.168.100.200,http://localhost:8080/
+2024-07-04 20:11:53,Toshiba,192.168.100.200,"GET http://localhost:8000/screenshot_20240703_095329.png net::ERR_EMPTY_RESPONSE
+screenshots:70 
+        
+        
+        GET http://localhost:8000/screenshot_20240703_095328.png net::ERR_EMPTY_RESPONSE
+screenshots:58 
+        
+        
+        GET http://localhost:8000/screenshot_20240703_095321.png net::ERR_EMPTY_RESPONSE
+screenshots:46 
+        
+        
+        GET http://localhost:8000/screenshot_20240703_095318.png net::ERR_EMPTY_RESPONSE
+screenshots:34 
+        
+        
+        GET http://localhost:8000/screenshot_20240703_095316.png net::ERR_EMPTY_RESPONSE
+screenshots:94 
+        
+        
+        GET http://localhost:8000/screenshot_20240703_095331.png net::ERR_EMPTY_RESPONSE
+screenshots:178 
+        
+        
+        GET http://localhost:8000/screenshot_20240703_095604.png net::ERR_EMPTY_RESPONSE"
+2024-07-04 20:12:30,Toshiba,192.168.100.200,"sudo netstat -tuln | grep 8000
+"
+2024-07-04 20:13:49,Toshiba,192.168.100.200,"netstat -ano | findstr :8000
+"
+2024-07-04 20:13:58,Toshiba,192.168.100.200," TCP    0.0.0.0:8000           0.0.0.0:0              LISTENING       10448
+  TCP    0.0.0.0:8000           0.0.0.0:0              LISTENING       10352
+  TCP    0.0.0.0:8000           0.0.0.0:0              LISTENING       3696
+  TCP    0.0.0.0:8000           0.0.0.0:0              LISTENING       16176
+  TCP    127.0.0.1:45688        127.0.0.1:8000         TIME_WAIT       0
+  TCP    [::]:8000              [::]:0                 LISTENING       3696
+  TCP    [::]:8000              [::]:0                 LISTENING       10352
+  TCP    [::]:8000              [::]:0                 LISTENING       16176
+  TCP    [::]:8000              [::]:0                 LISTENING       10448
+  TCP    [::1]:8000             [::1]:45749            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45750            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45751            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45752            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45753            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45754            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45755            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45756            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45757            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45758            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45759            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45762            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45763            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45764            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45765            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45766            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45767            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45768            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:45770            TIME_WAIT       0"
+2024-07-04 20:14:59,Toshiba,192.168.100.200,"def is_server_running():
+    for proc in psutil.process_iter(['pid', 'cmdline']):
+        if 'python' in proc.cmdline() and '-m' in proc.cmdline() and 'http.server' in proc.cmdline() and '8000' in proc.cmdline():
+            return True
+    return False
+
+def start_http_server():
+    if is_server_running():
+        print(""HTTP server is already running."")
+        return
+    
+    screenshot_dir = os.path.abspath(""LoggedData/Toshiba/Screenshot"")
+    command = [""python"", ""-m"", ""http.server"", ""8000"", ""--directory"", screenshot_dir]
+
+    try:
+        subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        print(f""HTTP server started. Serving files from {screenshot_dir} on port 8000."")
+    except Exception as e:
+        print(f""Error starting HTTP server: {e}"")"
+2024-07-04 20:16:20,Toshiba,192.168.100.200,taskkill /PID <PID> /F
+2024-07-04 20:16:30,Toshiba,192.168.100.200,"netstat -ano | findstr :8000
+  TCP    0.0.0.0:8000           0.0.0.0:0              LISTENING       10448
+  TCP    0.0.0.0:8000           0.0.0.0:0              LISTENING       3696
+  TCP    0.0.0.0:8000           0.0.0.0:0              LISTENING       10352
+  TCP    0.0.0.0:8000           0.0.0.0:0              LISTENING       16176
+  TCP    [::]:8000              [::]:0                 LISTENING       10448
+  TCP    [::]:8000              [::]:0                 LISTENING       3696
+  TCP    [::]:8000              [::]:0                 LISTENING       10352
+  TCP    [::]:8000              [::]:0                 LISTENING       16176"
+2024-07-04 20:17:36,Toshiba,192.168.100.200,"taskkill /F /PID 10448
+taskkill /F /PID 3696
+taskkill /F /PID 10352
+taskkill /F /PID 16176
+"
+2024-07-04 20:18:16,Toshiba,192.168.100.200,"python server.py
+Traceback (most recent call last):
+  File ""c:\ProgramData\anaconda3\Lib\site-packages\psutil\_pswindows.py"", line 789, in cmdline
+    ret = cext.proc_cmdline(self.pid, use_peb=True)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] Access is denied: '(originated from OpenProcess)'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""c:\ProgramData\anaconda3\Lib\site-packages\psutil\_pswindows.py"", line 688, in wrapper
+    return fun(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""c:\ProgramData\anaconda3\Lib\site-packages\psutil\_pswindows.py"", line 704, in wrapper
+    return fun(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""c:\ProgramData\anaconda3\Lib\site-packages\psutil\_pswindows.py"", line 792, in cmdline
+    ret = cext.proc_cmdline(self.pid, use_peb=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] assume access denied (originated from NtQueryInformationProcess(ProcessBasicInformation) -> STATUS_NOT_FOUND)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\server.py"", line 154, in <module>
+    start_http_server()
+  File ""C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\server.py"", line 110, in start_http_server
+    if is_server_running():
+       ^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\server.py"", line 100, in is_server_running
+    ""python"" in proc.cmdline()
+                ^^^^^^^^^^^^^^
+  File ""c:\ProgramData\anaconda3\Lib\site-packages\psutil\__init__.py"", line 684, in cmdline
+    return self._proc.cmdline()
+           ^^^^^^^^^^^^^^^^^^^^
+  File ""c:\ProgramData\anaconda3\Lib\site-packages\psutil\_pswindows.py"", line 690, in wrapper
+    raise convert_oserror(err, pid=self.pid, name=self._name)
+psutil.AccessDenied: (pid=76)"
+2024-07-04 20:23:23,Toshiba,192.168.100.200,"pip install --upgrade python psutil
+"
+2024-07-04 20:24:24,Toshiba,192.168.100.200,"pip install --upgrade python psutil
+ERROR: Could not find a version that satisfies the requirement python (from versions: none)
+ERROR: No matching distribution found for python"
+2024-07-04 20:24:43,Toshiba,192.168.100.200,"except psutil.AccessDenied:
+    print(""Access denied error - unable to check if server is running."")"
+2024-07-04 20:26:51,Toshiba,192.168.100.200,"python server.py
+Access denied error - unable to check if server is running.
+HTTP server started. Serving files from C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot on port 8000.
+ * Serving Flask app 'server'
+ * Debug mode: on"
+2024-07-04 20:27:32,Toshiba,192.168.100.200,"import requests
+"
+2024-07-04 20:27:51,Toshiba,192.168.100.200,"def is_server_running(url):
+    try:
+        response = requests.get(url)
+        return response.status_code == 200
+    except requests.exceptions.RequestException:
+        return False
+
+# Example usage:
+url = 'http://localhost:8000'
+if is_server_running(url):
+    print('HTTP server is running.')
+else:
+    print('HTTP server is not running or inaccessible.')"
+2024-07-04 20:29:54,Toshiba,192.168.100.200,C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot
+2024-07-04 20:30:53,Toshiba,192.168.100.200,">python -m http.server --directory C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot
+Serving HTTP on :: port 8000 (http://[::]:8000/) ..."
+2024-07-04 20:31:50,Toshiba,192.168.100.200,"python -m http.server --directory C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot
+Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+
+Keyboard interrupt received, exiting."
+2024-07-04 20:32:41,Toshiba,192.168.100.200,"netstat -aon | findstr :8000
+  TCP    [::1]:8000             [::1]:46363            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46364            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46365            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46366            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46367            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46368            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46372            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46373            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46374            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46375            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46376            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46377            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46379            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46380            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46381            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46382            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46383            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46384            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46385            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46395            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46396            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46397            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46398            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46399            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46400            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46401            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46402            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46403            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46404            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46405            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46406            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46407            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46408            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46409            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46410            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46411            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46412            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46413            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46419            TIME_WAIT       0
+  TCP    [::1]:8000             [::1]:46421            TIME_WAIT       0"
+2024-07-04 20:34:25,Toshiba,192.168.100.200,"python -m http.server --directory C:\Users\Toshiba\Desktop\D\Designing\Python\Django\ProximaLinkMonitoringApp\keylogger_project\test\LoggedData\Toshiba\Screenshot
+"
+2024-07-04 20:44:10,Toshiba,192.168.100.200,"<button type=""button"" class=""btn rounded-pill btn-primary mx-2"" id=""btnKeystrokes"">
+                  Keystrokes
+                </button>"
+2024-07-04 20:50:33,Toshiba,192.168.100.200,.col-md-10
+2024-07-04 20:52:51,Toshiba,192.168.100.200,.row
+2024-07-04 20:55:57,Toshiba,192.168.100.200,"/* Primary Colors */
+:root {
+  --primary-blue: #00c7fd;
+  --primary-darker-blue: #0071c5;
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --primary: #007bff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --black: #000;
+  --primary-dark: #191c24;
+  --gray-dark: #343a40;
+  --gray: #6c757d;
+}
+
+/* Secondary Colors */
+:root {
+  --secondary-white: #ffffff;
+  --secondary-green: #198754;
+  --secondary-light-blue: #0dcaf0;
+  --secondary-red: #ab2e3c;
+  --secondary-yellow: #ffc107;
+
+}
+
+body {
+  font-family: 'Roboto', 'Open Sans', 'Lato', Arial, sans-serif;
+  background-color: var(--black);
+  color: var(--secondary-white);
+}
+
+header {
+  background-color: var(--gray-dark);
+  color: #fff;
+  padding: 15px 0;
+  text-align: center;
+}
+
+header .logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container-fluid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  max-width: 150px;
+  /* Adjust this value based on your preference */
+}
+
+/* User section */
+.user-item {
+  background-color: #00c7fd;
+  /* Primary color */
+  color: #fff;
+  font-weight: 400;
+  font-size: small;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.user-item:hover {
+  background-color: #0071c5;
+  /* Darker shade on hover */
+}
+
+/* Log entry */
+.log-entry {
+  background-color: var(--primary-dark);
+  word-wrap: break-word;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+aside {
+  background-color: var(--gray-dark);
+
+  color: #fff;
+  padding-left: 0;
+  /* Remove left padding */
+  padding-right: 0;
+}
+
+
+.timestamp {
+  font-size: 0.9em;
+  color: #999;
+  text-align: left;
+}
+
+/* Tags */
+.tags-container {
+  margin-top: 10px;
+}
+
+.tag {
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #007bff;
+  /* Primary color */
+  color: #fff;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.tag:hover {
+  background-color: #0056b3;
+  /* Darker shade on hover */
+}
+
+/* Users section */
+.user-section {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.col-md-10 {
+  padding: 30px;
+}
+
+.col {
+  padding: 0;
+}
+
+/* Main content */
+.main-content {
+  padding: 20px, 0;
+}
+
+.user-section h2 {
+  color: #0071c5;
+  /* Primary color */
+  font-weight: 600;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.row {
+  margin: 0;
+}
+
+.row div div p.timestamp {
+  color: var(--light);
+}
+
+
+.btn {
+  padding-right: 15px;
+}
+
+footer {
+  background-color: #191c24;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
+
+footer p {
+  margin-top: 15px
+}
+"
+2024-07-04 20:56:14,Toshiba,192.168.100.200,"<!DOCTYPE html>
+<html lang=""en"">
+  <head>
+    <meta charset=""UTF-8"" />
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
+    <title>ProximaLink Dashboard</title>
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      href=""https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap""
+      rel=""stylesheet""
+    />
+    <link
+      rel=""stylesheet""
+      href=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css""
+    />
+    <link
+      rel=""stylesheet""
+      href=""{{ url_for('static', filename='styles.css') }}""
+    />
+  </head>
+  <body>
+    <header class=""flex-fill align-self-center"">
+      <div class=""container-fluid flex-fill align-items-center"">
+        <div class=""flex-grow-1 logo"">
+          <img
+            src=""/static/icons/PureWhite.png""
+            class=""img-fluid""
+            alt=""logo-white""
+          />
+        </div>
+        <div class=""header-content flex-fill"">
+          <h1>ProximaLink Dashboard</h1>
+          <p>Welcome to the monitoring dashboard.</p>
+        </div>
+        <div></div>
+      </div>
+    </header>
+
+    <div class=""container-fluid"">
+      <div class=""row"">
+        <aside class=""col-md-2 py-3"">
+          <h2>Users</h2>
+          <ul class=""list-unstyled"">
+            {% if unique_users %} {% for user in unique_users %}
+            <li class=""user-item"">{{ user }}</li>
+            {% endfor %} {% else %}
+            <p>No users found yet.</p>
+            {% endif %}
+          </ul>
+        </aside>
+
+        <main class=""col-md-10"">
+          <div class=""d-flex justify-content-between align-self-center"">
+            <div class=""col-btn"">
+              <!-- Buttons Section -->
+              <div
+                class=""btn-group d-flex align-items-start""
+                role=""group""
+                aria-label=""Toggle Buttons""
+              >
+                <button
+                  type=""button""
+                  class=""btn rounded-pill btn-primary mx-2""
+                  id=""btnKeystrokes""
+                >
+                  Keystrokes
+                </button>
+                <button
+                  type=""button""
+                  class=""btn rounded-pill btn-primary mx-2""
+                  id=""btnScreenshots""
+                >
+                  Screenshots
+                </button>
+                <button
+                  type=""button""
+                  class=""btn rounded-pill btn-primary mx-2""
+                  id=""btnVideos""
+                >
+                  Videos
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vertical Separator -->
+          <div class=""col-1 separator"">
+            <hr class=""my-3"" />
+          </div>
+
+          <!-- Content Sections -->
+          <div id=""keystrokesContent"">
+            <!-- Initial content for Keystrokes -->
+            <div class=""row"">
+              <div class=""col"">
+                {% if all_logs %} {% for log in all_logs %}
+                <div class=""log-entry border rounded mb-3"">
+                  <p>{{ log.text }}</p>
+                  <p class=""timestamp text-left"">{{ log.timestamp }}</p>
+                </div>
+                {% endfor %} {% else %}
+                <!-- Display a message if no logs are found -->
+                <div class=""alert alert-info text-center"" role=""alert"">
+                  No logs found yet. Monitor activity for data to appear.
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <div id=""screenshotsContent"" style=""display: none"">
+            <!-- Placeholder for Screenshots content loaded via AJAX -->
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <footer style=""margin-top: 15px"">
+      <p>ProximaLink Monitoring &copy; 2024</p>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src=""https://code.jquery.com/jquery-3.6.0.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js""></script>
+    <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js""></script>
+
+    <!-- Custom JavaScript for Toggling Content -->
+    <script>
+      $(document).ready(function () {
+        // Handle click on Keystrokes button
+        $(""#btnKeystrokes"").click(function () {
+          $(""#keystrokesContent"").show(); // Show Keystrokes content
+          $(""#screenshotsContent"").hide(); // Hide Screenshots content
+        });
+
+        // Handle click on Screenshots button
+        $(""#btnScreenshots"").click(function () {
+          // Load content from screenshots.html using AJAX
+          $.ajax({
+            url: ""screenshots.html"",
+            type: ""GET"",
+            success: function (data) {
+              $(""#screenshotsContent"").html(data); // Load HTML content into screenshotsContent div
+              $(""#screenshotsContent"").show(); // Show Screenshots content
+              $(""#keystrokesContent"").hide(); // Hide Keystrokes content
+            },
+            error: function (xhr, status, error) {
+              console.error(""Error loading screenshots:"", error);
+              // Handle error loading screenshots.html
+            },
+          });
+        });
+
+        // Handle click on Videos button (if needed)
+        $(""#btnVideos"").click(function () {
+          // Handle click on Videos button if required
+        });
+      });
+    </script>
+  </body>
+</html>
+"
+2024-07-04 20:58:36,Toshiba,192.168.100.200,"/* Primary Colors */
+:root {
+  --primary-blue: #00c7fd;
+  --primary-darker-blue: #0071c5;
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --primary: #007bff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --black: #000;
+  --primary-dark: #191c24;
+  --gray-dark: #343a40;
+  --gray: #6c757d;
+}
+
+/* Secondary Colors */
+:root {
+  --secondary-white: #ffffff;
+  --secondary-green: #198754;
+  --secondary-light-blue: #0dcaf0;
+  --secondary-red: #ab2e3c;
+  --secondary-yellow: #ffc107;
+}
+
+body {
+  font-family: 'Roboto', 'Open Sans', 'Lato', Arial, sans-serif;
+  background-color: var(--black);
+  color: var(--secondary-white);
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+header {
+  background-color: var(--gray-dark);
+  color: #fff;
+  padding: 15px 0;
+  text-align: center;
+  width: 100%;
+}
+
+header .logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container-fluid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  max-width: 150px;
+  /* Adjust this value based on your preference */
+}
+
+/* User section */
+.user-item {
+  background-color: #00c7fd;
+  /* Primary color */
+  color: #fff;
+  font-weight: 400;
+  font-size: small;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.user-item:hover {
+  background-color: #0071c5;
+  /* Darker shade on hover */
+}
+
+/* Log entry */
+.log-entry {
+  background-color: var(--primary-dark);
+  word-wrap: break-word;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+aside {
+  background-color: var(--gray-dark);
+  color: #fff;
+  padding-left: 0;
+  /* Remove left padding */
+  padding-right: 0;
+}
+
+.timestamp {
+  font-size: 0.9em;
+  color: #999;
+  text-align: left;
+}
+
+/* Tags */
+.tags-container {
+  margin-top: 10px;
+}
+
+.tag {
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #007bff;
+  /* Primary color */
+  color: #fff;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.tag:hover {
+  background-color: #0056b3;
+  /* Darker shade on hover */
+}
+
+/* Users section */
+.user-section {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.col-md-10 {
+  padding: 30px;
+}
+
+.col {
+  padding: 0;
+}
+
+/* Main content */
+.main-content {
+  padding: 20px 0; /* Fix comma here */
+}
+
+.user-section h2 {
+  color: #0071c5;
+  /* Primary color */
+  font-weight: 600;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.row {
+  margin: 0;
+}
+
+.row div div p.timestamp {
+  color: var(--light);
+}
+
+.btn {
+  padding-right: 15px;
+}
+
+footer {
+  background-color: #191c24;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
+
+footer p {
+  margin-top: 15px;
+}
+"

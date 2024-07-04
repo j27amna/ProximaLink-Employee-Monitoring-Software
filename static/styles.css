@@ -38,7 +38,7 @@
 
 body {
   font-family: 'Roboto', 'Open Sans', 'Lato', Arial, sans-serif;
-  background-color: var(--primary-blue);
+  background-color: var(--black);
   color: var(--secondary-white);
 }
 
@@ -139,9 +139,12 @@ aside {
   border-radius: 5px;
 }
 
-main {
-  background-color: var(--black);
-  padding: 20px;
+.col-md-10 {
+  padding: 30px;
+}
+
+.col {
+  padding: 0;
 }
 
 /* Main content */
@@ -157,6 +160,9 @@ main {
   padding-bottom: 10px;
 }
 
+.row {
+  margin: 0;
+}
 
 .row div div p.timestamp {
   color: var(--light);

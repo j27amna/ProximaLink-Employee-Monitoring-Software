@@ -66,6 +66,7 @@
         </div>
       </div>
     </div>
+
     <footer>
       <p>ProximaLink Monitoring &copy; 2024</p>
     </footer>
@@ -74,5 +75,43 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{{ url_for('static', filename='screenshot.js') }}"></script>
+
+    <!-- Custom JavaScript for Toggle Button Integration -->
+    <script>
+      $(document).ready(function () {
+        // Function to close the overlay modal
+        function closeModal() {
+          $("#overlayModal").modal("hide");
+        }
+
+        // Listen for click on Keystrokes button (if needed)
+        $("#btnKeystrokes").click(function () {
+          // Implement behavior for Keystrokes button click (if needed)
+        });
+
+        // Listen for click on Screenshots button (if needed)
+        $("#btnScreenshots").click(function () {
+          // Load content from screenshots.html using AJAX
+          $.ajax({
+            url: "screenshots.html",
+            type: "GET",
+            success: function (data) {
+              $("#screenshotsContent").html(data); // Load HTML content into screenshotsContent div
+              $("#screenshotsContent").show(); // Show Screenshots content
+              $("#keystrokesContent").hide(); // Hide Keystrokes content
+            },
+            error: function (xhr, status, error) {
+              console.error("Error loading screenshots:", error);
+              // Handle error loading screenshots.html
+            },
+          });
+        });
+
+        // Listen for click on Videos button (if needed)
+        $("#btnVideos").click(function () {
+          // Implement behavior for Videos button click (if needed)
+        });
+      });
+    </script>
   </body>
 </html>
