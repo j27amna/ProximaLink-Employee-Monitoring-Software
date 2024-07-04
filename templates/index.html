@@ -16,7 +16,6 @@
       href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
       rel="stylesheet"
     />
-
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -27,13 +26,26 @@
     />
   </head>
   <body>
-    <header class="bg-primary text-white text-center py-3">
-      <h1>ProximaLink Dashboard</h1>
-      <p>Welcome to the monitoring dashboard.</p>
+    <header class="flex-fill align-self-center">
+      <div class="container-fluid flex-fill align-items-center">
+        <div class="flex-grow-1 logo">
+          <img
+            src="/static/icons/PureWhite.png"
+            class="img-fluid"
+            alt="logo-white"
+          />
+        </div>
+        <div class="header-content flex-fill">
+          <h1>ProximaLink Dashboard</h1>
+          <p>Welcome to the monitoring dashboard.</p>
+        </div>
+        <div></div>
+      </div>
     </header>
+
     <div class="container-fluid">
       <div class="row">
-        <aside class="col-md-2 bg-light py-3">
+        <aside class="col-md-2 py-3">
           <h2>Users</h2>
           <ul class="list-unstyled">
             {% if unique_users %} {% for user in unique_users %}
@@ -43,34 +55,114 @@
             {% endif %}
           </ul>
         </aside>
-        <main class="col-md-10 py-3">
-          {% if all_logs %}
-          <div class="row row-data">
-            {% for log in all_logs %}
-            <div class="col-md-8 log-entry my-2 p-2 border rounded">
-              <p>{{ log.text }}</p>
-              <p class="timestamp text-left">{{ log.timestamp }}</p>
+
+        <main class="col-md-10">
+          <div class="d-flex justify-content-between align-self-center">
+            <div class="col-btn">
+              <!-- Buttons Section -->
+              <div
+                class="btn-group d-flex align-items-start"
+                role="group"
+                aria-label="Toggle Buttons"
+              >
+                <button
+                  type="button"
+                  class="btn rounded-pill btn-primary mx-2"
+                  id="btnKeystrokes"
+                >
+                  Keystrokes
+                </button>
+                <button
+                  type="button"
+                  class="btn rounded-pill btn-primary mx-2"
+                  id="btnScreenshots"
+                >
+                  Screenshots
+                </button>
+                <button
+                  type="button"
+                  class="btn rounded-pill btn-primary mx-2"
+                  id="btnVideos"
+                >
+                  Videos
+                </button>
+              </div>
             </div>
-            {% endfor %}
           </div>
-          {% else %}
-          <!-- Display a message if no logs are found -->
-          <div class="alert alert-info text-center" role="alert">
-            No logs found yet. Monitor activity for data to appear.
+
+          <!-- Vertical Separator -->
+          <div class="col-1 separator">
+            <hr class="my-3" />
           </div>
-          {% endif %}
-          <hr />
-          <div class="text-center">
-            <a href="/screenshots" class="btn btn-primary">View Screenshots</a>
+
+          <!-- Content Sections -->
+          <div id="keystrokesContent">
+            <!-- Initial content for Keystrokes -->
+            <div class="row">
+              <div class="col">
+                {% if all_logs %} {% for log in all_logs %}
+                <div class="log-entry border rounded mb-3">
+                  <p>{{ log.text }}</p>
+                  <p class="timestamp text-left">{{ log.timestamp }}</p>
+                </div>
+                {% endfor %} {% else %}
+                <!-- Display a message if no logs are found -->
+                <div class="alert alert-info text-center" role="alert">
+                  No logs found yet. Monitor activity for data to appear.
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <div id="screenshotsContent" style="display: none">
+            <!-- Placeholder for Screenshots content loaded via AJAX -->
           </div>
         </main>
       </div>
     </div>
-    <footer class="bg-primary text-white text-center py-3 mt-3">
+
+    <footer style="margin-top: 15px">
       <p>ProximaLink Monitoring &copy; 2024</p>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript for Toggling Content -->
+    <script>
+      $(document).ready(function () {
+        // Handle click on Keystrokes button
+        $("#btnKeystrokes").click(function () {
+          $("#keystrokesContent").show(); // Show Keystrokes content
+          $("#screenshotsContent").hide(); // Hide Screenshots content
+        });
+
+        // Handle click on Screenshots button
+        $("#btnScreenshots").click(function () {
+          // Load content from screenshots.html using AJAX
+          $.ajax({
+            url: "screenshots.html",
+            type: "GET",
+            success: function (data) {
+              $("#screenshotsContent").html(data); // Load HTML content into screenshotsContent div
+              $("#screenshotsContent").show(); // Show Screenshots content
+              $("#keystrokesContent").hide(); // Hide Keystrokes content
+            },
+            error: function (xhr, status, error) {
+              console.error("Error loading screenshots:", error);
+              // Handle error loading screenshots.html
+            },
+          });
+        });
+
+        // Handle click on Videos button (if needed)
+        $("#btnVideos").click(function () {
+          // Handle click on Videos button if required
+        });
+      });
+    </script>
   </body>
 </html>

