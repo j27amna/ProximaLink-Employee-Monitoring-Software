@@ -3,172 +3,157 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Screenshots</title>
+    <title>ProximaLink Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='screenshot.css') }}"
+      href="{{ url_for('static', filename='main.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+   
   </head>
   <body>
-    <header>
-      <h1>ProximaLink Dashboard</h1>
-      <p>Welcome to the monitoring dashboard.</p>
-    </header>
-    <h1>Screenshots</h1>
-    <div class="container">
-      <div class="row">
-        {% for screenshot in screenshots %}
-        <div class="col-md-4 col-sm-6">
+    <header class="flex-fill align-self-center">
+      <div class="container-fluid flex-fill align-items-center">
+        <div class="flex-grow-1 logo">
           <img
-            src="http://localhost:8000/{{ screenshot.filename }}"
-            alt="Screenshot"
-            class="img-thumbnail"
-            data-image="http://localhost:8000/{{ screenshot.filename }}"
-            data-toggle="modal"
-            data-target="#overlayModal"
-            data-caption="Username: {{ screenshot.username }}"
+            src="/static/icons/PureWhite.png"
+            class="img-fluid"
+            alt="logo-white"
           />
         </div>
-        {% endfor %}
-      </div>
-    </div>
-
-    <!-- Modal for overlay view -->
-    <div
-      class="modal fade"
-      id="overlayModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="overlayModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-          <button class="nav-btn nav-btn-left" id="prevImage">&lt;</button>
-          <button class="nav-btn nav-btn-right" id="nextImage">&gt;</button>
-          <div class="modal-body">
-            <img src="" class="img-fluid" id="overlayImage" />
-            <p id="imageCaption"></p>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
-          </div>
+        <div class="header-content flex-fill">
+          <h1>ProximaLink Dashboard</h1>
+          <p>Welcome to the monitoring dashboard.</p>
         </div>
       </div>
-    </div>
+    </header>
 
-    <footer>
+    <div class="container-fluid">
+      <div class="row">
+        <aside class="col-md-2 py-3">
+          <h2>Users</h2>
+          <ul class="list-unstyled">
+            {% if unique_users %} {% for user in unique_users %}
+            <li class="user-item">{{ user }}</li>
+            {% endfor %} {% else %}
+            <p>No users found yet.</p>
+            {% endif %}
+          </ul>
+        </aside>
+
+        <main class="col-md-10">
+          <div class="d-flex justify-content-between align-self-center">
+            <div class="col-btn">
+              <!-- Buttons Section -->
+              <div
+                class="btn-group d-flex align-items-start"
+                role="group"
+                aria-label="Toggle Buttons"
+              >
+                <button
+                  type="button"
+                  class="btn rounded-pill btn-primary mx-2"
+                  id="btnKeystrokes"
+                  data-toggle="button" 
+                  aria-pressed="false"
+                >
+                  Keystrokes
+
+            </button>
+                <button
+                  class="btn rounded-pill btn-outline-primary active mx-2"
+                  id="btnScreenshots"
+                  data-toggle="button" 
+                  aria-pressed="false"
+                  >
+
+                  Screenshots
+
+                <button
+                  type="button"
+                  class="btn rounded-pill btn-outline-primary mx-2"
+                  id="btnVideos"
+                  data-toggle="button" 
+                  aria-pressed="false"
+                >
+                  Videos
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vertical Separator -->
+          <div class="col-1 separator">
+            <hr class="my-3" />
+          </div>
+
+          <div class="screenshots-container">
+  {% for screenshot in screenshots %}
+  <div class="screenshot-item">
+    <img
+      src="http://localhost:8000/{{ screenshot.filename }}"
+      alt="Screenshot"
+      class="screenshot-thumbnail"
+      data-image="http://localhost:8000/{{ screenshot.filename }}"
+      data-toggle="modal"
+      data-target="#overlayModal"
+      data-caption="Username: {{ screenshot.username }}"
+    />
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Modal for overlay view -->
+<div class="modal fade" id="overlayModal" tabindex="-1" role="dialog" aria-labelledby="overlayModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close nav-btn-top-right" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <button class="nav-btn nav-btn-left" id="prevImage">&lt;</button>
+        <button class="nav-btn nav-btn-right" id="nextImage">&gt;</button>
+        <img src="" class="img-fluid" id="overlayImage" />
+      </div>
+      <div class="modal-footer justify-content-center">
+        <div class="nav-dots" id="navDots"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</main>
+
+
+    <footer style="margin-top: 15px">
       <p>ProximaLink Monitoring &copy; 2024</p>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="{{ url_for('static', filename='screenshot.js') }}"></script>
-
-    <!-- Custom JavaScript for Toggle Button Integration -->
-    <script>
-      $(document).ready(function () {
-        var currentIndex = 0;
-        var screenshots = [];
-
-        // Function to close the overlay modal
-        function closeModal() {
-          $("#overlayModal").modal("hide");
-        }
-
-        // Function to show the image at the specified index
-        function showImage(index) {
-          $("#overlayImage").attr("src", screenshots[index].src);
-          updateDots(index);
-        }
-
-        // Function to update the navigation dots
-        function updateDots(index) {
-          $("#navDots .dot").removeClass("active");
-          $("#navDots .dot").eq(index).addClass("active");
-        }
-
-        // Listen for click on Keystrokes button (if needed)
-        $("#btnKeystrokes").click(function () {
-          // Implement behavior for Keystrokes button click (if needed)
-        });
-
-        // Listen for click on Screenshots button (if needed)
-        $("#btnScreenshots").click(function () {
-          // Load content from screenshots.html using AJAX
-          $.ajax({
-            url: "screenshots.html",
-            type: "GET",
-            success: function (data) {
-              $("#screenshotsContent").html(data); // Load HTML content into screenshotsContent div
-              $("#screenshotsContent").show(); // Show Screenshots content
-              $("#keystrokesContent").hide(); // Hide Keystrokes content
-            },
-            error: function (xhr, status, error) {
-              console.error("Error loading screenshots:", error);
-              // Handle error loading screenshots.html
-            },
-          });
-        });
-
-        // Listen for click on Videos button (if needed)
-        $("#btnVideos").click(function () {
-          // Implement behavior for Videos button click (if needed)
-        });
-
-        // Initialize the screenshots array and dots
-        $(".screenshot-thumbnail").each(function (index) {
-          screenshots.push({
-            src: $(this).attr("src"),
-            caption: $(this).data("caption"),
-          });
-
-          $("#navDots").append(
-            '<div class="dot" data-index="' + index + '"></div>'
-          );
-        });
-
-        // Show the first image initially
-        if (screenshots.length > 0) {
-          showImage(0);
-        }
-
-        // Event listener for navigation dots
-        $("#navDots").on("click", ".dot", function () {
-          var index = $(this).data("index");
-          currentIndex = index;
-          showImage(index);
-        });
-
-        // Event listeners for navigation buttons
-        $("#prevImage").click(function () {
-          currentIndex =
-            currentIndex > 0 ? currentIndex - 1 : screenshots.length - 1;
-          showImage(currentIndex);
-        });
-
-        $("#nextImage").click(function () {
-          currentIndex =
-            currentIndex < screenshots.length - 1 ? currentIndex + 1 : 0;
-          showImage(currentIndex);
-        });
-
-        // Initialize modal with the first image
-        if (screenshots.length > 0) {
-          showImage(0);
-        }
-      });
-    </script>
+    <script src="{{url_for('static', filename="screenshot.js")}}">
+</script>
   </body>
 </html>

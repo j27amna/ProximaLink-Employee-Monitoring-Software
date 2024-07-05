@@ -22,9 +22,12 @@
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='styles.css') }}"
+      href="{{ url_for('static', filename='screenshot.css') }}"
     />
-   
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='main.css') }}"
+    />
   </head>
   <body>
     <header class="flex-fill align-self-center">
@@ -48,11 +51,7 @@
         <aside class="col-md-2 py-3">
           <h2>Users</h2>
           <ul class="list-unstyled">
-            {% if unique_users %} {% for user in unique_users %}
-            <li class="user-item">{{ user }}</li>
-            {% endfor %} {% else %}
-            <p>No users found yet.</p>
-            {% endif %}
+            <li class="user-item">Toshiba</li>
           </ul>
         </aside>
 
@@ -67,29 +66,25 @@
               >
                 <button
                   type="button"
-                  class="btn rounded-pill btn-primary mx-2"
+                  class="btn rounded-pill btn-outline-primary mx-2 toggle-btn active"
                   id="btnKeystrokes"
-                  data-toggle="button" 
-                  aria-pressed="false"
+                  data-target="keystrokes"
                 >
                   Keystrokes
-
-            </button>
-                <button
-                  class="btn rounded-pill btn-outline-primary active mx-2"
-                  id="btnScreenshots"
-                  data-toggle="button" 
-                  aria-pressed="false"
-                  >
-
-                  Screenshots
-
+                </button>
                 <button
                   type="button"
-                  class="btn rounded-pill btn-outline-primary mx-2"
+                  class="btn rounded-pill btn-outline-primary mx-2 toggle-btn"
+                  id="btnScreenshots"
+                  data-target="screenshots"
+                >
+                  Screenshots
+                </button>
+                <button
+                  type="button"
+                  class="btn rounded-pill btn-outline-primary mx-2 toggle-btn"
                   id="btnVideos"
-                  data-toggle="button" 
-                  aria-pressed="false"
+                  data-target="videos"
                 >
                   Videos
                 </button>
@@ -102,46 +97,78 @@
             <hr class="my-3" />
           </div>
 
-          <div class="screenshots-container">
-  {% for screenshot in screenshots %}
-  <div class="screenshot-item">
-    <img
-      src="http://localhost:8000/{{ screenshot.filename }}"
-      alt="Screenshot"
-      class="screenshot-thumbnail"
-      data-image="http://localhost:8000/{{ screenshot.filename }}"
-      data-toggle="modal"
-      data-target="#overlayModal"
-      data-caption="Username: {{ screenshot.username }}"
-    />
-  </div>
-  {% endfor %}
-</div>
+          <!-- Log and Iframe Containers -->
+          <div id="log-container">
+            <!-- Keystroke logs content -->
+            <div class="log-entry">
+              <div class="timestamp">2024-07-05 12:59:21</div>
+              <div class="log-content">undefined</div>
+            </div>
+          </div>
 
-<!-- Modal for overlay view -->
-<div class="modal fade" id="overlayModal" tabindex="-1" role="dialog" aria-labelledby="overlayModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <button type="button" class="close nav-btn-top-right" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <button class="nav-btn nav-btn-left" id="prevImage">&lt;</button>
-        <button class="nav-btn nav-btn-right" id="nextImage">&gt;</button>
-        <img src="" class="img-fluid" id="overlayImage" />
-      </div>
-      <div class="modal-footer justify-content-center">
-        <div class="nav-dots" id="navDots"></div>
+          <div class="screenshots-container">
+            {% for screenshot in screenshots %}
+            <div class="screenshot-item">
+              <img
+                src="http://localhost:8000/{{ screenshot.filename }}"
+                alt="Screenshot"
+                class="screenshot-thumbnail"
+                data-image="http://localhost:8000/{{ screenshot.filename }}"
+                data-toggle="modal"
+                data-target="#overlayModal"
+                data-caption="Username: {{ screenshot.username }}"
+              />
+            </div>
+            {% endfor %}
+          </div>
+
+          <!-- Modal for overlay view -->
+          <div
+            class="modal fade"
+            id="overlayModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="overlayModalLabel"
+            aria-hidden="true"
+          >
+            <div
+              class="modal-dialog modal-dialog-centered modal-xl"
+              role="document"
+            >
+              <div class="modal-content border-0">
+                <div class="modal-body p-0">
+                  <div class="text-right">
+                    <button
+                      type="button"
+                      class="close nav-btn-top-right"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <button
+                    class="nav-btn nav-btn-left position-absolute top-50 start-0 translate-middle-y"
+                    id="prevImage"
+                  >
+                    &lt;
+                  </button>
+                  <button
+                    class="nav-btn nav-btn-right position-absolute top-50 end-0 translate-middle-y"
+                    id="nextImage"
+                  >
+                    &gt;
+                  </button>
+                  <img src="" class="img-fluid" id="overlayImage" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
       </div>
     </div>
-  </div>
-</div>
 
-
-</main>
-
-
-    <footer style="margin-top: 15px">
+    <footer>
       <p>ProximaLink Monitoring &copy; 2024</p>
     </footer>
 
@@ -149,7 +176,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="{{url_for('static', filename="screenshot.js")}}">
-</script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+    <script src="{{ url_for('static', filename='screenshot.js') }}"></script>
   </body>
 </html>

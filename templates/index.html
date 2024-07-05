@@ -24,6 +24,10 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='styles.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='main.css') }}"
+    />
   </head>
   <body>
     <header class="flex-fill align-self-center">
@@ -102,9 +106,7 @@
           </div>
 
           <!-- Content Sections -->
-          <div id="keystrokesContent">
-            <!-- Initial content for Keystrokes -->
-            <div class="row">
+          
               <div class="col">
                 {% if all_logs %} {% for log in all_logs %}
                 <div class="log-entry border rounded mb-3">
@@ -118,8 +120,6 @@
                 </div>
                 {% endif %}
               </div>
-            </div>
-          </div>
 
           <div id="screenshotsContent" style="display: none">
             <!-- Placeholder for Screenshots content loaded via AJAX -->
@@ -136,39 +136,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
 
-    <!-- Custom JavaScript for Toggling Content -->
-    <script>
-      $(document).ready(function () {
-        // Handle click on Keystrokes button
-        $("#btnKeystrokes").click(function () {
-          $("#keystrokesContent").show(); // Show Keystrokes content
-          $("#screenshotsContent").hide(); // Hide Screenshots content
-        });
-
-        // Handle click on Screenshots button
-        $("#btnScreenshots").click(function () {
-          // Load content from screenshots.html using AJAX
-          $.ajax({
-            url: "screenshots.html",
-            type: "GET",
-            success: function (data) {
-              $("#screenshotsContent").html(data); // Load HTML content into screenshotsContent div
-              $("#screenshotsContent").show(); // Show Screenshots content
-              $("#keystrokesContent").hide(); // Hide Keystrokes content
-            },
-            error: function (xhr, status, error) {
-              console.error("Error loading screenshots:", error);
-              // Handle error loading screenshots.html
-            },
-          });
-        });
-
-        // Handle click on Videos button (if needed)
-        $("#btnVideos").click(function () {
-          // Handle click on Videos button if required
-        });
-      });
-    </script>
   </body>
 </html>

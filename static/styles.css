@@ -1,91 +1,3 @@
-/* Primary Colors */
-:root {
-  --primary-blue: #00c7fd;
-  --primary-darker-blue: #0071c5;
-  --blue: #007bff;
-  --indigo: #6610f2;
-  --purple: #6f42c1;
-  --pink: #e83e8c;
-  --red: #dc3545;
-  --orange: #fd7e14;
-  --yellow: #ffc107;
-  --green: #28a745;
-  --teal: #20c997;
-  --cyan: #17a2b8;
-  --white: #fff;
-  --primary: #007bff;
-  --secondary: #6c757d;
-  --success: #28a745;
-  --info: #17a2b8;
-  --warning: #ffc107;
-  --danger: #dc3545;
-  --light: #f8f9fa;
-  --black: #000;
-  --primary-dark: #191c24;
-  --gray-dark: #343a40;
-  --gray: #6c757d;
-}
-
-/* Secondary Colors */
-:root {
-  --secondary-white: #ffffff;
-  --secondary-green: #198754;
-  --secondary-light-blue: #0dcaf0;
-  --secondary-red: #ab2e3c;
-  --secondary-yellow: #ffc107;
-}
-
-body {
-  font-family: 'Roboto', 'Open Sans', 'Lato', Arial, sans-serif;
-  background-color: var(--black);
-  color: var(--secondary-white);
-  overflow-x: hidden;
-  /* Prevent horizontal overflow */
-}
-
-header {
-  background-color: var(--gray-dark);
-  color: #fff;
-  padding: 15px 0;
-  text-align: center;
-  width: 100%;
-}
-
-header .logo img {
-  max-width: 100%;
-  height: auto;
-}
-
-.container-fluid {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  max-width: 150px;
-  /* Adjust this value based on your preference */
-}
-
-/* User section */
-.user-item {
-  background-color: #00c7fd;
-  /* Primary color */
-  color: #fff;
-  font-weight: 400;
-  font-size: small;
-  padding: 10px;
-  margin-bottom: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.user-item:hover {
-  background-color: #0071c5;
-  /* Darker shade on hover */
-}
-
 /* Log entry */
 .log-entry {
   background-color: var(--primary-dark);
@@ -96,67 +8,11 @@ header .logo img {
   border-radius: 5px;
 }
 
-aside {
-  background-color: var(--gray-dark);
-  color: #fff;
-  padding-left: 0;
-  /* Remove left padding */
-  padding-right: 0;
-}
-
 .timestamp {
   font-size: 0.9em;
   color: #999;
   text-align: left;
 }
-
-/* Tags */
-.tags-container {
-  margin-top: 10px;
-}
-
-.tag {
-  cursor: pointer;
-  padding: 5px 10px;
-  background-color: #007bff;
-  /* Primary color */
-  color: #fff;
-  border-radius: 8px;
-  margin-right: 10px;
-}
-
-.tag:hover {
-  background-color: #0056b3;
-  /* Darker shade on hover */
-}
-
-/* Users section */
-.user-section {
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.col-md-10 {
-  padding: 30px;
-}
-
-/* Main content */
-.main-content {
-  padding: 20px 0;
-  /* Fix comma here */
-}
-
-.user-section h2 {
-  color: #0071c5;
-  /* Primary color */
-  font-weight: 600;
-  border-bottom: 2px solid #ccc;
-  padding-bottom: 10px;
-}
-
-
 
 .row div div p.timestamp {
   color: var(--light);
@@ -166,19 +22,7 @@ aside {
   padding-right: 15px;
 }
 
-footer {
-  background-color: #191c24;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  color: white;
-  text-align: center;
-}
 
-footer p {
-  margin-top: 15px;
-}
 
 
 /* should be removed after testing*/
